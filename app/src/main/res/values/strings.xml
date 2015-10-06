@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">ToT</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_sign_up">SignUP</string>
+    <string name="title_activity_sign_in">SignIn</string>
+    <string name="title_activity_home_page">HomePage</string>
+    <string name="title_activity_filter_menus">FilterMenus</string>
+    <string name="title_activity_randomize">Randomize</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="title_activity_feedback">Feedback</string>
+
+
+        <string-array name="Budget">
+            <item>100</item>
+            <item>Venus</item>
+            <item>000</item>
+            <item>Mars</item>
+            <item>Jupiter</item>
+            <item>Saturn</item>
+            <item>Uranus</item>
+            <item>Neptune</item>
+        </string-array>
+
+
+</resources>
