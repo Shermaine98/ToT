@@ -1,10 +1,12 @@
 package com.example.atayansy.tot;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+// TODO: FIX Navigation Design Home(TOP FOOD),favorites , RANDMOZIE, favorite, me(setting)
+// TODO: List Item for Picture with ArrayList of comments (no like and etc buttons)
 public class HomePage extends AppCompatActivity {
 
     @Override

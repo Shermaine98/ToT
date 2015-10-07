@@ -1,7 +1,10 @@
 package com.example.atayansy.tot;
+// TODO: Fix Layout of filter menus
+//TODO: Fix Spinner values
+//TODO: Ask miss about spinner erro
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
