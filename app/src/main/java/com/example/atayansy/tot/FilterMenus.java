@@ -1,7 +1,7 @@
 package com.example.atayansy.tot;
 // TODO: Fix Layout of filter menus
 //TODO: Fix Spinner values
-//TODO: Ask miss about spinner erro
+//TODO: Ask miss about spinner error, else try to solve it :D
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
