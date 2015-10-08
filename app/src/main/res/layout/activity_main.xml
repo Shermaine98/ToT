@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:weightSum="1">
+    android:weightSum="9"
+    android:background="#eeeeee">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:src="@drawable/tot_logo_cropped"
-        android:layout_weight="1"
+        android:layout_weight="5"
         android:layout_gravity="center" />
 
     <Button
@@ -19,14 +20,17 @@
         android:text="Sign In"
         android:id="@+id/bt_signInPage"
         android:layout_gravity="center"
-        android:layout_weight="1" />
+        android:layout_weight="2"
+        android:background="#ff6f69" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:id="@+id/bt_signUpPage"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:background="#96ceb4"
+        android:layout_weight="2"/>
     <!--Image Background move to send to back-->
 
 </LinearLayout>
