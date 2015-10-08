@@ -16,7 +16,7 @@
         android:layout_height="50dp"
         android:src="@drawable/tot_logo_cropped"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/HomeLogo"
         />
 
@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:text="SIGN UP"
         android:textSize="50sp"
+        android:textColor="#FFFFFF"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/HomeLogo"
         />
@@ -37,7 +38,7 @@
         android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
         android:background="#80000000"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <EditText
             android:id="@+id/et_inputName"

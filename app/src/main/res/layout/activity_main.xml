@@ -31,7 +31,7 @@
         android:text="TASTE OF TAFT"
         android:layout_below="@id/HomeLogo"
         android:layout_centerHorizontal="true"
-        android:textSize="45dp"/>
+        android:textSize="40sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
