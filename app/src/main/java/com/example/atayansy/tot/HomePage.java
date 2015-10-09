@@ -17,13 +17,14 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        ArrayList<FoodFeed> feedbackdArrayList = new ArrayList<>();
+        ArrayList<Comments> commentsArrayList = new ArrayList<>();
+        feedbackdArrayList.add(new FoodFeed(R.mipmap.ic_launcher, commentsArrayList));
 
-        lvFoodFeed = (ListView) findViewById(R.id.lv_foodfeed);
-        ArrayList<FoodFeed> foodFeedArrayList = new ArrayList<>();
 
-
-        CustomAdpaterFoodFeed customAdpaterFoodFeed = new CustomAdpaterFoodFeed(getBaseContext(), R.layout.foodfeed_list_view, foodFeedArrayList);
-        lvFoodFeed.setAdapter(customAdpaterFoodFeed);
+        feedbackdArrayList.add(new FoodFeed(R.mipmap.ic_launcher, commentsArrayList));
+        CustomAdpaterFoodFeed CustomAdpaterFoodFeed = new CustomAdpaterFoodFeed(getBaseContext(), R.layout.foodfeed_list_view, feedbackdArrayList);
+        lvFoodFeed.setAdapter(CustomAdpaterFoodFeed);
     }
 
     @Override

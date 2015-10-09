@@ -29,8 +29,12 @@ public class CustomAdapterComments extends ArrayAdapter {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.foodfeed_list_view, parent, false);
         }
-         TextView tvName = (TextView) convertView.findViewById(R.id.tv_nameUser);
-         TextView tvComments= (TextView) convertView.findViewById(R.id.tv_userComments);
+
+
+        TextView tvName = (TextView) convertView.findViewById(R.id.tv_nameUser);
+        TextView tvComments = (TextView) convertView.findViewById(R.id.tv_userComments);
+        //convertView.setTag(tvName);
+        //convertView.setTag(tvComments);
 
         tvName.setText(comments.get(position).getName());
         tvComments.setText(comments.get(position).getComments());

@@ -36,10 +36,10 @@ public class CustomAdpaterFoodFeed extends ArrayAdapter<FoodFeed> {
         ListView lvComments = (ListView) convertView.findViewById(R.id.lv_comments);
 
         ivIcon.setImageResource(foodfeeds.get(position).getIcon());
-        lvComments.setList
 
-        CustomAdapterComments customAdapterComments = new CustomAdapterComments(convertView.getContext(), R.layout.comment_list_view,lvComments);
-        lvComments.setAdapter(customAdapterComments);
+        ArrayList<Comments> commentsArrayList = new ArrayList<>();
+        //CustomAdapterComments customAdapterComments = new CustomAdapterComments();
+        //lvComments.setAdapter(customAdapterComments);
 
         return convertView;
 
