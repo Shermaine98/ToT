@@ -22,6 +22,8 @@
             <item>Uranus</item>
             <item>Neptune</item>
         </string-array>
+    <string name="title_activity_favorite">Favorite</string>
+    <string name="title_activity_history">History</string>
 
 
 </resources>

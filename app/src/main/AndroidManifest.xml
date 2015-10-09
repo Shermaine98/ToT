@@ -16,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SignUp"
             android:label="@string/title_activity_sign_up" >
@@ -43,8 +42,14 @@
         </activity>
         <activity
             android:name=".Feedback"
-            android:label="@string/title_activity_feedback" >
+            android:label="@string/title_activity_feedback" ></activity>
+        <activity
+            android:name=".Favorite"
+            android:label="@string/title_activity_favorite">
         </activity>
+        <activity
+            android:name=".History"
+            android:label="@string/title_activity_history"></activity>
     </application>
 
 </manifest>

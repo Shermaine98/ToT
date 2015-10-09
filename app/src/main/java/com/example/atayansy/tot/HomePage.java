@@ -1,10 +1,13 @@
 package com.example.atayansy.tot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -14,6 +17,35 @@ public class HomePage extends AppCompatActivity {
     private CustomAdpaterFoodFeed ExpAdapter;
     private ArrayList<FoodFeed> foodFeeds;
     private ExpandableListView ExpandList;
+    private ImageButton ibButtonHome;
+    private ImageButton ibButtonFavorite;
+    private ImageButton ibButtonRandomize;
+    private ImageButton ibButtonHistory;
+    private ImageButton ibButtonLogOut;
+    //Onclick listener for the Navigation Bar
+    View.OnClickListener Navigation = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent();
+            if (v.equals(ibButtonHome)) {
+
+            } else if (v.equals(ibButtonFavorite)) {
+                i.setClass(getBaseContext(), Favorite.class);
+            } else if (v.equals(ibButtonHome)) {
+                i.setClass(getBaseContext(), HomePage.class);
+            } else if (v.equals(ibButtonRandomize)) {
+                i.setClass(getBaseContext(), Randomize.class);
+            } else if (v.equals(ibButtonHistory)) {
+                i.setClass(getBaseContext(), History.class);
+            } else if (v.equals(ibButtonLogOut)) {
+                //TODO: something code here to not crash on activity exit??
+                i.setClass(getBaseContext(), MainActivity.class);
+            }
+
+            startActivity(i);
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +53,29 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         ExpandList = (ExpandableListView) findViewById(R.id.evFoodFeed);
+        ibButtonHome = (ImageButton) findViewById(R.id.button_Home);
+        ibButtonFavorite = (ImageButton) findViewById(R.id.button_favorites);
+        ibButtonRandomize = (ImageButton) findViewById(R.id.button_randomize);
+        ibButtonHistory = (ImageButton) findViewById(R.id.button_history);
+        ibButtonLogOut = (ImageButton) findViewById(R.id.button_logout);
+
+
+        //runs the function and returns the data to foodFeeds
         foodFeeds = SetStandardGroups();
+
+        //Adapter for ExapadableListView
         ExpAdapter = new CustomAdpaterFoodFeed(HomePage.this, foodFeeds);
         ExpandList.setAdapter(ExpAdapter);
 
+        ibButtonFavorite.setOnClickListener(Navigation);
+        ibButtonRandomize.setOnClickListener(Navigation);
+        ibButtonHome.setOnClickListener(Navigation);
+        ibButtonHistory.setOnClickListener(Navigation);
+        ibButtonLogOut.setOnClickListener(Navigation);
 
     }
 
+    // Dummy data method for pictures and comments
     public ArrayList<FoodFeed> SetStandardGroups() {
 
         String names[] = {"Geraldine", "Marielle", "Gina", "Bryan",
