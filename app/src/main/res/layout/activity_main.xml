@@ -1,32 +1,67 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:weightSum="1">
+    android:baselineAligned="false"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/wood"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:src="@drawable/tot_logo_cropped"
-        android:layout_weight="1"
-        android:layout_gravity="center" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:id="@+id/bt_signInPage"
         android:layout_gravity="center"
-        android:layout_weight="1" />
+        android:layout_marginTop="50dp"
+        android:id="@+id/HomeLogo"
+         />
 
-    <Button
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:id="@+id/bt_signUpPage"
-        android:layout_gravity="center" />
-    <!--Image Background move to send to back-->
+        android:text="TASTE OF TAFT"
+        android:layout_below="@id/HomeLogo"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Sign In"
+            android:id="@+id/bt_signInPage"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#99000000"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Sign Up"
+            android:id="@+id/bt_signUpPage"
+            android:layout_gravity="center"
+            android:background="#99000000"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"/>
+        <!--Image Background move to send to back-->
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,58 +1,95 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
     tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:src="@drawable/tot_logo_cropped" />
-
-    <EditText
-        android:id="@+id/et_inputName"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/et_inputEmail"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/et_inputUsername"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:hint="Username" />
-
-    <EditText
-        android:id="@+id/et_inputPassword"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
-    <Button
-        android:id="@+id/bt_signUp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:text="Sign Up" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/others" />
 
-</LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:src="@drawable/tot_logo_cropped"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:id="@+id/HomeLogo"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIGN UP"
+        android:textSize="50sp"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/HomeLogo"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="#80000000"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/et_inputName"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:textColor="#ffffff"
+            android:textColorHint="#d1d1d1"/>
+
+        <EditText
+            android:id="@+id/et_inputEmail"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="#ffffff"
+            android:textColorHint="#d1d1d1"/>
+
+        <EditText
+            android:id="@+id/et_inputUsername"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Username"
+            android:textColor="#ffffff"
+            android:textColorHint="#d1d1d1"/>
+
+        <EditText
+            android:id="@+id/et_inputPassword"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="#ffffff"
+            android:textColorHint="#d1d1d1"/>
+
+        <Button
+            android:id="@+id/bt_signUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#000000"
+            android:text="Sign Up"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+</RelativeLayout>
