@@ -13,6 +13,9 @@ public class Comments {
         this.comments = comments;
     }
 
+    public Comments() {
+    }
+
     public String getName() {
         return name;
     }

@@ -21,6 +21,9 @@ public class FoodFeed {
         this.comments = comments;
     }
 
+    public FoodFeed() {
+    }
+
     public int getIcon() {
         return icon;
     }

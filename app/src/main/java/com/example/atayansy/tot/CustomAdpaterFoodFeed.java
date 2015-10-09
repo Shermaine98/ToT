@@ -5,44 +5,95 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by shermainesy on 10/8/15.
  */
-public class CustomAdpaterFoodFeed extends ArrayAdapter<FoodFeed> {
+public class CustomAdpaterFoodFeed extends BaseExpandableListAdapter {
+    private Context Context;
+    private ArrayList<FoodFeed> foodfeeds;
 
-    ArrayList<FoodFeed> foodfeeds;
-
-    public CustomAdpaterFoodFeed(Context context, int resource, List<FoodFeed> objects) {
-        super(context, resource, objects);
-        this.foodfeeds = (ArrayList<FoodFeed>) objects;
+    public CustomAdpaterFoodFeed(Context context, ArrayList<FoodFeed> objects) {
+        this.Context = context;
+        this.foodfeeds = objects;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        //return super.getView(position, convertView, parent);
+    public Object getChild(int groupPosition, int childPosition) {
+        ArrayList<Comments> Comments = foodfeeds.get(groupPosition).getComments();
+        return Comments.get(childPosition);
+    }
+
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
+    }
+
+    @Override
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        Comments comments = (Comments) getChild(groupPosition, childPosition);
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.foodfeed_list_view, parent, false);
+            LayoutInflater inflater = (LayoutInflater) Context.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.comment_list_view, null);
         }
 
-        ImageView ivIcon = (ImageView) convertView.findViewById(R.id.iv_feedbackIcon);
-        ListView lvComments = (ListView) convertView.findViewById(R.id.lv_comments);
+        TextView name = (TextView) convertView.findViewById(R.id.tv_nameUser);
+        TextView setComments = (TextView) convertView.findViewById(R.id.tv_userComments);
 
-        ivIcon.setImageResource(foodfeeds.get(position).getIcon());
-
-        ArrayList<Comments> commentsArrayList = new ArrayList<>();
-        //CustomAdapterComments customAdapterComments = new CustomAdapterComments();
-        //lvComments.setAdapter(customAdapterComments);
-
+        name.setText(comments.getName());
+        setComments.setText(comments.getComments());
         return convertView;
 
-
     }
+
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        ArrayList<Comments> commentsArrayList = foodfeeds.get(groupPosition).getComments();
+        return commentsArrayList.size();
+    }
+
+    @Override
+    public Object getGroup(int groupPosition) {
+        return foodfeeds.get(groupPosition);
+    }
+
+    @Override
+    public int getGroupCount() {
+        return foodfeeds.size();
+    }
+
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded,
+                             View convertView, ViewGroup parent) {
+        FoodFeed FoodFeed = (FoodFeed) getGroup(groupPosition);
+        if (convertView == null) {
+            LayoutInflater inf = (LayoutInflater) Context
+                    .getSystemService(android.content.Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inf.inflate(R.layout.foodfeed_list_view, null);
+        }
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_feedbackIcon);
+        imageView.setImageResource(FoodFeed.getIcon());
+        return convertView;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return true;
+    }
+
 }
