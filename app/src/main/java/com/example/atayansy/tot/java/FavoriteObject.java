@@ -7,9 +7,9 @@ public class FavoriteObject {
 
     private int fPictureIcon;
     private String fName;
-    private int fRatingStar;
+    private float fRatingStar;
 
-    public FavoriteObject(int fPictureIcon, String fName, int fRatingStar) {
+    public FavoriteObject(int fPictureIcon, String fName, float fRatingStar) {
         this.fPictureIcon = fPictureIcon;
         this.fName = fName;
         this.fRatingStar = fRatingStar;
@@ -31,11 +31,11 @@ public class FavoriteObject {
         this.fName = fName;
     }
 
-    public int getfRatingStar() {
+    public float getfRatingStar() {
         return fRatingStar;
     }
 
-    public void setfRatingStar(int fRatingStar) {
+    public void setfRatingStar(float fRatingStar) {
         this.fRatingStar = fRatingStar;
     }
 }

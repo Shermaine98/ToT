@@ -42,7 +42,7 @@ public class CustomAdapterFavorite extends ArrayAdapter<FavoriteObject> {
 
         foodName.setText(favorites.get(position).getfName());
         imageView.setImageResource(favorites.get(position).getfPictureIcon());
-        ratingBar.setNumStars(favorites.get(position).getfRatingStar());
+        ratingBar.setRating(favorites.get(position).getfRatingStar());
         return convertView;
 
     }
