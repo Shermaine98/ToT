@@ -3,13 +3,27 @@ package com.example.atayansy.tot;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.example.atayansy.tot.CustomAdapters.CustomAdapterFavorite;
+import com.example.atayansy.tot.java.FavoriteObject;
+
+import java.util.ArrayList;
 
 public class Favorite extends BaseActivity {
-
+    ListView listViewfavorites;
+    CustomAdapterFavorite customAdapterFavorite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setUp(R.layout.activity_favorite);
+
+        listViewfavorites = (ListView) findViewById(R.id.lv_favorites);
+        ArrayList<FavoriteObject> favorites1 = new ArrayList<>();
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "ddddd", R.mipmap.ic_launcher));
+
+        customAdapterFavorite = new CustomAdapterFavorite(getBaseContext(), R.layout.activity_favorite, favorites1);
+        listViewfavorites.setAdapter(customAdapterFavorite);
     }
 
     @Override
