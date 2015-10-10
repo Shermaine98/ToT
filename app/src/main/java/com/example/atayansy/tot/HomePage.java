@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
 
 import com.example.atayansy.tot.CustomAdapters.CustomAdpaterFoodFeed;
 import com.example.atayansy.tot.java.Comments;
@@ -18,16 +17,6 @@ public class HomePage extends BaseActivity {
     private CustomAdpaterFoodFeed ExpAdapter;
     private ArrayList<FoodFeed> foodFeeds;
     private ExpandableListView ExpandList;
-
-    //TODO: for now ganito muna
-    private ImageButton ibButtonHome;
-    private ImageButton ibButtonFavorite;
-    private ImageButton ibButtonRandomize;
-    private ImageButton ibButtonHistory;
-    private ImageButton ibButtonLogOut;
-    //TODO: for now ganito muna
-    //Onclick listener for the Navigation Bar
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
