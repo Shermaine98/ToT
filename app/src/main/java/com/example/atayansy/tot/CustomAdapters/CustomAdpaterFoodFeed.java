@@ -1,4 +1,4 @@
-package com.example.atayansy.tot;
+package com.example.atayansy.tot.CustomAdapters;
 
 import android.app.Service;
 import android.content.Context;
@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.atayansy.tot.R;
+import com.example.atayansy.tot.java.Comments;
+import com.example.atayansy.tot.java.FoodFeed;
 
 import java.util.ArrayList;
 

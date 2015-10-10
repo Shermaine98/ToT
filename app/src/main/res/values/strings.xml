@@ -24,6 +24,7 @@
         </string-array>
     <string name="title_activity_favorite">Favorite</string>
     <string name="title_activity_history">History</string>
+    <string name="title_activity_base">BaseActivity</string>
 
 
 </resources>

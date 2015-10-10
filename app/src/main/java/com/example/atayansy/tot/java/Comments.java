@@ -1,4 +1,4 @@
-package com.example.atayansy.tot;
+package com.example.atayansy.tot.java;
 
 /**
  * Created by shermainesy on 10/8/15.

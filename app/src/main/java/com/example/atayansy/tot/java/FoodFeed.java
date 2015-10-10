@@ -1,4 +1,4 @@
-package com.example.atayansy.tot;
+package com.example.atayansy.tot.java;
 
 import java.util.ArrayList;
 

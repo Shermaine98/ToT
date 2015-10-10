@@ -30,7 +30,7 @@
          android:layout_height="wrap_content"
          android:layout_weight="1"
          android:src="@mipmap/ic_launcher" />
-
+        <!--TODO: delete this-->
         <ImageButton
             android:id="@+id/button_favorites"
             android:layout_width="wrap_content"

@@ -42,14 +42,17 @@
         </activity>
         <activity
             android:name=".Feedback"
-            android:label="@string/title_activity_feedback" ></activity>
+            android:label="@string/title_activity_feedback" />
         <activity
             android:name=".Favorite"
             android:label="@string/title_activity_favorite">
         </activity>
         <activity
             android:name=".History"
-            android:label="@string/title_activity_history"></activity>
+            android:label="@string/title_activity_history" />
+        <activity
+            android:name=".BaseActivity"
+            android:label="@string/title_activity_base"></activity>
     </application>
 
 </manifest>
