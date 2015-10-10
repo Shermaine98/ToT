@@ -1,8 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.atayansy.tot.FilterMenus"
     android:orientation="vertical"
+    tools:context="com.example.atayansy.tot.FilterMenus"
     >
 
     <Switch
@@ -12,8 +12,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
-        android:text="Near Me Location"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:text="Near Me Location" />
 
     <Spinner
         android:id="@+id/sn_location"
@@ -28,8 +28,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
-        android:text="Set Budget"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:text="Set Budget" />
 
     <Spinner
         android:id="@+id/sn_budget"
@@ -46,29 +46,29 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:src="@mipmap/ic_launcher" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@mipmap/ic_launcher" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@mipmap/ic_launcher" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@mipmap/ic_launcher" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:src="@mipmap/ic_launcher" />
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

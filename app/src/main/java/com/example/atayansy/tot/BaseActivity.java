@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -16,34 +17,14 @@ public class BaseActivity extends AppCompatActivity {
     private ImageButton ibButtonRandomize;
     private ImageButton ibButtonHistory;
     private ImageButton ibButtonLogOut;
-    View.OnClickListener Navigation = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent();
-            if (v.equals(ibButtonHome)) {
-                i.setClass(getBaseContext(), HomePage.class);
-            } else if (v.equals(ibButtonFavorite)) {
-                i.setClass(getBaseContext(), Favorite.class);
-            } else if (v.equals(ibButtonHome)) {
-                i.setClass(getBaseContext(), HomePage.class);
-            } else if (v.equals(ibButtonRandomize)) {
-                i.setClass(getBaseContext(), Randomize.class);
-            } else if (v.equals(ibButtonHistory)) {
-                i.setClass(getBaseContext(), History.class);
-            } else if (v.equals(ibButtonLogOut)) {
-                //TODO: something code here to not crash on activity exit??
-                i.setClass(getBaseContext(), MainActivity.class);
-            }
 
-            startActivity(i);
-
-        }
-    };
 
     public void setUp(int resource) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.base_container);
         LinearLayout navbar = (LinearLayout) View.inflate(getBaseContext(), R.layout.nagivation_layout_framelayout, null);
-        LinearLayout content = (LinearLayout) View.inflate(getBaseContext(), resource, null);
+        //TODO: layout for all contents
+
+        RelativeLayout content = (RelativeLayout) View.inflate(getBaseContext(), resource, null);
 
         layout.addView(content);
         layout.addView(navbar);
@@ -54,14 +35,35 @@ public class BaseActivity extends AppCompatActivity {
         ibButtonHistory = (ImageButton) findViewById(R.id.button_history);
         ibButtonLogOut = (ImageButton) findViewById(R.id.button_logout);
 
+        View.OnClickListener Navigation = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                if (v.equals(ibButtonHome)) {
+                    i.setClass(getBaseContext(), HomePage.class);
+                } else if (v.equals(ibButtonFavorite)) {
+                    i.setClass(getBaseContext(), Favorite.class);
+                } else if (v.equals(ibButtonHome)) {
+                    i.setClass(getBaseContext(), HomePage.class);
+                } else if (v.equals(ibButtonRandomize)) {
+                    i.setClass(getBaseContext(), Randomize.class);
+                } else if (v.equals(ibButtonHistory)) {
+                    i.setClass(getBaseContext(), History.class);
+                } else if (v.equals(ibButtonLogOut)) {
+                    //TODO: something code here to not crash on activity exit??
+                    i.setClass(getBaseContext(), MainActivity.class);
+                }
+
+                startActivity(i);
+
+            }
+        };
         ibButtonFavorite.setOnClickListener(Navigation);
         ibButtonRandomize.setOnClickListener(Navigation);
         ibButtonHome.setOnClickListener(Navigation);
         ibButtonHistory.setOnClickListener(Navigation);
         ibButtonLogOut.setOnClickListener(Navigation);
-
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
