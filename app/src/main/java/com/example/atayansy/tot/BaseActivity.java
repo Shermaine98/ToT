@@ -1,15 +1,16 @@
 package com.example.atayansy.tot;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
     private ImageButton ibButtonHome;
     private ImageButton ibButtonFavorite;
     private ImageButton ibButtonRandomize;
@@ -39,10 +40,14 @@ public class BaseActivity extends Activity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.nagivation_layout_framelayout);
+    public void setUp(int resource) {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.base_container);
+        LinearLayout navbar = (LinearLayout) View.inflate(getBaseContext(), R.layout.nagivation_layout_framelayout, null);
+        LinearLayout content = (LinearLayout) View.inflate(getBaseContext(), resource, null);
+
+        layout.addView(content);
+        layout.addView(navbar);
+
         ibButtonHome = (ImageButton) findViewById(R.id.button_Home);
         ibButtonFavorite = (ImageButton) findViewById(R.id.button_favorites);
         ibButtonRandomize = (ImageButton) findViewById(R.id.button_randomize);
@@ -54,6 +59,15 @@ public class BaseActivity extends Activity {
         ibButtonHome.setOnClickListener(Navigation);
         ibButtonHistory.setOnClickListener(Navigation);
         ibButtonLogOut.setOnClickListener(Navigation);
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_base);
+
+
     }
 
     @Override

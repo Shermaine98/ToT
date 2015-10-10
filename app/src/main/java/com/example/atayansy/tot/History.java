@@ -1,16 +1,28 @@
 package com.example.atayansy.tot;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
-public class History extends AppCompatActivity {
+import com.example.atayansy.tot.CustomAdapters.CustomAdapterHistory;
+import com.example.atayansy.tot.java.HistoryObject;
 
+import java.util.ArrayList;
+
+public class History extends BaseActivity {
+    ListView listView;
+    private CustomAdapterHistory customAdapterHistory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
+        super.setUp(R.layout.activity_history);
+        listView = (ListView) findViewById(R.id.lv_history);
+        ArrayList<HistoryObject> histories1 = new ArrayList<>();
+        histories1.add(new HistoryObject(R.mipmap.ic_launcher, "shermaine", R.mipmap.ic_launcher));
+
+        customAdapterHistory = new CustomAdapterHistory(getBaseContext(), R.layout.activity_history, histories1);
+        listView.setAdapter(customAdapterHistory);
     }
 
     @Override

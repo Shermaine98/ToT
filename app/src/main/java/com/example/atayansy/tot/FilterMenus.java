@@ -4,18 +4,17 @@ package com.example.atayansy.tot;
 //TODO: Ask miss about spinner error, else try to solve it :D
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class FilterMenus extends AppCompatActivity {
+public class FilterMenus extends BaseActivity {
     Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter_menus);
+        super.setUp(R.layout.activity_filter_menus);
 
         Spinner spinner = (Spinner) findViewById(R.id.sn_budget);
         // Create an ArrayAdapter using the string array and a default spinner layout

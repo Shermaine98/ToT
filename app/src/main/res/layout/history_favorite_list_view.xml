@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/tv_FoodName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Hello" />
+        android:layout_weight="1" />
 
     <ImageView
         android:id="@+id/iv_foodPic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_weight="1" />
 
     <RatingBar
-        android:id="@+id/rbstar"
+        android:id="@+id/rb_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="1" />

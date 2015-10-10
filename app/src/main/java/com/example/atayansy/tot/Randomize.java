@@ -1,17 +1,16 @@
 package com.example.atayansy.tot;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Randomize extends AppCompatActivity {
+public class Randomize extends BaseActivity {
 //TODO: Picture Changing Code
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_randomize);
+        super.setUp(R.layout.activity_randomize);
     }
 
     @Override

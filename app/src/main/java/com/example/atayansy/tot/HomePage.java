@@ -1,11 +1,8 @@
 package com.example.atayansy.tot;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 
@@ -17,7 +14,7 @@ import java.util.ArrayList;
 
 // TODO: FIX Navigation Design Home(TOP FOOD),favorites , RANDMOZIE, favorite, me(setting)
 // TODO: List Item for Picture with ArrayList of comments (no like and etc buttons)
-public class HomePage extends AppCompatActivity {
+public class HomePage extends BaseActivity {
     private CustomAdpaterFoodFeed ExpAdapter;
     private ArrayList<FoodFeed> foodFeeds;
     private ExpandableListView ExpandList;
@@ -30,56 +27,20 @@ public class HomePage extends AppCompatActivity {
     private ImageButton ibButtonLogOut;
     //TODO: for now ganito muna
     //Onclick listener for the Navigation Bar
-    View.OnClickListener Navigation = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent();
-            if (v.equals(ibButtonHome)) {
-                i.setClass(getBaseContext(), HomePage.class);
-            } else if (v.equals(ibButtonFavorite)) {
-                i.setClass(getBaseContext(), Favorite.class);
-            } else if (v.equals(ibButtonRandomize)) {
-                i.setClass(getBaseContext(), Randomize.class);
-            } else if (v.equals(ibButtonHistory)) {
-                i.setClass(getBaseContext(), History.class);
-            } else if (v.equals(ibButtonLogOut)) {
-                //TODO: something code here to not crash on activity exit??
-                i.setClass(getBaseContext(), MainActivity.class);
-            }
 
-            startActivity(i);
-
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        super.setUp(R.layout.activity_home_page);
 
         ExpandList = (ExpandableListView) findViewById(R.id.evFoodFeed);
-
-        //TODO: for now ganito muna
-        ibButtonHome = (ImageButton) findViewById(R.id.button_Home);
-        ibButtonFavorite = (ImageButton) findViewById(R.id.button_favorites);
-        ibButtonRandomize = (ImageButton) findViewById(R.id.button_randomize);
-        ibButtonHistory = (ImageButton) findViewById(R.id.button_history);
-        ibButtonLogOut = (ImageButton) findViewById(R.id.button_logout);
-
-
         //runs the function and returns the data to foodFeeds
         foodFeeds = SetStandardGroups();
 
         //Adapter for ExapadableListView
         ExpAdapter = new CustomAdpaterFoodFeed(HomePage.this, foodFeeds);
         ExpandList.setAdapter(ExpAdapter);
-
-        //TODO: for now ganito muna
-        ibButtonFavorite.setOnClickListener(Navigation);
-        ibButtonRandomize.setOnClickListener(Navigation);
-        ibButtonHome.setOnClickListener(Navigation);
-        ibButtonHistory.setOnClickListener(Navigation);
-        ibButtonLogOut.setOnClickListener(Navigation);
 
     }
 
