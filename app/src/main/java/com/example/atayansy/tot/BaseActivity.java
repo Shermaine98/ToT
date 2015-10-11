@@ -21,7 +21,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setUp(int resource) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.base_container);
-        LinearLayout navbar = (LinearLayout) View.inflate(getBaseContext(), R.layout.nagivation_layout_framelayout, null);
+        LinearLayout navbar = (LinearLayout) View.inflate(getBaseContext(), R.layout.navigation_layout_framelayout, null);
         //TODO: layout for all contents
 
         RelativeLayout content = (RelativeLayout) View.inflate(getBaseContext(), resource, null);

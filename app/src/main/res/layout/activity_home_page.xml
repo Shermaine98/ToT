@@ -10,12 +10,15 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
         android:text="Welcome to Taste of Taft!"
-        android:textSize="20sp" />
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:id="@+id/welcomeText" />
 
     <ExpandableListView
         android:id="@+id/evFoodFeed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/welcomeText"
         android:layout_weight="1"/>
 
 </RelativeLayout>
