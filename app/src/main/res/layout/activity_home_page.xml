@@ -10,15 +10,22 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
         android:text="Welcome to Taste of Taft!"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:textSize="20sp"
         android:id="@+id/welcomeText" />
 
     <ExpandableListView
         android:id="@+id/evFoodFeed"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/welcomeText"
+        android:layout_above="@id/THENAV"
         android:layout_weight="1"/>
 
 </RelativeLayout>
