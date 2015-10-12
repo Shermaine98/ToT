@@ -2,7 +2,6 @@ package com.example.atayansy.tot;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,8 +9,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-
-import java.util.logging.Filter;
 
 public class FilterMenu extends AppCompatActivity {
 
@@ -22,6 +19,27 @@ public class FilterMenu extends AppCompatActivity {
     ImageButton ibFilterButtonRandomize;
     ImageButton ibFilterButtonHistory;
     ImageButton ibFilterButtonLogOut;
+    View.OnClickListener randomizeOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent i = new Intent();
+            if (v.equals(ibFilterButtonHome)) {
+                i.setClass(getBaseContext(), HomePage.class);
+            } else if (v.equals(ibFilterButtonFavorite)) {
+                i.setClass(getBaseContext(), Favorite.class);
+            } else if (v.equals(ibFilterButtonRandomize)) {
+                i.setClass(getBaseContext(), Randomize.class);
+            } else if (v.equals(ibFilterButtonHistory)) {
+                i.setClass(getBaseContext(), History.class);
+            } else if (v.equals(ibFilterButtonLogOut)) {
+                //TODO: something code here to not crash on activity exit??
+                i.setClass(getBaseContext(), MainActivity.class);
+            }
+
+            startActivity(i);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,34 +69,12 @@ public class FilterMenu extends AppCompatActivity {
         ibFilterButtonHistory = (ImageButton) findViewById(R.id.filterButton_history);
         ibFilterButtonLogOut = (ImageButton) findViewById(R.id.filterButton_logout);
 
-        ibFilterButtonHome.setOnClickListener(ranomizeOnClick);
-        ibFilterButtonFavorite.setOnClickListener(ranomizeOnClick);
-        ibFilterButtonRandomize.setOnClickListener(ranomizeOnClick);
-        ibFilterButtonHistory.setOnClickListener(ranomizeOnClick);
-        ibFilterButtonLogOut.setOnClickListener(ranomizeOnClick);
+        ibFilterButtonHome.setOnClickListener(randomizeOnClick);
+        ibFilterButtonFavorite.setOnClickListener(randomizeOnClick);
+        ibFilterButtonRandomize.setOnClickListener(randomizeOnClick);
+        ibFilterButtonHistory.setOnClickListener(randomizeOnClick);
+        ibFilterButtonLogOut.setOnClickListener(randomizeOnClick);
     }
-
-    View.OnClickListener ranomizeOnClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            Intent i = new Intent();
-            if (v.equals(ibFilterButtonHome)) {
-                i.setClass(getBaseContext(), HomePage.class);
-            } else if (v.equals(ibFilterButtonFavorite)) {
-                i.setClass(getBaseContext(), Favorite.class);
-            } else if (v.equals(ibFilterButtonRandomize)) {
-                i.setClass(getBaseContext(), Randomize.class);
-            } else if (v.equals(ibFilterButtonHistory)) {
-                i.setClass(getBaseContext(), History.class);
-            } else if (v.equals(ibFilterButtonLogOut)) {
-                //TODO: something code here to not crash on activity exit??
-                i.setClass(getBaseContext(), MainActivity.class);
-            }
-
-            startActivity(i);
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
