@@ -1,106 +1,118 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.atayansy.tot.FilterMenus"
-    >
-<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    >
-    <Switch
-        android:id="@+id/ms_nearMe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:textSize="30dp"
-        android:layout_weight="1"
-        android:text="Near Me Location" />
+    android:background="#f8f8f8"
+    tools:context="com.example.atayansy.tot.FilterMenus">
 
-    <Spinner
-        android:id="@+id/sn_location"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-    <Switch
-        android:id="@+id/ms_budget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:textSize="30dp"
-        android:layout_weight="1"
-        android:text="Set Budget" />
-
-    <Spinner
-        android:id="@+id/sn_budget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:text="FILTER"
+        android:textSize="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/FilterText"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:background="#ff5f5f5f"
-        android:gravity="bottom|center"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/ly_navBar">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/FilterText">
 
-
-        <ImageButton
-            android:id="@+id/filterButton_Home"
-            android:layout_width="wrap_content"
+        <Switch
+            android:id="@+id/ms_nearMe"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:src="@drawable/home"
-            android:layout_margin="5dp"
-            android:background="#5f5f5f" />
+            android:text="Near Me Location"
+            android:textSize="30dp" />
 
-        <ImageButton
-            android:id="@+id/filterButton_favorites"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/sn_location"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/favorites"
-            android:layout_margin="5dp"
-            android:background="#5f5f5f" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1" />
 
-        <ImageButton
-            android:id="@+id/filterButton_randomize"
-            android:layout_width="wrap_content"
+        <Switch
+            android:id="@+id/ms_budget"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:src="@drawable/home"
-            android:layout_margin="5dp"
-            android:background="#5f5f5f" />
+            android:text="Set Budget"
+            android:textSize="30dp" />
 
-        <ImageButton
-            android:id="@+id/filterButton_history"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/sn_budget"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/history"
-            android:layout_margin="5dp"
-            android:background="#5f5f5f" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1" />
 
-        <ImageButton
-            android:id="@+id/filterButton_logout"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ly_navBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/signout"
-            android:layout_margin="5dp"
-            android:background="#5f5f5f" />
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:background="#dbdcd6">
+
+            <ImageButton
+                android:id="@+id/filterButton_Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#005f5f5f"
+                android:layout_weight="1"
+                android:src="@drawable/ic_home_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/filterButton_favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#005f5f5f"
+                android:layout_weight="1"
+                android:src="@drawable/ic_grade_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/filterButton_randomize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#005f5f5f"
+                android:layout_weight="1"
+                android:src="@drawable/ic_toys_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/filterButton_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#005f5f5f"
+                android:layout_weight="1"
+                android:src="@drawable/ic_history_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/filterButton_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#005f5f5f"
+                android:layout_weight="1"
+                android:src="@drawable/ic_settings_power_black_24dp" />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
 
 
 </RelativeLayout>

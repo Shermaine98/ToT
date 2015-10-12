@@ -4,65 +4,42 @@
     android:layout_height="match_parent"
     tools:context="com.example.atayansy.tot.ResultActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:text="Congratulations" />
-
-        <TextView
-            android:id="@+id/tv_fodName"
-            android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:text="foodName" />
-
-        <TextView
-            android:id="@+id/tv_foodescription"
-            android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:text="food description" />
-
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:text="Price: 100" />
-
-        <ImageView
-            android:id="@+id/tv_foodImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/food_temp1"
-            android:text="food description" />
-
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button_eat"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="RESULT"
+        android:textSize="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/ResultText"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ResultText"
+        android:id="@+id/image_view"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="I WILL EAT THIS"
+        android:id="@+id/button_eat"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="45dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="45dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginStart="39dp"
-        android:text="I WILL EAT THIS" />
+        android:theme="@style/Base.V21.Theme.AppCompat" />
 
     <Button
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="NAAAH"
         android:id="@+id/button_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
         android:layout_alignTop="@+id/button_eat"
-        android:layout_marginEnd="56dp"
-        android:layout_marginRight="56dp"
-        android:text="NAAAH" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:theme="@style/Base.V21.Theme.AppCompat" />
+
 </RelativeLayout>

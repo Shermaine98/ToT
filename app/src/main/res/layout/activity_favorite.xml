@@ -6,23 +6,25 @@
     tools:context="com.example.atayansy.tot.Favorite">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/favoritesText"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="My Favorites"
-        android:textSize="25dp"/>
+        android:text="Favorites"
+        android:textSize="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"/>
 
     <ListView
         android:padding="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="80dp"
         android:id="@+id/lv_favorites"
         android:layout_below="@id/favoritesText"
         android:layout_above="@id/THENAV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+
 </RelativeLayout>

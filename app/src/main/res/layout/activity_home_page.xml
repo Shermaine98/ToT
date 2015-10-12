@@ -3,28 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
      android:orientation="vertical"
-    tools:context="com.example.atayansy.tot.HomePage">
+    tools:context="com.example.atayansy.tot.HomePage"
+    android:layout_above="@id/THENAV">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.05"
-        android:text="Welcome to Taste of Taft!"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="20sp"
+        android:text="Welcome User!"
+        android:textSize="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
         android:id="@+id/welcomeText" />
 
     <TextView
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/welcomeText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.05"
-        android:text="Top food of the Week!"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="20sp"
+        android:text="Top Food of the Week!"
+        android:textSize="25dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/topFive" />
 
     <ExpandableListView
@@ -33,11 +31,10 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="80dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/welcomeText"
-        android:layout_above="@id/THENAV"
-        android:layout_weight="1"/>
+        android:layout_below="@id/topFive"
+        android:layout_above="@id/THENAV"/>
 
 </RelativeLayout>

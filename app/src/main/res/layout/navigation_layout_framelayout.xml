@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:orientation="horizontal"
+    android:layout_height="wrap_content"
     android:padding="10dp"
-    android:background="#ff5f5f5f"
+    android:orientation="horizontal"
+    android:background="#dbdcd6"
     android:gravity="bottom|center"
     android:layout_alignParentBottom="true">
 
@@ -14,43 +14,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/home"
+        android:src="@drawable/ic_home_black_24dp"
         android:layout_margin="5dp"
-        android:background="#5f5f5f" />
+        android:background="#005f5f5f" />
 
     <ImageButton
         android:id="@+id/button_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/favorites"
+        android:src="@drawable/ic_grade_black_24dp"
         android:layout_margin="5dp"
-        android:background="#5f5f5f" />
+        android:background="#005f5f5f" />
 
     <ImageButton
         android:id="@+id/button_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/home"
+        android:src="@drawable/ic_toys_black_24dp"
         android:layout_margin="5dp"
-        android:background="#5f5f5f" />
+        android:background="#005f5f5f" />
 
     <ImageButton
         android:id="@+id/button_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/history"
+        android:src="@drawable/ic_history_black_24dp"
         android:layout_margin="5dp"
-        android:background="#5f5f5f" />
+        android:background="#005f5f5f" />
 
     <ImageButton
         android:id="@+id/button_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/signout"
+        android:src="@drawable/ic_settings_power_black_24dp"
         android:layout_margin="5dp"
-        android:background="#5f5f5f" />
+        android:background="#005f5f5f" />
 </LinearLayout>
