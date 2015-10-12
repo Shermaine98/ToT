@@ -59,7 +59,7 @@
             android:background="#99000000"
             android:textColor="#FFFFFF"
             android:layout_weight="1"/>
-        <!--Image Background move to send to back-->
+        <!-- TODO: Image Background move to send to back-->
 
     </LinearLayout>
 

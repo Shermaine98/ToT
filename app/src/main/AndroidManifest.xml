@@ -29,10 +29,6 @@
             android:label="@string/title_activity_home_page" >
         </activity>
         <activity
-            android:name=".FilterMenus"
-            android:label="@string/title_activity_filter_menus" >
-        </activity>
-        <activity
             android:name=".Randomize"
             android:label="@string/title_activity_randomize" >
         </activity>
@@ -45,14 +41,24 @@
             android:label="@string/title_activity_feedback" />
         <activity
             android:name=".Favorite"
-            android:label="@string/title_activity_favorite">
+            android:label="@string/title_activity_favorite" >
         </activity>
         <activity
             android:name=".History"
             android:label="@string/title_activity_history" />
         <activity
             android:name=".BaseActivity"
-            android:label="@string/title_activity_base"></activity>
+            android:label="@string/title_activity_base" />
+        <activity
+            android:name=".MoreComments"
+            android:label="@string/title_activity_more_comments"
+      >
+        </activity>
+        <activity
+            android:name=".FilterMenu"
+            android:label="@string/title_activity_filter_menu"
+            >
+        </activity>
     </application>
 
 </manifest>

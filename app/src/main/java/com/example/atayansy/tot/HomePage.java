@@ -1,8 +1,12 @@
 package com.example.atayansy.tot;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 
 import com.example.atayansy.tot.CustomAdapters.CustomAdpaterFoodFeed;
@@ -30,9 +34,25 @@ public class HomePage extends BaseActivity {
         //Adapter for ExapadableListView
         ExpAdapter = new CustomAdpaterFoodFeed(HomePage.this, foodFeeds);
         ExpandList.setAdapter(ExpAdapter);
+     //   ExpandList.setOnChildClickListener();
 
     }
 
+    ExpandableListView.OnChildClickListener onClickComments = new ExpandableListView.OnChildClickListener(){
+        @Override
+        public boolean onChildClick( ExpandableListView parent, View v,  int groupPosition, int childPosition, long id) {
+           ArrayList<Comments> c = new ArrayList<>();
+            foodFeeds.get(groupPosition).getComments().get(childPosition);
+            return false;
+
+
+         //   Intent explicitIntent = new Intent();
+          //  explicitIntent.setClass(getBaseContext(), MoreComments.class);
+           // c = (Comments new(foodFeeds.get(groupPosition).getComments().get(childPosition));
+           // explicitIntent.putExtra("Message",fruitsSelected1);
+           // startActivity(explicitIntent);
+        }
+    };
     // Dummy data method for pictures and comments
     public ArrayList<FoodFeed> SetStandardGroups() {
 
@@ -42,11 +62,7 @@ public class HomePage extends BaseActivity {
         String comments[] = {"TasteGood", "Nah", "DONT EAT HERE", "Cameroon",
                 "Nice place", "chill", "woah Spain", "lalala"};
 
-        int Images[] = {R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher
-        };
+        int Images[] = {R.drawable.food_temp1, R.drawable.food_temp};
 
         ArrayList<FoodFeed> list = new ArrayList<FoodFeed>();
 
@@ -73,7 +89,6 @@ public class HomePage extends BaseActivity {
 
         return list;
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

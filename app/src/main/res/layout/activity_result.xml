@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.atayansy.tot.ResultActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world"
+        android:id="@+id/image_view"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="I WILL EAT THIS"
-        android:id="@+id/button"
+        android:id="@+id/button_eat"
         android:layout_marginLeft="39dp"
         android:layout_marginStart="39dp"
         android:layout_marginBottom="45dp"
@@ -25,8 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NAAAH"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/button"
+        android:id="@+id/button_main"
+        android:layout_alignTop="@+id/button_eat"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="56dp"

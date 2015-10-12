@@ -1,17 +1,47 @@
 package com.example.atayansy.tot;
 
+import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.graphics.Matrix;
+import android.widget.ImageView;
 
-public class Randomize extends BaseActivity {
+import java.util.Random;
+import java.util.Timer;
+
+public class Randomize extends AppCompatActivity {
 //TODO: Picture Changing Code
-
+    ImageView iv_randomize;
+    private Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setUp(R.layout.activity_randomize);
-    }
+        setContentView(R.layout.activity_randomize);
+
+        iv_randomize = (ImageView) findViewById(R.id.ivRandomize);
+        iv_randomize.setBackgroundResource(R.drawable.random_animation);
+
+        AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
+
+        frameAnimation.start();
+
+        Intent i = new Intent();
+        i.setClass(getBaseContext(), ResultActivity.class);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent();
+                i.setClass(getBaseContext(), ResultActivity.class);
+                startActivity(i);
+            }
+        }, 6000);
+
+}
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

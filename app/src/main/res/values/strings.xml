@@ -11,20 +11,31 @@
     <string name="title_activity_result">ResultActivity</string>
     <string name="title_activity_feedback">Feedback</string>
 
-
-        <string-array name="Budget">
+    <string-array name="budget">
+            <item>50</item>
             <item>100</item>
-            <item>sdsd</item>
-            <item>000</item>
-            <item>sds</item>
-            <item>Jupiter</item>
-            <item>Saturn</item>
-            <item>Uranus</item>
-            <item>Neptune</item>
-        </string-array>
+            <item>200</item>
+            <item>275</item>
+            <item>415</item>
+    </string-array>
+
+    <string-array name="distance">
+        <item>500km</item>
+        <item>1000km</item>
+        <item>100000km</item>
+        <item>500m</item>
+        <item>300m</item>
+    </string-array>
     <string name="title_activity_favorite">Favorite</string>
     <string name="title_activity_history">History</string>
     <string name="title_activity_base">BaseActivity</string>
+
+    <string name="title_activity_more_comments">MoreComments</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_filter_menu">FilterMenu</string>
+    <string name="title_activity_ssss">ssss</string>
 
 
 </resources>

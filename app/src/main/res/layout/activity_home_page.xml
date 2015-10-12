@@ -15,6 +15,18 @@
         android:textSize="20sp"
         android:id="@+id/welcomeText" />
 
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/welcomeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:text="Top food of the Week!"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:id="@+id/topFive" />
+
     <ExpandableListView
         android:id="@+id/evFoodFeed"
         android:padding="10dp"

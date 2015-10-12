@@ -16,6 +16,22 @@ public class SignUp extends AppCompatActivity {
     EditText EdtEmail;
     EditText EdtUsername;
     EditText EdtPassword;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
+
+        btnSignUp = (Button) findViewById(R.id.bt_signUp);
+
+        EdtName = (EditText) findViewById(R.id.et_inputName);
+        EdtEmail = (EditText) findViewById(R.id.et_inputEmail);
+        EdtUsername = (EditText) findViewById(R.id.et_inputUsername);
+        EdtPassword = (EditText) findViewById(R.id.et_password);
+
+
+
+    }
     View.OnClickListener signUp = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -42,23 +58,6 @@ public class SignUp extends AppCompatActivity {
 
         }
     };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-
-        btnSignUp = (Button) findViewById(R.id.bt_signUp);
-
-        EdtName = (EditText) findViewById(R.id.et_inputName);
-        EdtEmail = (EditText) findViewById(R.id.et_inputEmail);
-        EdtUsername = (EditText) findViewById(R.id.et_inputUsername);
-        EdtPassword = (EditText) findViewById(R.id.et_password);
-
-
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

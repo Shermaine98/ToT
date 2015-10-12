@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 public class BaseActivity extends AppCompatActivity {
     private ImageButton ibButtonHome;
     private ImageButton ibButtonFavorite;
-    private ImageButton ibButtonRandomize;
+    private ImageButton ibButtonFilter;
     private ImageButton ibButtonHistory;
     private ImageButton ibButtonLogOut;
 
@@ -31,7 +31,7 @@ public class BaseActivity extends AppCompatActivity {
 
         ibButtonHome = (ImageButton) findViewById(R.id.button_Home);
         ibButtonFavorite = (ImageButton) findViewById(R.id.button_favorites);
-        ibButtonRandomize = (ImageButton) findViewById(R.id.button_randomize);
+        ibButtonFilter = (ImageButton) findViewById(R.id.button_filter);
         ibButtonHistory = (ImageButton) findViewById(R.id.button_history);
         ibButtonLogOut = (ImageButton) findViewById(R.id.button_logout);
 
@@ -43,10 +43,8 @@ public class BaseActivity extends AppCompatActivity {
                     i.setClass(getBaseContext(), HomePage.class);
                 } else if (v.equals(ibButtonFavorite)) {
                     i.setClass(getBaseContext(), Favorite.class);
-                } else if (v.equals(ibButtonHome)) {
-                    i.setClass(getBaseContext(), HomePage.class);
-                } else if (v.equals(ibButtonRandomize)) {
-                    i.setClass(getBaseContext(), Randomize.class);
+                } else if (v.equals(ibButtonFilter)) {
+                    i.setClass(getBaseContext(), FilterMenu.class);
                 } else if (v.equals(ibButtonHistory)) {
                     i.setClass(getBaseContext(), History.class);
                 } else if (v.equals(ibButtonLogOut)) {
@@ -59,7 +57,7 @@ public class BaseActivity extends AppCompatActivity {
             }
         };
         ibButtonFavorite.setOnClickListener(Navigation);
-        ibButtonRandomize.setOnClickListener(Navigation);
+        ibButtonFilter.setOnClickListener(Navigation);
         ibButtonHome.setOnClickListener(Navigation);
         ibButtonHistory.setOnClickListener(Navigation);
         ibButtonLogOut.setOnClickListener(Navigation);
