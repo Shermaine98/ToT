@@ -7,11 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.graphics.Matrix;
 import android.widget.ImageView;
-
-import java.util.Random;
-import java.util.Timer;
 
 public class Randomize extends AppCompatActivity {
 //TODO: Picture Changing Code
@@ -38,7 +34,7 @@ public class Randomize extends AppCompatActivity {
                 i.setClass(getBaseContext(), ResultActivity.class);
                 startActivity(i);
             }
-        }, 6000);
+        }, 4000);
 
 }
 
