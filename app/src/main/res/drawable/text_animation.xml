@@ -5,12 +5,12 @@
         android:duration="100"
         android:text="this looks good" />
     <item
-        android:drawable="not good for you"
-        android:duration="100" />
+        android:duration="100"
+        android:text="not good for you" />
     <item
-        android:drawable="how about this one?"
-        android:duration="100" />
+        android:duration="100"
+        android:text="how about this one?" />
     <item
-        android:drawable="hmmm"
-        android:duration="100" />
+        android:duration="100"
+        android:text="hmmm" />
 </animation-list>
