@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Randomize extends AppCompatActivity {
 //TODO: Picture Changing Code
     ImageView iv_randomize;
+    TextView tv_randomize;
     private Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +21,17 @@ public class Randomize extends AppCompatActivity {
         setContentView(R.layout.activity_randomize);
 
         iv_randomize = (ImageView) findViewById(R.id.ivRandomize);
+        tv_randomize = (TextView) findViewById(R.id.tvrandomize);
+
         iv_randomize.setBackgroundResource(R.drawable.random_animation);
+        tv_randomize.setBackgroundResource(R.drawable.text_animation);
 
         AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
+        AnimationDrawable frameAnimation1 = (AnimationDrawable) tv_randomize.getBackground();
 
         frameAnimation.start();
+        frameAnimation1.start();
+
 
         Intent i = new Intent();
         i.setClass(getBaseContext(), ResultActivity.class);
