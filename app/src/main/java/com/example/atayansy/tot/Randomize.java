@@ -27,6 +27,7 @@ public class Randomize extends AppCompatActivity {
         //   tv_randomize.setBackgroundResource(R.drawable.text_animation);
 
         AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
+
         // AnimationDrawable frameAnimation1 = (AnimationDrawable) tv_randomize.getBackground();
 
         frameAnimation.start();
