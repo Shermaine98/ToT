@@ -5,7 +5,7 @@
     android:layout_height="45dp"
     android:orientation="horizontal"
     android:padding="8dp"
-    android:background="#89f1f2ed">
+    android:background="#64010101">
 
     <ImageButton
         android:id="@+id/button_Home"

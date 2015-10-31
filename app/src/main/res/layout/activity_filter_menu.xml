@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f8f8f8"
-    tools:context="com.example.atayansy.tot.FilterMenus">
+    android:background="#dddbd7"
+    tools:context="com.example.atayansy.tot.FilterMenus"
+    android:contextClickable="false">
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,57 +60,61 @@
             android:layout_weight="1" />
 
         <LinearLayout
-            android:id="@+id/ly_navBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_height="45dp"
             android:orientation="horizontal"
-            android:background="#dbdcd6">
+            android:padding="8dp"
+            android:background="#64010101">
 
             <ImageButton
                 android:id="@+id/filterButton_Home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="#005f5f5f"
                 android:layout_weight="1"
-                android:src="@drawable/ic_home_black_24dp" />
+                android:src="@drawable/ic_home_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
 
             <ImageButton
                 android:id="@+id/filterButton_favorites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="#005f5f5f"
                 android:layout_weight="1"
-                android:src="@drawable/ic_grade_black_24dp" />
+                android:src="@drawable/ic_grade_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
 
             <ImageButton
                 android:id="@+id/filterButton_randomize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="#005f5f5f"
                 android:layout_weight="1"
-                android:src="@drawable/ic_toys_black_24dp" />
+                android:src="@drawable/ic_toys_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
 
             <ImageButton
                 android:id="@+id/filterButton_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="#005f5f5f"
                 android:layout_weight="1"
-                android:src="@drawable/ic_history_black_24dp" />
+                android:src="@drawable/ic_history_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
 
             <ImageButton
                 android:id="@+id/filterButton_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="#005f5f5f"
                 android:layout_weight="1"
-                android:src="@drawable/ic_settings_power_black_24dp" />
+                android:src="@drawable/ic_settings_power_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
         </LinearLayout>
 
     </LinearLayout>
