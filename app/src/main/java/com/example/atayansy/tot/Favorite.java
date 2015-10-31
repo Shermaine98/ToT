@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -53,7 +54,7 @@ public class Favorite extends BaseActivity {
                 openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
                         0xCE)));
                 // set item width
-                openItem.setWidth(90);
+                openItem.setWidth(dp2px(90));
                 // set item title
                 openItem.setTitle("Open");
                 // set item title fontsize
@@ -70,9 +71,9 @@ public class Favorite extends BaseActivity {
                 deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
                 // set item width
-                deleteItem.setWidth(90);
+                deleteItem.setWidth(dp2px(90));
                 // set a icon
-                deleteItem.setIcon(R.mipmap.ic_launcher);
+                deleteItem.setIcon(R.drawable.ic_delete);
                 // add to menu
                 menu.addMenuItem(deleteItem);
             }
@@ -139,6 +140,7 @@ public class Favorite extends BaseActivity {
     }
 
     private void open(FavoriteObject item) {
+        //TODO: fix this
         // open app
         Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
         resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -161,6 +163,10 @@ public class Favorite extends BaseActivity {
     }
 
 
+    private int dp2px(int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                getResources().getDisplayMetrics());
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -3,57 +3,57 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="45dp"
+    android:background="#89f1f2ed"
     android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="#89f1f2ed">
+    android:padding="8dp">
 
     <ImageButton
         android:id="@+id/button_Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ic_home_black_24dp"
-        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:background="#005f5f5f" />
+        android:background="#005f5f5f"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_home_black_24dp" />
 
     <ImageButton
         android:id="@+id/button_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ic_grade_black_24dp"
-        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:background="#005f5f5f" />
+        android:background="#005f5f5f"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_grade_black_24dp" />
 
     <ImageButton
         android:id="@+id/button_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ic_toys_black_24dp"
-        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:background="#005f5f5f" />
+        android:background="#005f5f5f"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_toys_black_24dp" />
 
     <ImageButton
         android:id="@+id/button_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ic_history_black_24dp"
-        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:background="#005f5f5f" />
+        android:background="#005f5f5f"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_history_black_24dp" />
 
     <ImageButton
         android:id="@+id/button_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ic_settings_power_black_24dp"
-        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:background="#005f5f5f" />
+        android:background="#005f5f5f"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_settings_power_black_24dp" />
 </LinearLayout>
