@@ -35,6 +35,7 @@
 
     <string name="title_activity_filter_menu">FilterMenu</string>
     <string name="title_activity_ssss">ssss</string>
+    <string name="title_activity_result__favorite__history">Result_Favorite_History</string>
 
 
 </resources>

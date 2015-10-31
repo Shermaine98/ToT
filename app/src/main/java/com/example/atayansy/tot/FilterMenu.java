@@ -25,6 +25,52 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     ImageButton ibFilterButtonHistory;
     ImageButton ibFilterButtonLogOut;
     //private Integer[] budget= {50,100,200,275,415};
+    Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            if(spinner_lt.isEnabled())
+                spinner_lt.setEnabled(false);
+
+            else
+                spinner_lt.setEnabled(true);
+        }
+    };
+    Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            if(spinner_Bd.isEnabled())
+                spinner_Bd.setEnabled(false);
+            else
+                spinner_Bd.setEnabled(true);
+        }
+    };
+    // Method for Naviagtion bar
+    OnClickListener randomizeOnClick = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent i = new Intent();
+            if (v.equals(ibFilterButtonHome)) {
+                i.setClass(getBaseContext(), HomePage.class);
+            } else if (v.equals(ibFilterButtonFavorite)) {
+                i.setClass(getBaseContext(), Favorite.class);
+            } else if (v.equals(ibFilterButtonRandomize)) {
+                i.setClass(getBaseContext(), Randomize.class);
+                //put Extra Filter Options
+                String budget = spinner_Bd.getSelectedItem().toString();
+                String distance = spinner_lt.getSelectedItem().toString();
+                i.putExtra("Budget", budget);
+                i.putExtra("Distance", distance);
+            } else if (v.equals(ibFilterButtonHistory)) {
+                i.setClass(getBaseContext(), History.class);
+            } else if (v.equals(ibFilterButtonLogOut)) {
+                //TODO: something code here to not crash on activity exit??
+                i.setClass(getBaseContext(), MainActivity.class);
+            }
+
+            startActivity(i);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +97,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_Bd.setEnabled(false);
         spinner_Bd.setAdapter(adapter);
         Budget.setOnClickListener(switchSpinBd);
-        spinner_Bd.setOnItemSelectedListener(this);
+
 
         //location
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -62,7 +108,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_lt.setEnabled(false);
         spinner_lt.setAdapter(adapter2);
         location.setOnClickListener(switchSpinLt);
-        spinner_lt.setSelection(0);
 
         ibFilterButtonHome.setOnClickListener(randomizeOnClick);
         ibFilterButtonFavorite.setOnClickListener(randomizeOnClick);
@@ -70,50 +115,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         ibFilterButtonHistory.setOnClickListener(randomizeOnClick);
         ibFilterButtonLogOut.setOnClickListener(randomizeOnClick);
     }
-
-    Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener(){
-        @Override
-        public void onClick(View v) {
-            if(spinner_lt.isEnabled())
-                spinner_lt.setEnabled(false);
-
-            else
-                spinner_lt.setEnabled(true);
-        }
-    };
-
-    Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener(){
-        @Override
-        public void onClick(View v) {
-            if(spinner_Bd.isEnabled())
-                spinner_Bd.setEnabled(false);
-            else
-                spinner_Bd.setEnabled(true);
-        }
-    };
-
-    // Method for Naviagtion bar
-    OnClickListener randomizeOnClick = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            Intent i = new Intent();
-            if (v.equals(ibFilterButtonHome)) {
-                i.setClass(getBaseContext(), HomePage.class);
-            } else if (v.equals(ibFilterButtonFavorite)) {
-                i.setClass(getBaseContext(), Favorite.class);
-            } else if (v.equals(ibFilterButtonRandomize)) {
-                i.setClass(getBaseContext(), Randomize.class);
-            } else if (v.equals(ibFilterButtonHistory)) {
-                i.setClass(getBaseContext(), History.class);
-            } else if (v.equals(ibFilterButtonLogOut)) {
-                //TODO: something code here to not crash on activity exit??
-                i.setClass(getBaseContext(), MainActivity.class);
-            }
-
-            startActivity(i);
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

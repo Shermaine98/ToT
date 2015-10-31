@@ -5,6 +5,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -44,6 +45,15 @@ public class Randomize extends AppCompatActivity {
                 startActivity(i);
             }
         }, 4000);
+
+
+        //Get Chosen
+        String Budget = getIntent().getExtras().getString("Budget");
+        String Distance = getIntent().getExtras().getString("Distance");
+
+        //printing Console
+        Log.d("Budget", Budget.toString());
+        Log.d("Distance", Distance.toString());
 
 }
 

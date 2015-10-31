@@ -47,13 +47,14 @@
             android:label="@string/title_activity_base" />
         <activity
             android:name=".MoreComments"
-            android:label="@string/title_activity_more_comments"
-      >
+            android:label="@string/title_activity_more_comments">
         </activity>
         <activity
             android:name=".FilterMenu"
-            android:label="@string/title_activity_filter_menu"
-            >
+            android:label="@string/title_activity_filter_menu"></activity>
+        <activity
+            android:name=".Result_Favorite_History"
+            android:label="@string/title_activity_result__favorite__history">
         </activity>
     </application>
 

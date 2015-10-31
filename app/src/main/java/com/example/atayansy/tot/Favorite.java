@@ -1,11 +1,8 @@
 package com.example.atayansy.tot;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -19,7 +16,6 @@ import com.example.atayansy.tot.CustomAdapters.CustomAdapterFavorite;
 import com.example.atayansy.tot.java.FavoriteObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Favorite extends BaseActivity {
     ArrayList<FavoriteObject> favorites1;
@@ -33,7 +29,7 @@ public class Favorite extends BaseActivity {
         //listViewfavorites = (ListView) findViewById(R.id.lv_favorites);
 
         //Swiper
-        mListView = (SwipeMenuListView) findViewById(R.id.listView);
+        mListView = (SwipeMenuListView) findViewById(R.id.listView_favorite);
 
         //TODO: delete this Add items
         favorites1 = new ArrayList<>();
@@ -129,37 +125,24 @@ public class Favorite extends BaseActivity {
         });
     }
 
+    // TODO: Databass
     private void delete(FavoriteObject item) {
         // delete app
         try {
             Intent intent = new Intent(Intent.ACTION_DELETE);
-            intent.setData(Uri.fromParts("package", item.getfName(), null));
+            //   intent.setData(Uri.fromParts("package", item.getfName(), null));
             startActivity(intent);
         } catch (Exception e) {
         }
     }
 
     private void open(FavoriteObject item) {
-        //TODO: fix this
-        // open app
-        Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
-        resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        resolveIntent.setPackage(item.getfName());
-        List<ResolveInfo> resolveInfoList = getPackageManager()
-                .queryIntentActivities(resolveIntent, 0);
-        if (resolveInfoList != null && resolveInfoList.size() > 0) {
-            ResolveInfo resolveInfo = resolveInfoList.get(0);
-            String activityPackageName = resolveInfo.activityInfo.packageName;
-            String className = resolveInfo.activityInfo.name;
+        //TODO: fix this put extra
 
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            ComponentName componentName = new ComponentName(
-                    activityPackageName, className);
+        Intent Intent = new Intent();
+        Intent.setClass(getBaseContext(), Result_Favorite_History.class);
+        startActivity(Intent);
 
-            intent.setComponent(componentName);
-            startActivity(intent);
-        }
     }
 
 
