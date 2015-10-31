@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Message;
 import android.provider.Settings;
@@ -45,7 +46,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 spinner_lt.setEnabled(false);
             else
                 spinner_lt.setEnabled(true);
-            Location gpsLocation = appLocationService.getLocation();
+            Location gpsLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
             if (gpsLocation != null) {
                 double latitude = gpsLocation.getLatitude();
                 double longitude = gpsLocation.getLongitude();
