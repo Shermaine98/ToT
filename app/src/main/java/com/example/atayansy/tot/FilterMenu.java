@@ -6,12 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 
-public class FilterMenu extends AppCompatActivity {
-
+public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    Switch location;
+    Switch Budget;
     Spinner spinner_Bd;
     Spinner spinner_lt;
     ImageButton ibFilterButtonHome;
@@ -19,8 +22,8 @@ public class FilterMenu extends AppCompatActivity {
     ImageButton ibFilterButtonRandomize;
     ImageButton ibFilterButtonHistory;
     ImageButton ibFilterButtonLogOut;
-
-
+    //private Integer[] budget= {50,100,200,275,415};
+    // Method for Naviagtion bar
     View.OnClickListener randomizeOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -48,15 +51,23 @@ public class FilterMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_menu);
         //budget
+        Budget = (Switch) findViewById(R.id.ms_nearMe);
         spinner_Bd = (Spinner) findViewById(R.id.sn_budget);
         // Create an ArrayAdapter using the string array and a default spinner layout
+        //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer> (this, android.R.layout.simple_dropdown_item_1line, budget);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.budget, android.R.layout.simple_dropdown_item_1line);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         // Apply the adapter to the spinner
         spinner_Bd.setAdapter(adapter);
+        //TODO: null pointer set spinner state
+        spinner_Bd.setOnItemSelectedListener(this);
+        //TODO: null pointer set spinner state  //set Spinner to false
+        spinner_Bd.getSelectedView().setEnabled(false);
+        spinner_Bd.setEnabled(false);
 
         //location
+        location = (Switch) findViewById(R.id.ms_budget);
         spinner_lt = (Spinner) findViewById(R.id.sn_location);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.distance, android.R.layout.simple_dropdown_item_1line);
@@ -64,7 +75,13 @@ public class FilterMenu extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         // Apply the adapter to the spinner
         spinner_lt.setAdapter(adapter2);
+        //TODO: null pointer set spinner state
+        spinner_lt.setSelection(0);
+        //TODO: null pointer set spinner state    //set spinner to false
+        spinner_lt.getSelectedView().setEnabled(false);
+        spinner_lt.setEnabled(false);
 
+        //Button Naviation bar
         ibFilterButtonHome = (ImageButton) findViewById(R.id.filterButton_Home);
         ibFilterButtonFavorite = (ImageButton) findViewById(R.id.filterButton_favorites);
         ibFilterButtonRandomize = (ImageButton) findViewById(R.id.filterButton_randomize);
@@ -98,6 +115,16 @@ public class FilterMenu extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
 
