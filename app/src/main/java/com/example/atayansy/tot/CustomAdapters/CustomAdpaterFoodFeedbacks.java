@@ -11,18 +11,18 @@ import android.widget.TextView;
 
 import com.example.atayansy.tot.R;
 import com.example.atayansy.tot.java.Comments;
-import com.example.atayansy.tot.java.FoodFeed;
+import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 
 import java.util.ArrayList;
 
 /**
  * Created by shermainesy on 10/8/15.
  */
-public class CustomAdpaterFoodFeed extends BaseExpandableListAdapter {
+public class CustomAdpaterFoodFeedbacks extends BaseExpandableListAdapter {
     private Context Context;
-    private ArrayList<FoodFeed> foodfeeds;
+    private ArrayList<FoodFeedFeedbacks> foodfeeds;
 
-    public CustomAdpaterFoodFeed(Context context, ArrayList<FoodFeed> objects) {
+    public CustomAdpaterFoodFeedbacks(Context context, ArrayList<FoodFeedFeedbacks> objects) {
         this.Context = context;
         this.foodfeeds = objects;
     }
@@ -79,14 +79,14 @@ public class CustomAdpaterFoodFeed extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        FoodFeed FoodFeed = (FoodFeed) getGroup(groupPosition);
+        FoodFeedFeedbacks FoodFeedFeedbacks = (FoodFeedFeedbacks) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater inf = (LayoutInflater) Context
                     .getSystemService(android.content.Context.LAYOUT_INFLATER_SERVICE);
             convertView = inf.inflate(R.layout.foodfeed_list_view, null);
         }
         ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_feedbackIcon);
-        imageView.setImageResource(FoodFeed.getIcon());
+        imageView.setImageResource(FoodFeedFeedbacks.getIcon());
         return convertView;
     }
 

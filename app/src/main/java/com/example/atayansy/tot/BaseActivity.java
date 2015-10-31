@@ -39,7 +39,6 @@ public class BaseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent();
                 if (v.equals(ibButtonHome)) {
-
                     i.setClass(getBaseContext(), HomePage.class);
                 } else if (v.equals(ibButtonFavorite)) {
                     i.setClass(getBaseContext(), Favorite.class);
@@ -53,9 +52,9 @@ public class BaseActivity extends AppCompatActivity {
                 }
 
                 startActivity(i);
-
             }
         };
+
         ibButtonFavorite.setOnClickListener(Navigation);
         ibButtonFilter.setOnClickListener(Navigation);
         ibButtonHome.setOnClickListener(Navigation);

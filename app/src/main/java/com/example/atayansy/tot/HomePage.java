@@ -1,25 +1,37 @@
 package com.example.atayansy.tot;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 
-import com.example.atayansy.tot.CustomAdapters.CustomAdpaterFoodFeed;
+import com.example.atayansy.tot.CustomAdapters.CustomAdpaterFoodFeedbacks;
 import com.example.atayansy.tot.java.Comments;
-import com.example.atayansy.tot.java.FoodFeed;
+import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 
 import java.util.ArrayList;
 
 // TODO: FIX Navigation Design Home(TOP FOOD),favorites , RANDMOZIE, favorite, me(setting)
 // TODO: List Item for Picture with ArrayList of comments (no like and etc buttons)
 public class HomePage extends BaseActivity {
-    private CustomAdpaterFoodFeed ExpAdapter;
-    private ArrayList<FoodFeed> foodFeeds;
+    private CustomAdpaterFoodFeedbacks ExpAdapter;
+    private ArrayList<FoodFeedFeedbacks> foodFeedFeedbackses;
+    ExpandableListView.OnChildClickListener onClickComments = new ExpandableListView.OnChildClickListener() {
+        @Override
+        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            ArrayList<Comments> c = new ArrayList<>();
+            foodFeedFeedbackses.get(groupPosition).getComments().get(childPosition);
+            return false;
+
+
+            //   Intent explicitIntent = new Intent();
+            //  explicitIntent.setClass(getBaseContext(), MoreComments.class);
+            // c = (Comments new(foodFeedFeedbackses.get(groupPosition).getComments().get(childPosition));
+            // explicitIntent.putExtra("Message",fruitsSelected1);
+            // startActivity(explicitIntent);
+        }
+    };
     private ExpandableListView ExpandList;
 
     @Override
@@ -28,33 +40,18 @@ public class HomePage extends BaseActivity {
         super.setUp(R.layout.activity_home_page);
 
         ExpandList = (ExpandableListView) findViewById(R.id.evFoodFeed);
-        //runs the function and returns the data to foodFeeds
-        foodFeeds = SetStandardGroups();
+        //runs the function and returns the data to foodFeedFeedbackses
+        foodFeedFeedbackses = SetStandardGroups();
 
         //Adapter for ExapadableListView
-        ExpAdapter = new CustomAdpaterFoodFeed(HomePage.this, foodFeeds);
+        ExpAdapter = new CustomAdpaterFoodFeedbacks(HomePage.this, foodFeedFeedbackses);
         ExpandList.setAdapter(ExpAdapter);
      //   ExpandList.setOnChildClickListener();
 
     }
 
-    ExpandableListView.OnChildClickListener onClickComments = new ExpandableListView.OnChildClickListener(){
-        @Override
-        public boolean onChildClick( ExpandableListView parent, View v,  int groupPosition, int childPosition, long id) {
-           ArrayList<Comments> c = new ArrayList<>();
-            foodFeeds.get(groupPosition).getComments().get(childPosition);
-            return false;
-
-
-         //   Intent explicitIntent = new Intent();
-          //  explicitIntent.setClass(getBaseContext(), MoreComments.class);
-           // c = (Comments new(foodFeeds.get(groupPosition).getComments().get(childPosition));
-           // explicitIntent.putExtra("Message",fruitsSelected1);
-           // startActivity(explicitIntent);
-        }
-    };
     // Dummy data method for pictures and comments
-    public ArrayList<FoodFeed> SetStandardGroups() {
+    public ArrayList<FoodFeedFeedbacks> SetStandardGroups() {
 
         String names[] = {"Geraldine", "Marielle", "Gina", "Bryan",
                 "Pat", "Eugene", "Shermaine", "Kook"};
@@ -64,13 +61,13 @@ public class HomePage extends BaseActivity {
 
         int Images[] = {R.drawable.food_temp1, R.drawable.food_temp};
 
-        ArrayList<FoodFeed> list = new ArrayList<FoodFeed>();
+        ArrayList<FoodFeedFeedbacks> list = new ArrayList<FoodFeedFeedbacks>();
 
         ArrayList<Comments> comments_list;
 
 
         for (int images : Images) {
-            FoodFeed gru = new FoodFeed();
+            FoodFeedFeedbacks gru = new FoodFeedFeedbacks();
             gru.setIcon(images);
 
             comments_list = new ArrayList<Comments>();
