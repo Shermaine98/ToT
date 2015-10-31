@@ -6,24 +6,17 @@
     tools:context="com.example.atayansy.tot.History">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/historyText"
-        android:textSize="60dp"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
-        android:text="History"/>
-
-    <ListView
-        android:id="@+id/lv_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="80dp"
-        android:layout_below="@id/historyText"
-        android:layout_above="@id/THENAV"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="History"
+        android:textSize="60dp" />
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/listView_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
