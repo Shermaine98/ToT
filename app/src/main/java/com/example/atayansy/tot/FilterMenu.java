@@ -1,7 +1,12 @@
 package com.example.atayansy.tot;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Message;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +17,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
+import Location.AppLocationService;
 
 public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Switch location;
@@ -24,17 +35,29 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     ImageButton ibFilterButtonRandomize;
     ImageButton ibFilterButtonHistory;
     ImageButton ibFilterButtonLogOut;
-    //private Integer[] budget= {50,100,200,275,415};
+    TextView tvAddress;
+
+    AppLocationService appLocationService;
     Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener(){
         @Override
         public void onClick(View v) {
             if(spinner_lt.isEnabled())
                 spinner_lt.setEnabled(false);
-
             else
                 spinner_lt.setEnabled(true);
+            Location gpsLocation = appLocationService.getLocation();
+            if (gpsLocation != null) {
+                double latitude = gpsLocation.getLatitude();
+                double longitude = gpsLocation.getLongitude();
+                String result = "Latitude: " + gpsLocation.getLatitude() +
+                        " Longitude: " + gpsLocation.getLongitude();
+                tvAddress.setText(result);
+            } else {
+                showSettingsAlert();
+            }
         }
     };
+    //location end
     Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener(){
         @Override
         public void onClick(View v) {
@@ -72,6 +95,28 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         }
     };
 
+    public void showSettingsAlert() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                FilterMenu.this);
+        alertDialog.setTitle("SETTINGS");
+        alertDialog.setMessage("Enable Location Provider! Go to settings menu?");
+        AlertDialog.Builder settings = alertDialog.setPositiveButton("Settings",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(
+                                Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        FilterMenu.this.startActivity(intent);
+                    }
+                });
+        alertDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        alertDialog.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +126,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_Bd = (Spinner) findViewById(R.id.sn_budget);
         spinner_lt = (Spinner) findViewById(R.id.sn_location);
         location = (Switch) findViewById(R.id.ms_nearMe);
+        tvAddress = (TextView) findViewById(R.id.tvAddress);
         //Button Naviation bar
         ibFilterButtonHome = (ImageButton) findViewById(R.id.filterButton_Home);
         ibFilterButtonFavorite = (ImageButton) findViewById(R.id.filterButton_favorites);
@@ -98,7 +144,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_Bd.setAdapter(adapter);
         Budget.setOnClickListener(switchSpinBd);
 
-
+        appLocationService = new AppLocationService(FilterMenu.this);
         //location
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.distance, android.R.layout.simple_dropdown_item_1line);
@@ -146,6 +192,37 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    private class GeocoderHandler extends Handler {
+
+        public void handleMessage(Message message) {
+            String locationAddress;
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = bundle.getString("address");
+                    break;
+                default:
+                    locationAddress = null;
+            }
+            tvAddress.setText(locationAddress);
+        }
+
+        @Override
+        public void close() {
+
+        }
+
+        @Override
+        public void flush() {
+
+        }
+
+        @Override
+        public void publish(LogRecord record) {
+
+        }
     }
 }
 

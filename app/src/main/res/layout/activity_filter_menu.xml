@@ -2,26 +2,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#dddbd7"
-    tools:context="com.example.atayansy.tot.FilterMenus"
-    android:contextClickable="false">
+    android:contextClickable="false"
+    android:orientation="vertical"
+    tools:context="com.example.atayansy.tot.FilterMenus">
 
     <TextView
+        android:id="@+id/FilterText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:text="FILTER"
         android:textSize="60dp"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/FilterText"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@id/FilterText">
+        android:layout_below="@id/FilterText"
+        android:orientation="vertical">
 
         <Switch
             android:id="@+id/ms_nearMe"
@@ -40,6 +40,14 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textSize="60dp" />
 
         <Switch
             android:id="@+id/ms_budget"
@@ -62,59 +70,59 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:background="#64010101"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="#64010101">
+            android:padding="8dp">
 
             <ImageButton
                 android:id="@+id/filterButton_Home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_home_black_24dp"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:background="#005f5f5f" />
+                android:background="#005f5f5f"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_home_black_24dp" />
 
             <ImageButton
                 android:id="@+id/filterButton_favorites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_grade_black_24dp"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:background="#005f5f5f" />
+                android:background="#005f5f5f"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_grade_black_24dp" />
 
             <ImageButton
                 android:id="@+id/filterButton_randomize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_toys_black_24dp"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:background="#005f5f5f" />
+                android:background="#005f5f5f"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_toys_black_24dp" />
 
             <ImageButton
                 android:id="@+id/filterButton_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_history_black_24dp"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:background="#005f5f5f" />
+                android:background="#005f5f5f"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_history_black_24dp" />
 
             <ImageButton
                 android:id="@+id/filterButton_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_settings_power_black_24dp"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:background="#005f5f5f" />
+                android:background="#005f5f5f"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_settings_power_black_24dp" />
         </LinearLayout>
 
     </LinearLayout>
