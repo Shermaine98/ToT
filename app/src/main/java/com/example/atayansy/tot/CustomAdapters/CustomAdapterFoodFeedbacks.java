@@ -18,11 +18,11 @@ import java.util.ArrayList;
 /**
  * Created by shermainesy on 10/8/15.
  */
-public class CustomAdpaterFoodFeedbacks extends BaseExpandableListAdapter {
+public class CustomAdapterFoodFeedbacks extends BaseExpandableListAdapter {
     private Context Context;
     private ArrayList<FoodFeedFeedbacks> foodfeeds;
 
-    public CustomAdpaterFoodFeedbacks(Context context, ArrayList<FoodFeedFeedbacks> objects) {
+    public CustomAdapterFoodFeedbacks(Context context, ArrayList<FoodFeedFeedbacks> objects) {
         this.Context = context;
         this.foodfeeds = objects;
     }
