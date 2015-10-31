@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by shermainesy on 10/8/15.
  */
-public class FoodFeed {
+public class FoodFeedFeedbacks {
     /**
      * static final String TABLE_Name = "";
      * static final String COLUMN_PICTURE = "";
@@ -16,12 +16,12 @@ public class FoodFeed {
     private int icon;
     private ArrayList<Comments> comments;
 
-    public FoodFeed(int icon, ArrayList<Comments> comments) {
+    public FoodFeedFeedbacks(int icon, ArrayList<Comments> comments) {
         this.icon = icon;
         this.comments = comments;
     }
 
-    public FoodFeed() {
+    public FoodFeedFeedbacks() {
     }
 
     public int getIcon() {

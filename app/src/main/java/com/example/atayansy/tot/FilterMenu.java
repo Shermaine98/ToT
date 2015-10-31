@@ -19,6 +19,8 @@ public class FilterMenu extends AppCompatActivity {
     ImageButton ibFilterButtonRandomize;
     ImageButton ibFilterButtonHistory;
     ImageButton ibFilterButtonLogOut;
+
+
     View.OnClickListener randomizeOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
