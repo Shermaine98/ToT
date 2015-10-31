@@ -21,10 +21,6 @@
             android:label="@string/title_activity_sign_up" >
         </activity>
         <activity
-            android:name=".SignIn"
-            android:label="@string/title_activity_sign_in" >
-        </activity>
-        <activity
             android:name=".HomePage"
             android:label="@string/title_activity_home_page" >
         </activity>

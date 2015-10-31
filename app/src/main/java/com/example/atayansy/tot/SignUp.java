@@ -42,7 +42,7 @@ public class SignUp extends AppCompatActivity {
                     !EdtEmail.getText().toString().isEmpty() &&
                     !EdtUsername.getText().toString().isEmpty() &&
                     !EdtPassword.getText().toString().isEmpty()) {
-                i.setClass(getBaseContext(), SignIn.class);
+                i.setClass(getBaseContext(), MainActivity.class);
                 startActivity(i);
             } else if (EdtName.getText().toString().isEmpty() ||
                     EdtEmail.getText().toString().isEmpty() ||
