@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ImageView
@@ -17,10 +16,14 @@
     <ImageView
         android:id="@+id/HomeLogo"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/tot_logo_cropped" />
+        android:layout_height="180dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/tot_logo_cropped"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/HomeText"
@@ -28,49 +31,48 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/HomeLogo"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
         android:text="TASTE OF TAFT"
         android:textColor="#000000"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/HomeText"
-        android:layout_marginBottom="80dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:background="#64f6f4f4"
+        android:layout_margin="20dp"
+        android:background="#43f6f4f4"
         android:orientation="vertical"
         android:padding="20dp">
 
         <EditText
             android:id="@+id/et_username"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="2"
             android:hint="Username" />
 
         <EditText
             android:id="@+id/et_password"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="password"
+            android:hint="Password"
+            android:layout_weight="2"
             android:inputType="textPassword" />
 
         <Button
             android:id="@+id/bt_signInPage"
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
             android:layout_weight="1"
-            android:background="#99000000"
+            android:background="#000000"
             android:text="Sign In"
+            android:layout_marginTop="20dp"
             android:textColor="#FFFFFF"
-            android:textSize="25dp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/bt_signUpPage"
@@ -81,10 +83,10 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="onClick"
-            android:text="SIGN UP"
-            android:textColor="#1c72fc"
+            android:text="No account yet? Sign up!"
+            android:textColor="#926e44"
             android:textIsSelectable="false"
-            android:textSize="20dp"
+            android:textSize="15sp"
             android:textStyle="italic" />
         <!-- TODO: Image Background move to send to back-->
 

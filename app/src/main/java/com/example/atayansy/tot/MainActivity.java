@@ -13,12 +13,13 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnSignIn;
     TextView btnSignUp;
+
     View.OnClickListener redirect = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent i = new Intent();
             if (v.equals(btnSignIn)) {
-                i.setClass(getBaseContext(), SignIn.class);
+                i.setClass(getBaseContext(), HomePage.class);
             } else if (v.equals(btnSignUp)) {
                 i.setClass(getBaseContext(), SignUp.class);
             }
