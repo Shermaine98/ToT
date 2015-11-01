@@ -7,34 +7,32 @@
     android:layout_above="@id/THENAV">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Welcome User!"
         android:textSize="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
+        android:padding="8dp"
+        android:background="@color/material_deep_teal_200"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
         android:id="@+id/welcomeText" />
 
     <TextView
-        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:layout_below="@+id/welcomeText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Top Food of the Week!"
-        android:textSize="25dp"
-        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="20dp"
+        android:layout_marginTop="7dp"
         android:id="@+id/topFive" />
 
     <ExpandableListView
         android:id="@+id/evFoodFeed"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="80dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/topFive"
-        android:layout_above="@id/THENAV"/>
+        android:layout_marginBottom="45dp" />
 
 </RelativeLayout>
