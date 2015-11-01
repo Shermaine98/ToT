@@ -59,7 +59,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             else {
                 spinner_lt.setEnabled(true);
 
-// two types, since GPS sometimes wont work or tooks long time to load
+// two types, since GPS sometimes wont work or took long time to load
                 Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
 
                 Location networkLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
