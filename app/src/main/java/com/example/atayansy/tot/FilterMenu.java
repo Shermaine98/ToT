@@ -48,6 +48,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             else {
                 spinner_lt.setEnabled(true);
 
+// two types, since GPS sometimes wont work or tooks long time to load
                 Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
 
                 Location networkLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
@@ -61,25 +62,26 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 } else if (networkLocation != null) {
                     double latitude = networkLocation.getLatitude();
                     double longitude = networkLocation.getLongitude();
-                    String result = "Latitude:"
-                            + networkLocation.getLatitude() + "Longitude:"
-                            + networkLocation.getLongitude();
+                    String result = "Latitude:" + networkLocation.getLatitude() + "Longitude:" + networkLocation.getLongitude();
                     tvAddress.setText(result);
                 } else {
                     showSettingsAlert();
                 }
 
                 //address
-                Location location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
-
                 //you can hard-code the lat & long if you have issues with getting it
                 //remove the below if-condition and use the following couple of lines
                 //double latitude = 37.422005;
                 //double longitude = -122.084095
 
-                if (location != null) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
+                if (gpsLocation != null) {
+                    double latitude = gpsLocation.getLatitude();
+                    double longitude = gpsLocation.getLongitude();
+                    LocationAddress locationAddress = new LocationAddress();
+                    LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
+                } else if (networkLocation != null) {
+                    double latitude = networkLocation.getLatitude();
+                    double longitude = networkLocation.getLongitude();
                     LocationAddress locationAddress = new LocationAddress();
                     LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
                 } else {
