@@ -10,18 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:padding="8dp"
         android:background="@color/material_deep_teal_200"
         android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
+        android:padding="8dp"
         android:text="Favorite"
         android:textSize="30dp" />
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:layout_below="@id/historyText"
-        android:layout_marginTop="10dp"
         android:id="@+id/listView_favorite"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/historyText"
+        android:layout_marginBottom="45dp"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>

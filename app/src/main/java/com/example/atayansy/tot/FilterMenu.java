@@ -45,8 +45,22 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         public void onClick(View v) {
             if (spinner_Bd.isEnabled())
                 spinner_Bd.setEnabled(false);
-            else
+            else {
                 spinner_Bd.setEnabled(true);
+
+                spinner_Bd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        tvBudgetLocation.setText("You Selected" + spinner_Bd.getSelectedItem().toString());
+                    }
+
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                        return;
+                    }
+                });
+
+
+            }
         }
     };
     private double latitude;
@@ -59,6 +73,16 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             else {
                 spinner_lt.setEnabled(true);
 
+                spinner_lt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        tvBudgetLocation.setText("You Selected" + spinner_lt.getSelectedItem().toString());
+                    }
+
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                        return;
+                    }
+                });
+
 // two types, since GPS sometimes wont work or took long time to load
                 Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
 
@@ -67,14 +91,14 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 if (gpsLocation != null) {
                     latitude = gpsLocation.getLatitude();
                     longitude = gpsLocation.getLongitude();
-                    String result = "Latitude:" + gpsLocation.getLatitude() + "Longitude:" + gpsLocation.getLongitude();
-                    tvAddress.setText(result);
+                    //   String result = "Latitude:" + gpsLocation.getLatitude() + "Longitude:" + gpsLocation.getLongitude();
+                    // tvAddress.setText(result);
                     LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
                 } else if (networkLocation != null) {
                     latitude = networkLocation.getLatitude();
                     longitude = networkLocation.getLongitude();
-                    String result = "Latitude:" + networkLocation.getLatitude() + "Longitude:" + networkLocation.getLongitude();
-                    tvAddress.setText(result);
+                    //  String result = "Latitude:" + networkLocation.getLatitude() + "Longitude:" + networkLocation.getLongitude();
+                    //   tvAddress.setText(result);
                     LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
                 } else {
                     showSettingsAlert();
@@ -181,26 +205,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         location.setOnClickListener(switchSpinLt);
 // TODO: delete if useless
 //to show what user selected
-        spinner_Bd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                tvBudgetLocation.setText("You Selected" + spinner_Bd.getSelectedItem().toString());
-            }
-
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                return;
-            }
-        });
-
-        spinner_lt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                tvBudgetLocation.setText("You Selected" + spinner_lt.getSelectedItem().toString());
-            }
-
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                return;
-            }
-        });
 
 
 

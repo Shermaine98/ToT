@@ -26,14 +26,23 @@ public class Favorite extends BaseActivity {
         super.onCreate(savedInstanceState);
         super.setUp(R.layout.activity_favorite);
 
-        //listViewfavorites = (ListView) findViewById(R.id.lv_favorites);
-
         //Swiper
         mListView = (SwipeMenuListView) findViewById(R.id.listView_favorite);
 
         //TODO: delete this Add items
         favorites1 = new ArrayList<>();
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "ddddd", R.mipmap.ic_launcher));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Food Salad", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Chicken", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Hotdong", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "BBQ", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Food Salad", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Chicken", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Hotdong", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "BBQ", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Food Salad", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Chicken", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Hotdong", R.id.rb_star));
+        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "BBQ", R.id.rb_star));
 
         //Custom adapter
         customAdapterFavorite = new CustomAdapterFavorite(getBaseContext(), R.layout.activity_favorite, favorites1);
@@ -140,6 +149,8 @@ public class Favorite extends BaseActivity {
 
         Intent Intent = new Intent();
         Intent.setClass(getBaseContext(), Result_Favorite_History.class);
+        Intent.putExtra("Class", "Favorite");
+        Intent.putExtra("FoodName", item.getfName());
         startActivity(Intent);
 
     }
