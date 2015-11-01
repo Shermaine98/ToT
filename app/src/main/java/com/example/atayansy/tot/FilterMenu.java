@@ -100,7 +100,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             } else if (v.equals(ibFilterButtonRandomize)) {
                 i.setClass(getBaseContext(), Randomize.class);
                 //put Extra Filter Options
-                String budget = spinner_Bd.getSelectedItem().toString();
+                int budget = Integer.parseInt(spinner_Bd.getSelectedItem().toString());
                 String distance = spinner_lt.getSelectedItem().toString();
                 i.putExtra("Budget", budget);
                 i.putExtra("Distance", distance);

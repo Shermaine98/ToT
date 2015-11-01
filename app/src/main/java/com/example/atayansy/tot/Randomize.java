@@ -48,16 +48,16 @@ public class Randomize extends AppCompatActivity {
 
 
         //Get Chosen
-        String Budget = getIntent().getExtras().getString("Budget");
+        int Budget = getIntent().getExtras().getInt("Budget");
         String Distance = getIntent().getExtras().getString("Distance");
-        String Latitude = getIntent().getExtras().getString("Latitude");
-        String Longitude = getIntent().getExtras().getString("Longitude");
+        Double Latitude = getIntent().getExtras().getDouble("Latitude");
+        Double Longitude = getIntent().getExtras().getDouble("Longitude");
 
         //printing Console
-        Log.d("Budget", Budget.toString());
+        Log.d("Budget", String.valueOf(Budget));
         Log.d("Distance", Distance.toString());
-        Log.d("Latitude", Latitude.toString());
-        Log.d("Longitude", Longitude.toString());
+        Log.d("Latitude", String.valueOf(Latitude));
+        Log.d("Longitude", String.valueOf(Longitude.toString()));
 
 }
 
