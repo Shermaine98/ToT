@@ -38,7 +38,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     TextView tvAddress;
 
     AppLocationService appLocationService;
-    LocationAddress locationAddress;
 
     Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener() {
         @Override
@@ -77,12 +76,12 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 if (gpsLocation != null) {
                     double latitude = gpsLocation.getLatitude();
                     double longitude = gpsLocation.getLongitude();
-                    LocationAddress locationAddress = new LocationAddress();
+                    LocationAddress locationAddress1 = new LocationAddress();
                     LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
                 } else if (networkLocation != null) {
                     double latitude = networkLocation.getLatitude();
                     double longitude = networkLocation.getLongitude();
-                    LocationAddress locationAddress = new LocationAddress();
+                    LocationAddress locationAddress2 = new LocationAddress();
                     LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
                 } else {
                     showSettingsAlert();
