@@ -32,6 +32,7 @@ public class LocationAddress {
                             sb.append(address.getAddressLine(i)).append("\n");
                         }
                         sb.append(address.getLocality()).append("\n");
+                        // TODO: remove this since null
                         sb.append(address.getPostalCode()).append("\n");
                         sb.append(address.getCountryName());
                         result = sb.toString();

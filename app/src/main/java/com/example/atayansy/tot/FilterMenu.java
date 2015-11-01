@@ -38,7 +38,18 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     TextView tvAddress;
 
     AppLocationService appLocationService;
-
+    //location end
+    Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (spinner_Bd.isEnabled())
+                spinner_Bd.setEnabled(false);
+            else
+                spinner_Bd.setEnabled(true);
+        }
+    };
+    private double latitude;
+    private double longitude;
     Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -53,16 +64,20 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 Location networkLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
 
                 if (gpsLocation != null) {
-                    double latitude = gpsLocation.getLatitude();
-                    double longitude = gpsLocation.getLongitude();
-                    String result = "Latitude:" + gpsLocation.getLatitude()
-                            + "Longitude:" + gpsLocation.getLongitude();
+                    latitude = gpsLocation.getLatitude();
+                    longitude = gpsLocation.getLongitude();
+                    String result = "Latitude:" + gpsLocation.getLatitude() + "Longitude:" + gpsLocation.getLongitude();
                     tvAddress.setText(result);
+                    LocationAddress locationAddress1 = new LocationAddress();
+                    //AYAW MAGING LOCATIONADDRESS1 BAKIT GANUN AUTO BUMALIK HMM D KO SURE KUNG GAGANA HAHA
+                    LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
                 } else if (networkLocation != null) {
-                    double latitude = networkLocation.getLatitude();
-                    double longitude = networkLocation.getLongitude();
+                    latitude = networkLocation.getLatitude();
+                    longitude = networkLocation.getLongitude();
                     String result = "Latitude:" + networkLocation.getLatitude() + "Longitude:" + networkLocation.getLongitude();
                     tvAddress.setText(result);
+                    LocationAddress locationAddress2 = new LocationAddress();
+                    LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
                 } else {
                     showSettingsAlert();
                 }
@@ -72,31 +87,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 //remove the below if-condition and use the following couple of lines
                 //double latitude = 37.422005;
                 //double longitude = -122.084095
-
-                if (gpsLocation != null) {
-                    double latitude = gpsLocation.getLatitude();
-                    double longitude = gpsLocation.getLongitude();
-                    LocationAddress locationAddress1 = new LocationAddress();
-                    LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
-                } else if (networkLocation != null) {
-                    double latitude = networkLocation.getLatitude();
-                    double longitude = networkLocation.getLongitude();
-                    LocationAddress locationAddress2 = new LocationAddress();
-                    LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
-                } else {
-                    showSettingsAlert();
-                }
             }
-        }
-    };
-    //location end
-    Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (spinner_Bd.isEnabled())
-                spinner_Bd.setEnabled(false);
-            else
-                spinner_Bd.setEnabled(true);
         }
     };
     // Method for Naviagtion bar
@@ -116,6 +107,8 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 String distance = spinner_lt.getSelectedItem().toString();
                 i.putExtra("Budget", budget);
                 i.putExtra("Distance", distance);
+                i.putExtra("Latitude", latitude);
+                i.putExtra("Longitude", longitude);
             } else if (v.equals(ibFilterButtonHistory)) {
                 i.setClass(getBaseContext(), History.class);
             } else if (v.equals(ibFilterButtonLogOut)) {
