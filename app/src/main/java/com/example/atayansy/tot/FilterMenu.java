@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -20,10 +21,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-
 import Location.AppLocationService;
+import Location.LocationAddress;
 
 public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Switch location;
@@ -39,30 +38,63 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     TextView tvAddress;
 
     AppLocationService appLocationService;
-    Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener(){
+    LocationAddress locationAddress;
+
+    Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(spinner_lt.isEnabled())
+            if (spinner_lt.isEnabled())
                 spinner_lt.setEnabled(false);
-            else
+            else {
                 spinner_lt.setEnabled(true);
-            Location gpsLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
-            if (gpsLocation != null) {
-                double latitude = gpsLocation.getLatitude();
-                double longitude = gpsLocation.getLongitude();
-                String result = "Latitude: " + gpsLocation.getLatitude() +
-                        " Longitude: " + gpsLocation.getLongitude();
-                tvAddress.setText(result);
-            } else {
-                showSettingsAlert();
+
+// two types, since GPS sometimes wont work or tooks long time to load
+                Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
+
+                Location networkLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
+
+                if (gpsLocation != null) {
+                    double latitude = gpsLocation.getLatitude();
+                    double longitude = gpsLocation.getLongitude();
+                    String result = "Latitude:" + gpsLocation.getLatitude()
+                            + "Longitude:" + gpsLocation.getLongitude();
+                    tvAddress.setText(result);
+                } else if (networkLocation != null) {
+                    double latitude = networkLocation.getLatitude();
+                    double longitude = networkLocation.getLongitude();
+                    String result = "Latitude:" + networkLocation.getLatitude() + "Longitude:" + networkLocation.getLongitude();
+                    tvAddress.setText(result);
+                } else {
+                    showSettingsAlert();
+                }
+
+                //address
+                //you can hard-code the lat & long if you have issues with getting it
+                //remove the below if-condition and use the following couple of lines
+                //double latitude = 37.422005;
+                //double longitude = -122.084095
+
+                if (gpsLocation != null) {
+                    double latitude = gpsLocation.getLatitude();
+                    double longitude = gpsLocation.getLongitude();
+                    LocationAddress locationAddress = new LocationAddress();
+                    LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
+                } else if (networkLocation != null) {
+                    double latitude = networkLocation.getLatitude();
+                    double longitude = networkLocation.getLongitude();
+                    LocationAddress locationAddress = new LocationAddress();
+                    LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
+                } else {
+                    showSettingsAlert();
+                }
             }
         }
     };
     //location end
-    Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener(){
+    Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(spinner_Bd.isEnabled())
+            if (spinner_Bd.isEnabled())
                 spinner_Bd.setEnabled(false);
             else
                 spinner_Bd.setEnabled(true);
@@ -96,6 +128,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         }
     };
 
+    // Ask user to change location permission setting
     public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                 FilterMenu.this);
@@ -196,7 +229,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     }
 
     private class GeocoderHandler extends Handler {
-
+        @Override
         public void handleMessage(Message message) {
             String locationAddress;
             switch (message.what) {
@@ -208,21 +241,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                     locationAddress = null;
             }
             tvAddress.setText(locationAddress);
-        }
-
-        @Override
-        public void close() {
-
-        }
-
-        @Override
-        public void flush() {
-
-        }
-
-        @Override
-        public void publish(LogRecord record) {
-
         }
     }
 }
