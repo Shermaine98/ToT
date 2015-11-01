@@ -23,8 +23,8 @@ public class Randomize extends AppCompatActivity {
 
 
     private double Distance;
-    private double Latitude;
-    private double Longitude;
+    private double CurrLatitude;
+    private double CurrLongitude;
     private int Budget;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +82,14 @@ public class Randomize extends AppCompatActivity {
         //Get Chosen
         Budget = getIntent().getExtras().getInt("Budget");
         Distance = getIntent().getExtras().getDouble("Distance");
-        Latitude = getIntent().getExtras().getDouble("Latitude");
-        Longitude = getIntent().getExtras().getDouble("Longitude");
+        CurrLatitude = getIntent().getExtras().getDouble("Latitude");
+        CurrLongitude = getIntent().getExtras().getDouble("Longitude");
 
         //printing Console
         Log.d("Budget", String.valueOf(Budget));
         Log.d("Distance", String.valueOf(Distance));
-        Log.d("Latitude", String.valueOf(Latitude));
-        Log.d("Longitude", String.valueOf(Longitude));
+        Log.d("Latitude", String.valueOf(CurrLatitude));
+        Log.d("Longitude", String.valueOf(CurrLongitude));
 
     }
 
@@ -97,6 +97,8 @@ public class Randomize extends AppCompatActivity {
     public void sort() {
 
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
