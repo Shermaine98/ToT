@@ -36,6 +36,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     ImageButton ibFilterButtonHistory;
     ImageButton ibFilterButtonLogOut;
     TextView tvAddress;
+    TextView tvBudgetLocation;
 
     AppLocationService appLocationService;
     //location end
@@ -150,6 +151,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_lt = (Spinner) findViewById(R.id.sn_location);
         location = (Switch) findViewById(R.id.ms_nearMe);
         tvAddress = (TextView) findViewById(R.id.tvAddress);
+        tvBudgetLocation = (TextView) findViewById(R.id.selectedBudgetLocation);
         //Button Naviation bar
         ibFilterButtonHome = (ImageButton) findViewById(R.id.filterButton_Home);
         ibFilterButtonFavorite = (ImageButton) findViewById(R.id.filterButton_favorites);
@@ -177,6 +179,30 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_lt.setEnabled(false);
         spinner_lt.setAdapter(adapter2);
         location.setOnClickListener(switchSpinLt);
+// TODO: delete if useless
+//to show what user selected
+        spinner_Bd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                tvBudgetLocation.setText("You Selected" + spinner_Bd.getSelectedItem().toString());
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
+
+        spinner_lt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tvBudgetLocation.setText("You Selected" + spinner_lt.getSelectedItem().toString());
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
+
+
 
         ibFilterButtonHome.setOnClickListener(randomizeOnClick);
         ibFilterButtonFavorite.setOnClickListener(randomizeOnClick);
@@ -206,6 +232,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

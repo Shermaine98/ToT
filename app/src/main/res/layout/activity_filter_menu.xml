@@ -11,38 +11,38 @@
         android:id="@+id/FilterText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="FILTER"
-        android:padding="8dp"
         android:background="@color/material_deep_teal_200"
         android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
+        android:padding="8dp"
+        android:text="FILTER"
         android:textSize="30dp"
         />
 
     <LinearLayout
         android:id="@+id/layout_filter"
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/FilterText"
+        android:layout_marginTop="8dp"
         android:orientation="vertical">
 
         <Switch
             android:id="@+id/ms_nearMe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif-thin"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="Near Me Location"
             android:textSize="20dp" />
 
         <Spinner
             android:id="@+id/sn_location"
-            android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_weight="1" />
 
 
@@ -50,28 +50,38 @@
             android:id="@+id/ms_budget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-thin"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:fontFamily="sans-serif-thin"
-            android:layout_weight="1"
             android:text="Set Budget"
             android:textSize="20dp" />
 
         <Spinner
             android:id="@+id/sn_budget"
-            android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_weight="1" />
 
         <TextView
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:id="@+id/tvAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
             android:layout_weight="3"
+            android:fontFamily="sans-serif-thin"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/selectedBudgetLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="sans-serif-thin"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:textSize="15sp" />
 
         <LinearLayout
