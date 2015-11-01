@@ -48,18 +48,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             else {
                 spinner_Bd.setEnabled(true);
 
-                spinner_Bd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                        tvBudgetLocation.setText("You Selected" + spinner_Bd.getSelectedItem().toString());
-                    }
-
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                        return;
-                    }
-                });
-
-
             }
         }
     };
@@ -73,15 +61,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             else {
                 spinner_lt.setEnabled(true);
 
-                spinner_lt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        tvBudgetLocation.setText("You Selected" + spinner_lt.getSelectedItem().toString());
-                    }
-
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                        return;
-                    }
-                });
 
 // two types, since GPS sometimes wont work or took long time to load
                 Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
@@ -112,6 +91,8 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             }
         }
     };
+
+
     // Method for Naviagtion bar
     OnClickListener randomizeOnClick = new OnClickListener() {
         @Override
@@ -203,11 +184,30 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_lt.setEnabled(false);
         spinner_lt.setAdapter(adapter2);
         location.setOnClickListener(switchSpinLt);
-// TODO: delete if useless
+// TODO: delete if useless, dapat pag ni on lang lalabas, nilgay ko sa if else statement ayaw gumana
 //to show what user selected
+        spinner_Bd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                tvBudgetLocation.setText("You Selected" + spinner_Bd.getSelectedItem().toString());
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
 
 
+        spinner_lt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tvBudgetLocation.setText("You Selected" + spinner_lt.getSelectedItem().toString());
+            }
 
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
 
         ibFilterButtonHome.setOnClickListener(randomizeOnClick);
         ibFilterButtonFavorite.setOnClickListener(randomizeOnClick);
