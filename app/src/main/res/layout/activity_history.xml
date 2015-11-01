@@ -17,6 +17,8 @@
         android:textSize="30dp" />
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:id="@+id/listView_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
