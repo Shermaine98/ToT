@@ -1,75 +1,78 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:orientation="vertical"
     tools:context="com.example.atayansy.tot.ResultActivity">
+
+    <TextView
+        android:id="@+id/ResultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/material_deep_teal_200"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
+        android:padding="8dp"
+        android:text="RESULT"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tv_fodName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="foodName"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/tv_foodescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif-thin"
+        android:text="food description"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Price: 100"
+        android:textSize="17sp" />
+
+    <ImageView
+        android:id="@+id/tv_foodImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/food_temp1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/ResultText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="RESULT"
-            android:textSize="60sp" />
-
-        <TextView
-            android:id="@+id/tv_fodName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="foodName"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tv_foodescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="food description"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Price: 100"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/tv_foodImage"
+        <Button
+            android:id="@+id/button_eat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/food_temp1"
-            android:text="food description" />
+            android:background="#000000"
+            android:text="I WILL EAT THIS"
+            android:textColor="#FFFFFF" />
 
+        <Button
+            android:id="@+id/button_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/button_eat"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:text="NAAAH"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_eat"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="I WILL EAT THIS"
-        android:theme="@style/Base.V21.Theme.AppCompat" />
-
-    <Button
-        android:id="@+id/button_main"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/button_eat"
-        android:text="NAAAH"
-        android:theme="@style/Base.V21.Theme.AppCompat" />
-
-</RelativeLayout>
+</LinearLayout>
