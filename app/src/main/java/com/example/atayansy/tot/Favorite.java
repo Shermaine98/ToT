@@ -81,7 +81,6 @@ public class Favorite extends BaseActivity {
         mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                //TODO: change this
                 FavoriteObject item = favorites1.get(position);
                 switch (index) {
                     case 0:
@@ -125,7 +124,7 @@ public class Favorite extends BaseActivity {
         });
     }
 
-    // TODO: Databass
+    // TODO: Database
     private void delete(FavoriteObject item) {
         // delete app
         try {

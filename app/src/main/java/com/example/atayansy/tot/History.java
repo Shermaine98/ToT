@@ -63,7 +63,6 @@ public class History extends BaseActivity {
         menulistView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                //TODO: change this
                 HistoryObject item = histories1.get(position);
                 switch (index) {
                     case 0:

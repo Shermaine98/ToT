@@ -14,13 +14,27 @@ import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 import java.util.ArrayList;
 
 // TODO: FIX Navigation Design Home(TOP FOOD),favorites , RANDMOZIE, favorite, me(setting)
-// TODO: List Item for Picture with ArrayList of comments (no like and etc buttons)
 public class HomePage extends BaseActivity {
 
-    private CustomAdapterFoodFeedbacks ExpAdapter;
-    private ArrayList<FoodFeedFeedbacks> foodFeedFeedbacks;
     ArrayList<Food> CrazyKatsu;
     ArrayList<Food> Bonchon;
+    private CustomAdapterFoodFeedbacks ExpAdapter;
+    private ArrayList<FoodFeedFeedbacks> foodFeedFeedbacks;
+    ExpandableListView.OnChildClickListener onClickComments = new ExpandableListView.OnChildClickListener() {
+        @Override
+        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            ArrayList<Comments> c = new ArrayList<>();
+            foodFeedFeedbacks.get(groupPosition).getComments().get(childPosition);
+            return false;
+
+
+            //   Intent explicitIntent = new Intent();
+            //  explicitIntent.setClass(getBaseContext(), MoreComments.class);
+            // c = (Comments new(foodFeedFeedbackses.get(groupPosition).getComments().get(childPosition));
+            // explicitIntent.putExtra("Message",fruitsSelected1);
+            // startActivity(explicitIntent);
+        }
+    };
     private ExpandableListView ExpandList;
 
     @Override
@@ -55,22 +69,6 @@ public class HomePage extends BaseActivity {
         //   ExpandList.setOnChildClickListener();
 
     }
-
-    ExpandableListView.OnChildClickListener onClickComments = new ExpandableListView.OnChildClickListener() {
-        @Override
-        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-            ArrayList<Comments> c = new ArrayList<>();
-            foodFeedFeedbacks.get(groupPosition).getComments().get(childPosition);
-            return false;
-
-
-            //   Intent explicitIntent = new Intent();
-            //  explicitIntent.setClass(getBaseContext(), MoreComments.class);
-            // c = (Comments new(foodFeedFeedbackses.get(groupPosition).getComments().get(childPosition));
-            // explicitIntent.putExtra("Message",fruitsSelected1);
-            // startActivity(explicitIntent);
-        }
-    };
 
     // Dummy data method for pictures and comments
     public ArrayList<FoodFeedFeedbacks> SetStandardGroups() {
