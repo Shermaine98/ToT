@@ -101,7 +101,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 i.setClass(getBaseContext(), Randomize.class);
                 //put Extra Filter Options
                 int budget = Integer.parseInt(spinner_Bd.getSelectedItem().toString());
-                String distance = spinner_lt.getSelectedItem().toString();
+                double distance = Double.parseDouble(spinner_lt.getSelectedItem().toString());
                 i.putExtra("Budget", budget);
                 i.putExtra("Distance", distance);
                 i.putExtra("Latitude", latitude);
