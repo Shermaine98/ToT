@@ -68,15 +68,12 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                     longitude = gpsLocation.getLongitude();
                     String result = "Latitude:" + gpsLocation.getLatitude() + "Longitude:" + gpsLocation.getLongitude();
                     tvAddress.setText(result);
-                    LocationAddress locationAddress1 = new LocationAddress();
-                    //AYAW MAGING LOCATIONADDRESS1 BAKIT GANUN AUTO BUMALIK HMM D KO SURE KUNG GAGANA HAHA
                     LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
                 } else if (networkLocation != null) {
                     latitude = networkLocation.getLatitude();
                     longitude = networkLocation.getLongitude();
                     String result = "Latitude:" + networkLocation.getLatitude() + "Longitude:" + networkLocation.getLongitude();
                     tvAddress.setText(result);
-                    LocationAddress locationAddress2 = new LocationAddress();
                     LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
                 } else {
                     showSettingsAlert();
