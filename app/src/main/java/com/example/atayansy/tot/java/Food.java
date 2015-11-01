@@ -11,8 +11,10 @@ public class Food {
     String location;
     String type;
     int image;
+    double latitue;
+    double longtitude;
 
-    public Food(String foodName, String restaurant, String definition, double price, String location, String type, int image) {
+    public Food(String foodName, String restaurant, String definition, double price, String location, String type, int image, double latitue, double longtitude) {
         this.foodName = foodName;
         this.restaurant = restaurant;
         this.definition = definition;
@@ -20,6 +22,8 @@ public class Food {
         this.location = location;
         this.type = type;
         this.image = image;
+        this.latitue = latitue;
+        this.longtitude = longtitude;
     }
 
     public String getFoodName() {
@@ -77,4 +81,21 @@ public class Food {
     public void setImage(int image) {
         this.image = image;
     }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public double getLatitue() {
+        return latitue;
+    }
+
+    public void setLatitue(double latitue) {
+        this.latitue = latitue;
+    }
+
 }

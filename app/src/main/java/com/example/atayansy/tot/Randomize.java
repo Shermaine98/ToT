@@ -11,8 +11,12 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.atayansy.tot.java.Food;
+
+import java.util.ArrayList;
+
 public class Randomize extends AppCompatActivity {
-//TODO: Picture Changing Code
+    ArrayList<Food> FoodList;
     ImageView iv_randomize;
     TextView tv_randomize;
     private Handler handler = new Handler();
@@ -45,6 +49,28 @@ public class Randomize extends AppCompatActivity {
                 startActivity(i);
             }
         }, 4000);
+
+        //TODO: delete if database
+
+
+        FoodList = new ArrayList<>();
+        FoodList.add(new Food("Chicken Katsu", "Crazy Katsu",
+                "Breaded, deep-fried chicken cutlet served with shredded lettuce and rice",
+                155.00, "Ermita One Archers Place, Taft Avenue, Manila", "Main Course", 1, 14.57, 120.98));
+        FoodList.add(new Food("Tonkatsu", "Crazy Katsu",
+                "Breaded, deep-fried pork cutlet served with shredded lettuce and rice",
+                150.00, "Ermita One Archers Place, Taft Avenue, Manila", "Main Course", 2, 14.57, 120.98));
+        FoodList.add(new Food("Katsu Curry", "Crazy Katsu",
+                "Breaded pork cutlet in curry sauce served with rice",
+                190.00, "Ermita One Archers Place, Taft Avenue, Manila", "Main Course", 2, 14.57, 120.99));
+
+
+        FoodList.add(new Food("Breakfast Beef Bulgogi Ricebox", "Chicken Bonchon - Taft (University Mall)",
+                "Beef bulgogi with egg and rice", 135.00,
+                "University Mall, Taft Avenue, Manila City, Metro Manila", "Main Course", 3, 14.56, 120.99));
+        FoodList.add(new Food("Breakfast Chops Ricebox", "Chicken Bonchon - Taft (University Mall)",
+                "Chicken chops with egg and garlic rice", 135.00,
+                "University Mall, Taft Avenue, Manila City, Metro Manila", "Main Course", 4, 14.56, 120.99));
 
 
         //Get Chosen

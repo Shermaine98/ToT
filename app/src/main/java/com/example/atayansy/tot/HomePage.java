@@ -8,7 +8,6 @@ import android.widget.ExpandableListView;
 
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterFoodFeedbacks;
 import com.example.atayansy.tot.java.Comments;
-import com.example.atayansy.tot.java.Food;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 
 import java.util.ArrayList;
@@ -16,8 +15,7 @@ import java.util.ArrayList;
 // TODO: FIX Navigation Design Home(TOP FOOD),favorites , RANDMOZIE, favorite, me(setting)
 public class HomePage extends BaseActivity {
 
-    ArrayList<Food> CrazyKatsu;
-    ArrayList<Food> Bonchon;
+
     private CustomAdapterFoodFeedbacks ExpAdapter;
     private ArrayList<FoodFeedFeedbacks> foodFeedFeedbacks;
     ExpandableListView.OnChildClickListener onClickComments = new ExpandableListView.OnChildClickListener() {
@@ -42,23 +40,6 @@ public class HomePage extends BaseActivity {
         super.onCreate(savedInstanceState);
         super.setUp(R.layout.activity_home_page);
 
-        CrazyKatsu = new ArrayList<>();
-        Bonchon = new ArrayList<>();
-        CrazyKatsu.add(new Food("Chicken Katsu", "Crazy Katsu",
-                "Breaded, deep-fried chicken cutlet served with shredded lettuce and rice",
-                155.00, "Ermita One Archers Place, Taft Avenue, Manila", "Main Course", 1));
-        CrazyKatsu.add(new Food("Tonkatsu", "Crazy Katsu",
-                "Breaded, deep-fried pork cutlet served with shredded lettuce and rice",
-                150.00, "Ermita One Archers Place, Taft Avenue, Manila", "Main Course", 2));
-        CrazyKatsu.add(new Food("Katsu Curry", "Crazy Katsu",
-                "Breaded pork cutlet in curry sauce served with rice",
-                190.00, "Ermita One Archers Place, Taft Avenue, Manila", "Main Course", 2));
-        Bonchon.add(new Food("Breakfast Beef Bulgogi Ricebox", "Chicken Bonchon - Taft (University Mall)",
-                "Beef bulgogi with egg and rice", 135.00,
-                "University Mall, Taft Avenue, Manila City, Metro Manila", "Main Course", 3));
-        Bonchon.add(new Food("Breakfast Chops Ricebox", "Chicken Bonchon - Taft (University Mall)",
-                "Chicken chops with egg and garlic rice", 135.00,
-                "University Mall, Taft Avenue, Manila City, Metro Manila", "Main Course", 4));
         ExpandList = (ExpandableListView) findViewById(R.id.evFoodFeed);
         //runs the function and returns the data to foodFeedFeedbacks
         foodFeedFeedbacks = SetStandardGroups();
