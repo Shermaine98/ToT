@@ -108,8 +108,8 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 //put Extra Filter Options
                 int budget = Integer.parseInt(spinner_Bd.getSelectedItem().toString());
                 float distance = Float.parseFloat(spinner_lt.getSelectedItem().toString());
-                i.putExtra("location_switch", location.isEnabled());
-                i.putExtra("Budget_switch", Budget.isEnabled());
+                i.putExtra("location_switch", location.isActivated());
+                i.putExtra("Budget_switch", Budget.isActivated());
                 i.putExtra("Budget", budget);
                 i.putExtra("Distance", distance);
                 i.putExtra("Latitude", latitude);

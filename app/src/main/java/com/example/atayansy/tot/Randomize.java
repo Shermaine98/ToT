@@ -49,9 +49,6 @@ public class Randomize extends AppCompatActivity {
         frameAnimation.start();
         //    frameAnimation1.start();
 
-
-
-
         //TODO: delete if database
 
 
@@ -91,7 +88,7 @@ public class Randomize extends AppCompatActivity {
         Log.e("Distance", String.valueOf(Distance));
         Log.e("Latitude", String.valueOf(CurrLatitude));
         Log.e("Longitude", String.valueOf(CurrLongitude));
-
+        sort();
     }
 
     //Sorting
