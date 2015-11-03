@@ -28,8 +28,8 @@ public class Randomize extends AppCompatActivity {
     private double CurrLatitude;
     private double CurrLongitude;
     private int Budget;
-    private boolean location_switch;
-    private boolean budget_switch;
+    private boolean location_spinner;
+    private boolean budget_spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +73,8 @@ public class Randomize extends AppCompatActivity {
 
 
         //Get Chosen
-        location_switch = getIntent().getExtras().getBoolean("location_switch");
-        budget_switch = getIntent().getExtras().getBoolean("Budget_switch");
+        location_spinner = getIntent().getExtras().getBoolean("location_spinner");
+        budget_spinner = getIntent().getExtras().getBoolean("Budget_spinner");
         Budget = getIntent().getExtras().getInt("Budget");
         Distance = getIntent().getExtras().getFloat("Distance");
         CurrLatitude = getIntent().getExtras().getDouble("Latitude");
@@ -82,8 +82,8 @@ public class Randomize extends AppCompatActivity {
 
         //printing Console
 
-        Log.e("location_switch", String.valueOf(location_switch));
-        Log.e("Budget_switch", String.valueOf(budget_switch));
+        Log.e("location_spinner", String.valueOf(location_spinner));
+        Log.e("Budget_spinner", String.valueOf(budget_spinner));
         Log.e("Budget", String.valueOf(Budget));
         Log.e("Distance", String.valueOf(Distance));
         Log.e("Latitude", String.valueOf(CurrLatitude));
@@ -95,22 +95,22 @@ public class Randomize extends AppCompatActivity {
     public void sort() {
         Random random = new Random();
         FilteredResult = new ArrayList<>();
-        if (location_switch == false && budget_switch == false) {
-            result = random.nextInt(FoodList.size() + 1);
+        if (location_spinner == false && budget_spinner == false) {
+            result = random.nextInt(FoodList.size());
             intent(FoodList);
         }
         //sort/filter budget then randomize
-        else if (location_switch == false && budget_switch == true) {
+        else if (location_spinner == false && budget_spinner == true) {
             for (int i = 0; i < FoodList.size(); i++) {
                 if (FoodList.get(i).getPrice() <= Budget) {
                     FilteredResult.add(FoodList.get(i));
                 }
             }
-            result = random.nextInt(FilteredResult.size() + 1);
+            result = random.nextInt(FilteredResult.size());
             intent(FilteredResult);
         }
         //sort/filter location then randomize
-        else if (location_switch == true && budget_switch == false) {
+        else if (location_spinner == true && budget_spinner == false) {
 
             Location currentLocation = new Location("Current Location");
             currentLocation.setLatitude(CurrLatitude);
@@ -125,7 +125,7 @@ public class Randomize extends AppCompatActivity {
                     FilteredResult.add(FoodList.get(i));
 
             }
-            result = random.nextInt(FilteredResult.size() + 1);
+            result = random.nextInt(FilteredResult.size());
             intent(FilteredResult);
         } else {
             //sort/filter location and budget randmize

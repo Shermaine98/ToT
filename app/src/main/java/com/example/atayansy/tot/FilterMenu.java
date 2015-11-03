@@ -108,8 +108,10 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 //put Extra Filter Options
                 int budget = Integer.parseInt(spinner_Bd.getSelectedItem().toString());
                 float distance = Float.parseFloat(spinner_lt.getSelectedItem().toString());
-                i.putExtra("location_switch", location.isActivated());
-                i.putExtra("Budget_switch", Budget.isActivated());
+                //return spinner
+                i.putExtra("location_spinner", spinner_lt.isEnabled());
+                i.putExtra("Budget_spinner", spinner_Bd.isEnabled());
+                //
                 i.putExtra("Budget", budget);
                 i.putExtra("Distance", distance);
                 i.putExtra("Latitude", latitude);
@@ -174,7 +176,9 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         // Apply the adapter to the spinner
         spinner_Bd.setEnabled(false);
         spinner_Bd.setAdapter(adapter);
+
         Budget.setOnClickListener(switchSpinBd);
+
 
         appLocationService = new AppLocationService(FilterMenu.this);
         //location
@@ -184,8 +188,10 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         // Apply the adapter to the spinner
         spinner_lt.setEnabled(false);
+
         spinner_lt.setAdapter(adapter2);
         location.setOnClickListener(switchSpinLt);
+
 // TODO: delete if useless, dapat pag ni on lang lalabas, nilgay ko sa if else statement ayaw gumana
 //to show what user selected
         spinner_Bd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
