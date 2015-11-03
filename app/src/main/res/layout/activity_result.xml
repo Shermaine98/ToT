@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#e9e7e3"
+    android:orientation="vertical"
     tools:context="com.example.atayansy.tot.ResultActivity">
 
     <TextView
@@ -24,7 +24,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:fontFamily="sans-serif-medium"
-        android:text="foodName"
         android:textSize="22sp" />
 
     <TextView
