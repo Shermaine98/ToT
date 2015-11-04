@@ -28,6 +28,7 @@ public class ResultActivity extends AppCompatActivity {
         }
     };
     private String result;
+    private String Noresult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,22 +43,14 @@ public class ResultActivity extends AppCompatActivity {
         button_main.setOnClickListener(decision);
 
         result = getIntent().getExtras().getString("Result");
-        resultFoodName.setText(result);
-    /**    Random myRandom = new Random();
-       iv_randomize   = (ImageView) findViewById(R.id.ivRandomize);
-      /  switch(myRandom.nextInt()%3) {
-            case 0:
-                iv_randomize.setImageResource(R.mipmap.ic_launcher);
-                break;
-            case 1:
-                iv_randomize.setImageResource(R.drawable.tomato);
-                break;
-            case 2:
-                iv_randomize.setImageResource(R.drawable.food_temp);
-                break;
-            default:
+        Noresult = getIntent().getExtras().getString("NoResult");
+
+        if (result.equalsIgnoreCase(null)) {
+            resultFoodName.setText(Noresult);
+
+        } else {
+            resultFoodName.setText(result);
         }
-     **/
     }
 
     @Override

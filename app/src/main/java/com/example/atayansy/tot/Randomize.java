@@ -23,6 +23,8 @@ public class Randomize extends AppCompatActivity {
     TextView tv_randomize;
     ArrayList<Food> FilteredResult;
     int result;
+    boolean x = true;
+    Random random = new Random();
     private Handler handler = new Handler();
     private double Distance;
     private double CurrLatitude;
@@ -81,7 +83,7 @@ public class Randomize extends AppCompatActivity {
         CurrLongitude = getIntent().getExtras().getDouble("Longitude");
 
         //printing Console
-
+//TODO: delete
         Log.e("location_spinner", String.valueOf(location_spinner));
         Log.e("Budget_spinner", String.valueOf(budget_spinner));
         Log.e("Budget", String.valueOf(Budget));
@@ -93,55 +95,90 @@ public class Randomize extends AppCompatActivity {
 
     //Sorting
     public void sort() {
-        Random random = new Random();
+
         FilteredResult = new ArrayList<>();
         if (location_spinner == false && budget_spinner == false) {
-            result = random.nextInt(FoodList.size());
-            intent(FoodList);
+            randomize();
         }
         //sort/filter budget then randomize
         else if (location_spinner == false && budget_spinner == true) {
-            for (int i = 0; i < FoodList.size(); i++) {
-                if (FoodList.get(i).getPrice() <= Budget) {
-                    FilteredResult.add(FoodList.get(i));
-                }
-            }
-            result = random.nextInt(FilteredResult.size());
-            intent(FilteredResult);
+            filterBudget();
         }
         //sort/filter location then randomize
         else if (location_spinner == true && budget_spinner == false) {
-
-            Location currentLocation = new Location("Current Location");
-            currentLocation.setLatitude(CurrLatitude);
-            currentLocation.setLongitude(CurrLongitude);
-
-            for (int i = 0; i < FoodList.size(); i++) {
-                Location otherLocation = new Location("Other Location");
-                otherLocation.setLatitude(FoodList.get(i).getLatitue());
-                otherLocation.setLongitude(FoodList.get(i).getLongtitude());
-                float distanceResult = currentLocation.distanceTo(otherLocation);
-                if (Distance <= distanceResult)
-                    FilteredResult.add(FoodList.get(i));
-
-            }
-            result = random.nextInt(FilteredResult.size());
-            intent(FilteredResult);
+            filterLocation();
         } else {
             //sort/filter location and budget randmize
-
+            //TODO:
 
         }
 
     }
 
+    //sort/filter location then randomize
+    public void filterLocation() {
+        Location currentLocation = new Location("Current Location");
+        currentLocation.setLatitude(CurrLatitude);
+        currentLocation.setLongitude(CurrLongitude);
+
+        for (int i = 0; i < FoodList.size(); i++) {
+            Location otherLocation = new Location("Other Location");
+            otherLocation.setLatitude(FoodList.get(i).getLatitue());
+            otherLocation.setLongitude(FoodList.get(i).getLongtitude());
+            float distanceResult = currentLocation.distanceTo(otherLocation);
+            if (Distance <= distanceResult) {
+                FilteredResult.add(FoodList.get(i));
+                x = true;
+            } else {
+                x = false;
+            }
+        }
+        if (x) {
+            result = random.nextInt(FilteredResult.size());
+            intent(FilteredResult);
+        } else {
+            intent();
+        }
+    }
+
+    //sort/filter budget then randomize
+    public void filterBudget() {
+        for (int i = 0; i < FoodList.size(); i++) {
+            if (FoodList.get(i).getPrice() <= Budget) {
+                FilteredResult.add(FoodList.get(i));
+                x = true;
+            } else {
+                x = false;
+            }
+        }
+        if (x) {
+            result = random.nextInt(FilteredResult.size());
+            intent(FilteredResult);
+        } else {
+            intent();
+        }
+    }
+
+    public void randomize() {
+        result = random.nextInt(FoodList.size());
+        intent(FoodList);
+    }
 
     public void intent(ArrayList<Food> FoodResult) {
         Intent i = new Intent();
         i.setClass(getBaseContext(), ResultActivity.class);
+
         i.putExtra("Result", FoodResult.get(result).getFoodName());
         startActivity(i);
     }
+
+    public void intent() {
+        Intent i = new Intent();
+        i.setClass(getBaseContext(), ResultActivity.class);
+        i.putExtra("NoResult", "No result Found");
+        startActivity(i);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

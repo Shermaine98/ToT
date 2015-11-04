@@ -7,15 +7,15 @@
     <TextView
         android:id="@+id/tv_FoodName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="72dp"
+        android:layout_weight="0.71"
         android:textAlignment="center" />
 
     <ImageView
         android:id="@+id/iv_foodPic"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_height="184dp"
+        android:layout_weight="0.37" />
 
     <RatingBar
         android:id="@+id/rb_star"
