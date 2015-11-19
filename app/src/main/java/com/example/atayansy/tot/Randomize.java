@@ -1,7 +1,6 @@
 package com.example.atayansy.tot;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,14 +40,14 @@ public class Randomize extends AppCompatActivity {
         iv_randomize = (ImageView) findViewById(R.id.ivRandomize);
         tv_randomize = (TextView) findViewById(R.id.tvrandomize);
 
-        iv_randomize.setBackgroundResource(R.drawable.random_animation);
-        //   tv_randomize.setBackgroundResource(R.drawable.text_animation);
+        //  iv_randomize.setBackgroundResource(R.drawable.random_animation);
+//        tv_randomize.setBackgroundResource(R.drawable.text_animation);
 
-        AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
+        //     AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
 
-        // AnimationDrawable frameAnimation1 = (AnimationDrawable) tv_randomize.getBackground();
+        //  AnimationDrawable frameAnimation1 = (AnimationDrawable) tv_randomize.getBackground();
 
-        frameAnimation.start();
+        //   frameAnimation.start();
         //    frameAnimation1.start();
 
         //TODO: delete if database
@@ -70,7 +69,7 @@ public class Randomize extends AppCompatActivity {
                 "Beef bulgogi with egg and rice", 135.00,
                 "University Mall, Taft Avenue, Manila City, Metro Manila", "Main Course", 3, 14.56, 120.99));
         FoodList.add(new Food("Breakfast Chops Ricebox", "Chicken Bonchon - Taft (University Mall)",
-                "Chicken chops with egg and garlic rice", 135.00,
+                "Chicken chops with egg and garlic rice", 50.00,
                 "University Mall, Taft Avenue, Manila City, Metro Manila", "Main Course", 4, 14.56, 120.99));
 
 
@@ -167,16 +166,17 @@ public class Randomize extends AppCompatActivity {
     public void intent(ArrayList<Food> FoodResult) {
         Intent i = new Intent();
         i.setClass(getBaseContext(), ResultActivity.class);
-
         i.putExtra("Result", FoodResult.get(result).getFoodName());
         startActivity(i);
+        finish();
     }
 
     public void intent() {
         Intent i = new Intent();
         i.setClass(getBaseContext(), ResultActivity.class);
-        i.putExtra("NoResult", "No result Found");
+        i.putExtra("Result", "No Result");
         startActivity(i);
+        finish();
     }
 
     @Override

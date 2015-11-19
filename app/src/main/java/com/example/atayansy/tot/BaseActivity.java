@@ -51,6 +51,7 @@ public class BaseActivity extends AppCompatActivity {
                 }
 
                 startActivity(i);
+                finish();
             }
         };
 

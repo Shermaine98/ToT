@@ -13,7 +13,7 @@ public class ResultActivity extends AppCompatActivity {
 
     Button button_eat;
     Button button_main;
-    TextView resultFoodName;
+    TextView resultFoodName, resultDescription, resultPrice;
     View.OnClickListener decision = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -25,28 +25,33 @@ public class ResultActivity extends AppCompatActivity {
                 i.setClass(getBaseContext(), FilterMenu.class);
             }
             startActivity(i);
+            finish();
         }
     };
     private String result;
-    private String Noresult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         resultFoodName = (TextView) findViewById(R.id.tv_fodName);
-
+        resultDescription = (TextView) findViewById(R.id.tv_foodescription);
+        resultPrice = (TextView) findViewById(R.id.tv_price);
         button_eat = (Button) findViewById(R.id.button_eat);
         button_main = (Button) findViewById(R.id.button_main);
+
 
         button_eat.setOnClickListener(decision);
         button_main.setOnClickListener(decision);
 
         result = getIntent().getExtras().getString("Result");
-        Noresult = getIntent().getExtras().getString("NoResult");
 
-        if (result.equalsIgnoreCase(null)) {
-            resultFoodName.setText(Noresult);
+        if (result.equalsIgnoreCase("No Result")) {
+            resultFoodName.setText(result);
+            button_eat.setVisibility(Button.INVISIBLE);
+            button_main.setVisibility(Button.INVISIBLE);
+            resultPrice.setText("");
+            resultDescription.setText("");
 
         } else {
             resultFoodName.setText(result);

@@ -124,6 +124,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             }
 
             startActivity(i);
+            finish();
         }
     };
 
