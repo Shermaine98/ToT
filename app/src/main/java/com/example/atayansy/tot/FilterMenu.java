@@ -162,12 +162,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         location = (Switch) findViewById(R.id.ms_nearMe);
         tvAddress = (TextView) findViewById(R.id.tvAddress);
         tvBudgetLocation = (TextView) findViewById(R.id.selectedBudgetLocation);
-        //Button Naviation bar
-        ibFilterButtonHome = (ImageButton) findViewById(R.id.filterButton_Home);
-        ibFilterButtonFavorite = (ImageButton) findViewById(R.id.filterButton_favorites);
-        ibFilterButtonRandomize = (ImageButton) findViewById(R.id.filterButton_randomize);
-        ibFilterButtonHistory = (ImageButton) findViewById(R.id.filterButton_history);
-        ibFilterButtonLogOut = (ImageButton) findViewById(R.id.filterButton_logout);
+
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer> (this, android.R.layout.simple_dropdown_item_1line, budget);
