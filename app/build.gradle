@@ -17,7 +17,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/notice.txt'
+    }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -33,7 +44,7 @@ dependencies {
     compile files('libs/httpclient-cache-4.5.1.jar')
     compile files('libs/httpclient-win-4.5.1.jar')
     compile files('libs/httpcore-4.4.3.jar')
-    compile files('libs/httpmime-4.5.1.jar')
     compile files('libs/jna-4.1.0.jar')
     compile files('libs/jna-platform-4.1.0.jar')
+    compile files('libs/httpmime-4.5.1.jar')
 }

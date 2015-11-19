@@ -25,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //change this
-    private static String url_login = "http://http://localhost:8081/ToT/LoginServlet";
+    private static String url_login = "http://localhost:8081/ToT/LoginServlet";
     Button btnSignIn;
     TextView btnSignUp;
     JSONParser jParser = new JSONParser();
@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
                 new Login().execute();
             } else if (v.equals(btnSignUp)) {
                 i.setClass(getBaseContext(), SignUp.class);
+                startActivity(i);
+                finish();
             }
-            startActivity(i);
-            finish();
         }
     };
     private EditText userName, password;
