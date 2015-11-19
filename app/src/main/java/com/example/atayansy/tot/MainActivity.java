@@ -12,16 +12,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.atayansy.tot.Web.JSONParser;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     //change this
-    private static String url_login = "http://127.0.0.1:3306/ToT/LoginServlet";
+    private static String url_login = "http://http://localhost:8081/ToT/LoginServlet";
     Button btnSignIn;
     TextView btnSignUp;
-    EditText userName, password;
     JSONParser jParser = new JSONParser();
     JSONObject json;
     View.OnClickListener redirect = new View.OnClickListener() {
@@ -29,9 +35,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent i = new Intent();
             if (v.equals(btnSignIn)) {
-
-
-                i.setClass(getBaseContext(), HomePage.class);
+                new Login().execute();
             } else if (v.equals(btnSignUp)) {
                 i.setClass(getBaseContext(), SignUp.class);
             }
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     };
+    private EditText userName, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(redirect);
 
     }
+
+// Codes from http://www.javaknowledge.info/sample-login-app-in-android-using-servlet-and-json-parsing/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,18 +86,32 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Fix to work UI thread error
+     */
     private class Login extends AsyncTask<String, String, String> {
+        //intialize varibales
+        String username;
+        String pass;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // Getting username and password from user input
+            username = userName.getText().toString();
+            pass = password.getText().toString();
+        }
 
         @Override
         protected String doInBackground(String... args) {
 
-            // Getting username and password from user input
-            String username = userName.getText().toString();
-            String pass = password.getText().toString();
-
+            //get Data
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("u", username));
-            params.add(new BasicNameValuePair("p", pass));
+            params.add(new BasicNameValuePair("userName", username));
+            params.add(new BasicNameValuePair("password", pass));
+
+            //entering parser
             json = jParser.makeHttpRequest(url_login, "GET", params);
             String s = null;
 
@@ -98,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 s = json.getString("info");
                 Log.d("Msg", json.getString("info"));
                 if (s.equals("success")) {
-                    Intent login = new Intent(getApplicationContext(), Welcome.class);
+                    Intent login = new Intent(getApplicationContext(), HomePage.class);
                     login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(login);
                     finish();
@@ -112,4 +133,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
 }
