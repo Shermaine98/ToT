@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     Button btnSignIn;
     TextView btnSignUp;
     JSONParser jParser = new JSONParser();
-    JSONObject json;
     View.OnClickListener redirect = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         //intialize varibales
         String username;
         String pass;
-
+        JSONObject json;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -101,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
             // Getting username and password from user input
             username = userName.getText().toString();
             pass = password.getText().toString();
+            json = new JSONObject();
         }
 
         @Override
@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
             //get Data
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("userName", username));
-            params.add(new BasicNameValuePair("password", pass));
+            params.add(new BasicNameValuePair("u", username));
+            params.add(new BasicNameValuePair("p", pass));
 
             //entering parser
             json = jParser.makeHttpRequest(url_login, "GET", params);
