@@ -1,6 +1,7 @@
 package com.example.atayansy.tot;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,24 +12,32 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.atayansy.tot.Web.JSONParser;
+import com.example.atayansy.tot.URL.url;
+import com.example.atayansy.tot.java.User;
+import com.google.gson.Gson;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
     //change this
-    private static String url_login = "http://localhost:8081/ToT/LoginServlet";
+
     Button btnSignIn;
     TextView btnSignUp;
-    JSONParser jParser = new JSONParser();
+    User user;
+    SharedPreferences sp;
+
     View.OnClickListener redirect = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -85,54 +94,87 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Fix to work UI thread error
-     */
-    private class Login extends AsyncTask<String, String, String> {
-        //intialize varibales
-        String username;
-        String pass;
-        JSONObject json;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            // Getting username and password from user input
-            username = userName.getText().toString();
-            pass = password.getText().toString();
-            json = new JSONObject();
-        }
+    /*urlHelper start here*/
+    private class Login extends AsyncTask<String, Void, String> {
 
         @Override
-        protected String doInBackground(String... args) {
+        protected String doInBackground(String... params) {
 
-            //get Data
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("u", username));
-            params.add(new BasicNameValuePair("p", pass));
+            //sample
+            OkHttpClient client = new OkHttpClient();
+            Response response = null;
+            client.setConnectTimeout(100, TimeUnit.SECONDS);
 
-            //entering parser
-            json = jParser.makeHttpRequest(url_login, "GET", params);
-            String s = null;
+            RequestBody requestBody = new FormEncodingBuilder()
+                    .add("username", params[0]).add("password", params[1])
+                    .build();
 
+            Request r = new Request.Builder().url(url.ip + "/SignIn").post(requestBody).build();
             try {
-                s = json.getString("info");
-                Log.d("Msg", json.getString("info"));
-                if (s.equals("success")) {
-                    Intent login = new Intent(getApplicationContext(), HomePage.class);
-                    login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(login);
-                    finish();
-                }
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
+                response = client.newCall(r).execute();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            return null;
+            Log.i("urlconnect", "example");
+
+
+            String result = "";
+            try {
+                result = response.body().string();
+            } catch (IOException e) {
+
+            }
+
+            return result;
         }
 
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            try {
+                JSONObject jo = new JSONObject(s);
+
+                user = new User(jo.getInt("userID"), jo.getString("username"), jo.getString("email"), jo.getString("password"));
+                Log.i("user: ", user.getUserID() + "");
+                Log.i("user: ", user.getUserName() + "");
+                Log.i("user: ", user.getPassword() + "");
+                Log.i("user: ", user.getEmail() + "");
+
+            } catch (JSONException e) {
+            }
+            if (user != null) {
+                sp = getSharedPreferences("login", MODE_PRIVATE);
+
+                /*marielle's experiment*/
+                SharedPreferences.Editor editor = sp.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(user);
+                editor.putString("user", json);
+
+                editor.commit();
+
+                /*experiement end*/
+
+
+                /*
+                String userID = sp.getString("userID", "");
+                SharedPreferences.Editor spEditor = sp.edit();
+                spEditor.putString("id", userID);
+                spEditor.commit();
+                */
+                Intent i = new Intent();
+                i.setClass(getBaseContext(), MainActivity.class);
+
+                startActivity(i);
+                finish();
+            } else {
+                Toast.makeText(getBaseContext(), "Invalid Username/Password!", Toast.LENGTH_LONG).show();
+            }
+        }
     }
+    /*urlHelper ends here*/
 
 
 }

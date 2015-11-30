@@ -53,6 +53,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     };
     private double latitude;
     private double longitude;
+
     Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener() {
         @Override
         public void onClick(View v) {
