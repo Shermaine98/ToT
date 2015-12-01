@@ -20,12 +20,8 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setUp(int resource) {
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.base_container);
-       // LinearLayout navbar = (LinearLayout) View.inflate(getBaseContext(), R.layout.navigation_layout_framelayout, null);
-
         RelativeLayout content = (RelativeLayout) View.inflate(getBaseContext(), resource, null);
-
         layout.addView(content);
-        //layout.addView(navbar,2);
 
         ibButtonHome = (ImageButton) findViewById(R.id.button_Home);
         ibButtonFavorite = (ImageButton) findViewById(R.id.button_favorites);

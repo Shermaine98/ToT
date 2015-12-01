@@ -30,4 +30,5 @@ dependencies {
     compile files('libs/okhttp-2.5.0.jar')
     compile files('libs/okio-1.6.0.jar')
     compile files('/Users/shermainesy/AndroidStudioProjects/ToT/.idea/libraries/gson-2.5.jar')
+    compile files('libs/gson-2.3.1.jar')
 }

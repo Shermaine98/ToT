@@ -4,16 +4,82 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/base_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#e9e7e3">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#a89179"
+        android:scaleType="centerCrop"
+        android:src="@drawable/woodbg"
+        android:tint="#bbefe8e8" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:id="@+id/THENAV">
-        <include layout="@layout/navigation_layout_framelayout"
-            />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="#a39b9791">
+
+            <ImageButton
+                android:id="@+id/button_Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_home_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
+
+            <ImageButton
+                android:id="@+id/button_favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_grade_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
+
+            <ImageButton
+                android:id="@+id/button_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_toys_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
+
+            <ImageButton
+                android:id="@+id/button_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_history_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
+
+            <ImageButton
+                android:id="@+id/button_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_settings_power_black_24dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
+        </LinearLayout>
+
     </FrameLayout>
 
 </RelativeLayout>

@@ -2,16 +2,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dddbd7"
     android:contextClickable="false"
     android:orientation="vertical"
     tools:context="com.example.atayansy.tot.FilterMenus">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#a89179"
+        android:scaleType="centerCrop"
+        android:src="@drawable/woodbg"
+        android:tint="#63dbcfc2" />
 
     <TextView
         android:id="@+id/FilterText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/material_deep_teal_200"
+        android:background="#a8d4d3ca"
         android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
         android:padding="8dp"
