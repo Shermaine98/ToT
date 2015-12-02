@@ -61,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         /*Get LOCAL IP address*/
-
+        /*
         url url = new url();
         url.getIp();
-
+*/
         userName = (EditText) findViewById(R.id.et_username);
         password = (EditText) findViewById(R.id.et_password);
 
