@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
     TextView btnSignUp;
     User user;
     SharedPreferences sp;
-
+    private EditText userName, password;
     View.OnClickListener redirect = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent i = new Intent();
             if (v.equals(btnSignIn)) {
-                new Login().execute();
+                new Login().execute(userName.getText().toString(), password.getText().toString());
             } else if (v.equals(btnSignUp)) {
                 i.setClass(getBaseContext(), SignUp.class);
                 startActivity(i);
@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    private EditText userName, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(redirect);
 
     }
-
-// Codes from http://www.javaknowledge.info/sample-login-app-in-android-using-servlet-and-json-parsing/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,13 +91,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*urlHelper start here*/
     private class Login extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
 
-            //sample
             OkHttpClient client = new OkHttpClient();
             Response response = null;
             client.setConnectTimeout(100, TimeUnit.SECONDS);
@@ -108,20 +103,29 @@ public class MainActivity extends AppCompatActivity {
             RequestBody requestBody = new FormEncodingBuilder()
                     .add("username", params[0]).add("password", params[1])
                     .build();
+            Log.i("link", params[0]);
+            Log.i("link", params[1]);
+            Log.i("requestBody", requestBody.toString());
 
-            Request r = new Request.Builder().url(url.ip + "/SignIn").post(requestBody).build();
+            Request r = new Request.Builder().url(url.ip + "LoginServlet").post(requestBody).build();
+            Log.i("Request", r.toString());
+
+
             try {
                 response = client.newCall(r).execute();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
+            Log.i("link", response.toString());
             Log.i("urlconnect", "example");
 
 
             String result = "";
+
             try {
                 result = response.body().string();
+                Log.i("result", result);
             } catch (IOException e) {
 
             }
@@ -147,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
             if (user != null) {
                 sp = getSharedPreferences("login", MODE_PRIVATE);
 
-                /*marielle's experiment*/
                 SharedPreferences.Editor editor = sp.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(user);
@@ -155,15 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
                 editor.commit();
 
-                /*experiement end*/
 
-
-                /*
-                String userID = sp.getString("userID", "");
-                SharedPreferences.Editor spEditor = sp.edit();
-                spEditor.putString("id", userID);
-                spEditor.commit();
-                */
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), MainActivity.class);
 
@@ -174,7 +169,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    /*urlHelper ends here*/
-
 
 }
