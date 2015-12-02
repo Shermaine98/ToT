@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,11 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -54,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*Get LOCAL IP address*/
+
+        url url = new url();
+        url.getIp();
 
         userName = (EditText) findViewById(R.id.et_username);
         password = (EditText) findViewById(R.id.et_password);
@@ -111,9 +121,11 @@ public class MainActivity extends AppCompatActivity {
 
             OkHttpClient okHttpClient = new OkHttpClient();
 
-            RequestBody requestbody = new FormEncodingBuilder().
-                    add("username", currentUser.getUserName()).
-                    add("password", currentUser.getPassword()).build();
+            okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
+
+            RequestBody requestbody = new FormEncodingBuilder()
+                    .add("username", currentUser.getUserName())
+                    .add("password", currentUser.getPassword()).build();
 
             Request request = new Request.Builder().url(url.ip + "LoginServlet").post(requestbody).build();
 
@@ -128,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 result = response.body().string();
+                Log.i("result", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -138,7 +151,31 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Toast.makeText(getBaseContext(), "ENTER", Toast.LENGTH_LONG).show();
+
+            try {
+                JSONObject jo = new JSONObject(s);
+
+                user = new User();
+                user.setUserName(jo.getString("username"));
+                user.setUserID(jo.getInt("idUser"));
+
+                Log.i("user: ", user.getUserID() + "");
+                Log.i("user: ", user.getUserName() + "");
+
+            } catch (JSONException e) {
+            }
+            if (user != null) {
+                /* TODO: Shared Preference Code Her*/
+
+                Intent i = new Intent();
+                i.setClass(getBaseContext(), HomePage.class);
+
+                startActivity(i);
+                finish();
+            } else {
+                Toast.makeText(getBaseContext(), "Invalid Username/Password!", Toast.LENGTH_LONG).show();
+            }
+
         }
 
 
