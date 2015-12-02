@@ -96,39 +96,24 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             OkHttpClient client = new OkHttpClient();
-            Response response = null;
             client.setConnectTimeout(100, TimeUnit.SECONDS);
 
             RequestBody requestBody = new FormEncodingBuilder()
                     .add("username", params[0])
                     .add("password", params[1])
                     .build();
-            //Log.i("link", params[0]);
-            //Log.i("link", params[1]);
-            //Log.i("requestBody", requestBody.toString());
 
-            Request r = new Request.Builder().url("http://localhost:8084/ToT/LoginServlet").post(requestBody).build();
-            Log.i("Request", r.toString());
+            String reqUrl = "http://192.168.1.9:8084/ToT/LoginServlet";
 
+            Request r = new Request.Builder().url(reqUrl).post(requestBody).build();
+            Response response = null;
             try {
                 response = client.newCall(r).execute();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            Log.i("link", response.toString());
-            Log.i("urlconnect", "example");
-
-            String result = "";
-
-            try {
-                result = response.body().string();
-                Log.i("result", result);
-            } catch (IOException e) {
-
-            }
-
-            return result;
+            return response.body().toString();
         }
 
         @Override
@@ -137,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 JSONObject jo = new JSONObject(s);
-                user = new User(jo.getInt("userID"), jo.getString("username"), jo.getString("email"), jo.getString("password"));
+                user = new User(jo.getInt("idUser"), jo.getString("username"), jo.getString("email"), jo.getString("password"));
                 Log.i("user: ", user.getUserID() + "");
                 Log.i("user: ", user.getUserName() + "");
                 Log.i("user: ", user.getPassword() + "");
@@ -156,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
 
                 Intent i = new Intent();
-                i.setClass(getBaseContext(), MainActivity.class);
+                i.setClass(getBaseContext(), HomePage.class);
 
                 startActivity(i);
                 finish();
