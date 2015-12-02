@@ -1,18 +1,22 @@
 package com.example.atayansy.tot.URL;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Enumeration;
-
 /**
  * Created by shermainesy on 11/30/15.
  */
 public class url {
 
+    /**
+     * Shermaine's IP Address
+     **/
+    public static String ip = "http://192.168.1.4:8081/ToT/";
 
-    public static String ip;
+    /**Geraldine's IP Address**/
+    // public static String ip;
 
 
+    /**GET IP ADDRESS**/
+
+  /*
     public void getIp() {
 
         InetAddress i = null;
@@ -41,4 +45,5 @@ public class url {
 
 
     }
+    */
 }
