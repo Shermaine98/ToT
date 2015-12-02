@@ -32,34 +32,19 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 
     //change this
-
     Button btnSignIn;
     TextView btnSignUp;
+    EditText username, password;
     User user;
     SharedPreferences sp;
-    private EditText userName, password;
-    View.OnClickListener redirect = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent();
-            if (v.equals(btnSignIn)) {
-                new Login().execute(userName.getText().toString(), password.getText().toString());
-            } else if (v.equals(btnSignUp)) {
-                i.setClass(getBaseContext(), SignUp.class);
-                startActivity(i);
-                finish();
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userName = (EditText) findViewById(R.id.et_username);
+        username = (EditText) findViewById(R.id.et_username);
         password = (EditText) findViewById(R.id.et_password);
-
 
         btnSignIn = (Button) findViewById(R.id.bt_signInPage);
         btnSignUp = (TextView) findViewById(R.id.bt_signUpPage);
@@ -68,6 +53,21 @@ public class MainActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(redirect);
 
     }
+
+    View.OnClickListener redirect = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent();
+            if (v.equals(btnSignIn)) {
+                Login uhelp = new Login();
+                uhelp.execute(username.getText().toString(), password.getText().toString());
+            } else if (v.equals(btnSignUp)) {
+                i.setClass(getBaseContext(), SignUp.class);
+                startActivity(i);
+                finish();
+            }
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -101,15 +100,15 @@ public class MainActivity extends AppCompatActivity {
             client.setConnectTimeout(100, TimeUnit.SECONDS);
 
             RequestBody requestBody = new FormEncodingBuilder()
-                    .add("username", params[0]).add("password", params[1])
+                    .add("username", params[0])
+                    .add("password", params[1])
                     .build();
-            Log.i("link", params[0]);
-            Log.i("link", params[1]);
-            Log.i("requestBody", requestBody.toString());
+            //Log.i("link", params[0]);
+            //Log.i("link", params[1]);
+            //Log.i("requestBody", requestBody.toString());
 
-            Request r = new Request.Builder().url(url.ip + "LoginServlet").post(requestBody).build();
+            Request r = new Request.Builder().url("http://localhost:8084/ToT/LoginServlet").post(requestBody).build();
             Log.i("Request", r.toString());
-
 
             try {
                 response = client.newCall(r).execute();
@@ -119,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
             Log.i("link", response.toString());
             Log.i("urlconnect", "example");
-
 
             String result = "";
 
@@ -139,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 JSONObject jo = new JSONObject(s);
-
                 user = new User(jo.getInt("userID"), jo.getString("username"), jo.getString("email"), jo.getString("password"));
                 Log.i("user: ", user.getUserID() + "");
                 Log.i("user: ", user.getUserName() + "");
@@ -157,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("user", json);
 
                 editor.commit();
-
 
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), MainActivity.class);
