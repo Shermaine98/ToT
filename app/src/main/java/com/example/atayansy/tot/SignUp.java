@@ -123,7 +123,6 @@ public class SignUp extends AppCompatActivity {
             return result;
         }
 
-        //TODO: What Error is this? HAHA
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);

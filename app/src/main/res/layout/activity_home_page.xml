@@ -12,21 +12,20 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:padding="8dp"
-        android:text="Welcome, "
         android:textSize="30dp" />
 
     <TextView
         android:id="@+id/topFive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/welcomeText"
         android:fontFamily="sans-serif-thin"
         android:gravity="center_horizontal"
-        android:text="Top Food of the Week!"
-        android:textSize="20dp"
         android:paddingBottom="10dp"
-        android:layout_below="@+id/welcomeText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Top Food of the Week!"
+        android:textSize="20dp" />
 
     <ExpandableListView
         android:id="@+id/evFoodFeed"

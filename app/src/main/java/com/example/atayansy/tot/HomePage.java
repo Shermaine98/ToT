@@ -1,44 +1,29 @@
 package com.example.atayansy.tot;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterFoodFeedbacks;
-import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.Comments;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
-import com.example.atayansy.tot.java.User;
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 // TODO: FIX Navigation Design Home(TOP FOOD),favorites , RANDMOZIE, favorite, me(setting)
 public class HomePage extends BaseActivity {
 
 
+    TextView welcome;
+    SharedPreferences sharedPreferences;
+    String username;
     private CustomAdapterFoodFeedbacks ExpAdapter;
     private ArrayList<FoodFeedFeedbacks> foodFeedFeedbacks;
     private ExpandableListView ExpandList;
-    TextView welcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +41,26 @@ public class HomePage extends BaseActivity {
 
         welcome = (TextView) findViewById(R.id.welcomeText);
 
-//        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
-//        String user = prefs.getString("user", null);
-//        JSONObject json = null;
-//        try {
-//            json = new JSONObject(user);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            welcome.append(json.getString("username") + "!");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+
+        if (username.isEmpty()) {
+            Intent intent = new Intent();
+            intent.setClass(getBaseContext(), MainActivity.class);
+            startActivity(intent);
+        } else {
+            onResume();
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+        welcome.setText("Welcome, " + username);
 
     }
 
