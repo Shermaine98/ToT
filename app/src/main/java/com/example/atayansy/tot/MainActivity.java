@@ -129,22 +129,14 @@ public class MainActivity extends AppCompatActivity {
             Response response = null;
 
             request = new Request.Builder().url(url.ip2 + "LoginServlet").post(requestbody).build();
-
-            try {
-                response = okHttpClient.newCall(request).execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
             String result = "";
 
             try {
+                response = okHttpClient.newCall(request).execute();
                 result = response.body().string();
-                Log.i("result", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
             return result;
         }
