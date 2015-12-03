@@ -94,6 +94,7 @@ public class HomePage extends BaseActivity {
     JSONArray Rating;
     JSONArray Price;
 
+    //TODO: SETTING OF VALUES TO THE LIST
     // Dummy data method for pictures and comments
     public ArrayList<FoodFeedFeedbacks> SetStandardGroups() {
 
@@ -171,6 +172,8 @@ public class HomePage extends BaseActivity {
             //check if result is null
             if (!s.equalsIgnoreCase("null")) {
                 try {
+
+                    //TODO: IS THIS CORRECT? JSON ARRAY....
                     //getting result body and converting to JSON
                     Log.i("ENTER", "AFTER TRY");
                     Log.i("ENTER", s);
