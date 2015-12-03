@@ -144,21 +144,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            user = new User();
+            JSONObject jo = new JSONObject();
             try {
-                JSONObject jo = new JSONObject(s);
+                jo = new JSONObject(s);
 
-                user = new User();
                 user.setUserName(jo.getString("username"));
                 user.setUserID(jo.getInt("idUser"));
 
-                Log.i("user: ", user.getUserID() + "");
-                Log.i("user: ", user.getUserName() + "");
-
             } catch (JSONException e) {
             }
+
             if (user != null) {
-                /* TODO: Shared Preference Code Here*/
+                /* TODO: Shared Preference works BUT displays null (Walang nakukuha sa Json) */
+                SharedPreferences.Editor editor = getSharedPreferences("login", MODE_PRIVATE).edit();
+                editor.putString("username", user.getUserName());
+                editor.putInt("id", user.getUserID());
+                editor.commit();
 
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), HomePage.class);

@@ -1,16 +1,35 @@
 package com.example.atayansy.tot;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterFoodFeedbacks;
+import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.Comments;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
+import com.example.atayansy.tot.java.User;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 // TODO: FIX Navigation Design Home(TOP FOOD),favorites , RANDMOZIE, favorite, me(setting)
 public class HomePage extends BaseActivity {
@@ -19,6 +38,7 @@ public class HomePage extends BaseActivity {
     private CustomAdapterFoodFeedbacks ExpAdapter;
     private ArrayList<FoodFeedFeedbacks> foodFeedFeedbacks;
     private ExpandableListView ExpandList;
+    TextView welcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +53,14 @@ public class HomePage extends BaseActivity {
         ExpAdapter = new CustomAdapterFoodFeedbacks(HomePage.this, foodFeedFeedbacks);
         ExpandList.setAdapter(ExpAdapter);
         //   ExpandList.setOnChildClickListener();
+
+        welcome = (TextView) findViewById(R.id.welcomeText);
+
+        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+        String username = prefs.getString("username", null);
+        int userId = prefs.getInt("id", 0);
+
+        welcome.append(username + "!");
 
     }
 
