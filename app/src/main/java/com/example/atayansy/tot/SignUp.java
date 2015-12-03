@@ -116,6 +116,7 @@ public class SignUp extends AppCompatActivity {
                 Intent i = new Intent();
                 i.setClass(getBaseContext(),MainActivity.class);
                 startActivity(i);
+                finish();
                 Toast.makeText(getBaseContext(), "Successfully Signed Up!", Toast.LENGTH_LONG).show();
             }
 

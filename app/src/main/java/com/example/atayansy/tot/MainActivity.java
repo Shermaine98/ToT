@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
             } else if (v.equals(btnSignUp)) {
                 i.setClass(getBaseContext(), SignUp.class);
                 startActivity(i);
-                finish();
             }
         }
     };
