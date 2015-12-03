@@ -26,6 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -60,15 +63,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    Another Page
+    //    Another Page
     View.OnClickListener redirect = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent i = new Intent();
             if (v.equals(btnSignIn)) {
                 /** Connect to Database **/
-                new SignIn().execute();
-
+                SignIn signIn = new SignIn();
+                signIn.execute();
             } else if (v.equals(btnSignUp)) {
                 i.setClass(getBaseContext(), SignUp.class);
                 startActivity(i);
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    DATABASE URLHELPER
+    //    DATABASE URLHELPER
     private class SignIn extends AsyncTask<String, Void, String> {
         User currentUser = new User();
 
@@ -123,9 +126,11 @@ public class MainActivity extends AppCompatActivity {
                     .add("username", currentUser.getUserName())
                     .add("password", currentUser.getPassword()).build();
 
-            Request request = new Request.Builder().url(url.ip + "LoginServlet").post(requestbody).build();
-
+            Request request = null;
             Response response = null;
+
+            request = new Request.Builder().url(url.ip2 + "/LoginServlet").post(requestbody).build();
+
             try {
                 response = okHttpClient.newCall(request).execute();
             } catch (IOException e) {

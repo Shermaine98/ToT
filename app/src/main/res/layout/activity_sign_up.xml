@@ -47,15 +47,6 @@
             android:padding="20dp">
 
             <EditText
-                android:id="@+id/et_inputName"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:hint="Name"
-                android:inputType="textPersonName" />
-
-            <EditText
                 android:id="@+id/et_inputEmail"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -69,7 +60,8 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="Username" />
+                android:hint="Username"
+                android:inputType="text"/>
 
             <EditText
                 android:id="@+id/et_inputPassword"
