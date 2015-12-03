@@ -14,7 +14,6 @@ import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 
 import java.util.ArrayList;
 
-// TODO: FIX Navigation Design Home(TOP FOOD),favorites , RANDMOZIE, favorite, me(setting)
 public class HomePage extends BaseActivity {
 
 
@@ -39,6 +38,9 @@ public class HomePage extends BaseActivity {
         ExpandList.setAdapter(ExpAdapter);
         //   ExpandList.setOnChildClickListener();
 
+
+
+     /* Shared Preferences */
         welcome = (TextView) findViewById(R.id.welcomeText);
 
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
@@ -99,6 +101,8 @@ public class HomePage extends BaseActivity {
         return list;
     }
 
+
+    // Codes that are not changed
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -120,4 +124,5 @@ public class HomePage extends BaseActivity {
 
         return super.onOptionsItemSelected(item);
     }
+// end codes that are not changed
 }

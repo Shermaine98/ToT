@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         url url = new url();
         url.getIp();
         */
+
         userName = (EditText) findViewById(R.id.et_username);
         password = (EditText) findViewById(R.id.et_password);
 
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    CODES THAT ARE NOT CHANGED
+    //  CODES THAT ARE NOT CHANGED
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,10 +100,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //    DATABASE URLHELPER
+    //   END CODES THAT ARE NOT CHANGED
+
+    //   DATABASE
     private class SignIn extends AsyncTask<String, Void, String> {
         User currentUser = new User();
 
+
+        // Assign Variables
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -110,13 +115,16 @@ public class MainActivity extends AppCompatActivity {
             currentUser.setPassword(password.getText().toString());
         }
 
+        //Connecting to Servlet
         @Override
         protected String doInBackground(String... params) {
 
             OkHttpClient okHttpClient = new OkHttpClient();
 
+            // Stop Activity?
             okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
 
+            //Setting Parameters
             RequestBody requestbody = new FormEncodingBuilder()
                     .add("username", currentUser.getUserName())
                     .add("password", currentUser.getPassword()).build();
@@ -124,11 +132,15 @@ public class MainActivity extends AppCompatActivity {
             Request request = null;
             Response response = null;
 
+
+            //Connecting to Servlet
             request = new Request.Builder().url(url.ip + "LoginServlet").post(requestbody).build();
             String result = "";
 
             try {
+                //Run
                 response = okHttpClient.newCall(request).execute();
+                //get the page body
                 result = response.body().string();
                 Log.i("result", result);
             } catch (IOException e) {
@@ -142,14 +154,16 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("ENTER", "POSTEXCUTE");
+            //check if result is null
             if (!s.equalsIgnoreCase("null")) {
                 try {
+                    //getting result body and coverting to JSON
                     Log.i("ENTER", "AFTER TRY");
                     Log.i("ENTER", s);
                     userLogin = new User();
                     JSONObject jo = new JSONObject(s);
 
-
+                    //Setting Json variable
                     userLogin.setUserName(jo.getString("userName"));
                     userLogin.setUserID(Integer.parseInt(jo.getString("userID")));
 
@@ -159,8 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                 }
 
-
-                /* TODO: Shared Preference works BUT displays null (Walang nakukuha sa Json) */
+                /* Shared Preference for Username and UserID */
                 SharedPreferences.Editor editor = getSharedPreferences("login", MODE_PRIVATE).edit();
                 editor.putString("username", userLogin.getUserName());
                 editor.putInt("id", userLogin.getUserID());
@@ -168,16 +181,14 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), HomePage.class);
-
                 startActivity(i);
                 finish();
             } else {
+                //if wrong password
                 Toast.makeText(getBaseContext(), "Invalid Username/Password!", Toast.LENGTH_LONG).show();
             }
-
         }
-
-
     }
+    //  END  DATABASE
 
 }
