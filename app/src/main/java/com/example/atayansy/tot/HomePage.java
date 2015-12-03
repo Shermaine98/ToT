@@ -91,6 +91,8 @@ public class HomePage extends BaseActivity {
     JSONArray FoodName;
     JSONArray FoodDesc;
     JSONArray Images;
+    JSONArray Rating;
+    JSONArray Price;
 
     // Dummy data method for pictures and comments
     public ArrayList<FoodFeedFeedbacks> SetStandardGroups() {
@@ -175,11 +177,13 @@ public class HomePage extends BaseActivity {
                     JSONObject jo = new JSONObject(s);
 
                     //Setting Json variable
-                    usernames = jo.getJSONArray("username");
+                    usernames = jo.getJSONArray("foodID");
+                    FoodName = jo.getJSONArray("foodName");
+                    FoodDesc = jo.getJSONArray("foodDescription");
+                    Images = jo.getJSONArray("picture");
+                    Price = jo.getJSONArray("price");
+                    Rating = jo.getJSONArray("rating");
                     comments = jo.getJSONArray("comments");
-                    FoodName = jo.getJSONArray("FoodName");
-                    FoodDesc = jo.getJSONArray("FoodDescription");
-                    Images = jo.getJSONArray("Picture");
 
                 } catch (JSONException e) {
                 }
