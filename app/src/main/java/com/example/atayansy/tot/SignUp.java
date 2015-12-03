@@ -55,7 +55,7 @@ public class SignUp extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.bt_signUp);
         EdtEmail = (EditText) findViewById(R.id.et_inputEmail);
         EdtUsername = (EditText) findViewById(R.id.et_inputUsername);
-        EdtPassword = (EditText) findViewById(R.id.et_password);
+        EdtPassword = (EditText) findViewById(R.id.et_inputPassword);
 
         btnSignUp.setOnClickListener(signUp);
 
@@ -117,6 +117,8 @@ public class SignUp extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            Log.i("RESULT", result);
 
             return result;
         }
