@@ -30,14 +30,37 @@ import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
-    /*Views*/
+
     Button btnSignIn;
     TextView btnSignUp;
-    /*OBJECTS*/
+    private EditText userName, password;
     User user;
-    /*OTHER*/
     SharedPreferences sp;
-    /*Another Page*/
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        /*Get LOCAL IP address*/
+        /*
+        url url = new url();
+        url.getIp();
+        */
+        userName = (EditText) findViewById(R.id.et_username);
+        password = (EditText) findViewById(R.id.et_password);
+
+        btnSignIn = (Button) findViewById(R.id.bt_signInPage);
+        btnSignUp = (TextView) findViewById(R.id.bt_signUpPage);
+
+        /* Calling a Method*/
+
+        btnSignIn.setOnClickListener(redirect);
+        btnSignUp.setOnClickListener(redirect);
+
+    }
+
+//    Another Page
     View.OnClickListener redirect = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -53,35 +76,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    private EditText userName, password;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        /*Get LOCAL IP address*/
-        /*
-        url url = new url();
-        url.getIp();
-*/
-        userName = (EditText) findViewById(R.id.et_username);
-        password = (EditText) findViewById(R.id.et_password);
-
-
-        btnSignIn = (Button) findViewById(R.id.bt_signInPage);
-        btnSignUp = (TextView) findViewById(R.id.bt_signUpPage);
-
-        /* Calling a Method*/
-
-        btnSignIn.setOnClickListener(redirect);
-        btnSignUp.setOnClickListener(redirect);
-
-    }
-
-    /**
-     * CODES THAT ARE NOT CHANGED
-     **/
+//    CODES THAT ARE NOT CHANGED
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*DATABASE*/
+//    DATABASE URLHELPER
     private class SignIn extends AsyncTask<String, Void, String> {
         User currentUser = new User();
 
@@ -148,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
             return result;
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -165,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
             }
             if (user != null) {
-                /* TODO: Shared Preference Code Her*/
+                /* TODO: Shared Preference Code Here*/
 
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), HomePage.class);
