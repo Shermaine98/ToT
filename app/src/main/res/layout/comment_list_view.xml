@@ -3,13 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--TODO: Fix Comments below -->
+
     <TextView
         android:id="@+id/tv_userComments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_nameUser"
         android:layout_marginBottom="14dp"
-        android:layout_marginLeft="29dp"
-        android:layout_toRightOf="@+id/tv_nameUser"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="29dp"
         android:textSize="20dp" />
 
     <TextView
@@ -18,6 +21,6 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="27dp" />
+        android:layout_marginLeft="40dp" />
 
 </RelativeLayout>

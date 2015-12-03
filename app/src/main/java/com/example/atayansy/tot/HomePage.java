@@ -8,23 +8,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterFoodFeedbacks;
+import com.example.atayansy.tot.CustomAdapters.CustomExpandableListView;
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.Comments;
 import com.example.atayansy.tot.java.Food;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
-import com.example.atayansy.tot.java.User;
-import com.google.gson.JsonParser;
-import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,31 +32,55 @@ import java.util.concurrent.TimeUnit;
 public class HomePage extends BaseActivity {
 
 
+    public CustomExpandableListView ExpAdapter;
     TextView welcome;
     SharedPreferences sharedPreferences;
     String username;
-    private CustomAdapterFoodFeedbacks ExpAdapter;
-    private ArrayList<FoodFeedFeedbacks> foodFeedFeedbacks;
+    private ArrayList<Food> food;
+    private ArrayList<Comments> commentses;
     private ExpandableListView ExpandList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setUp(R.layout.activity_home_page);
-        ExpandList = (ExpandableListView) findViewById(R.id.evFoodFeed);
-
-
-        //   ExpandList.setOnChildClickListener();
 
         GetTopFood get = new GetTopFood();
         get.execute();
 
-        //runs the function and returns the data to foodFeedFeedbacks
-        foodFeedFeedbacks = SetStandardGroups();
+        /**Custom Adapter **/
 
-        //Adapter for ExapadableListView
-        ExpAdapter = new CustomAdapterFoodFeedbacks(HomePage.this, foodFeedFeedbacks);
-        ExpandList.setAdapter(ExpAdapter);
+
+        int noObjectsLevel1 = 1;
+        int noObjectsLevel2 = 1;
+        int noObjectsLevel3 = 1;
+
+
+        ArrayList<FoodFeedFeedbacks> objectsLvl1 = new ArrayList<FoodFeedFeedbacks>();
+        // objectsLvl1.add(new FoodFeedFeedbacks(R.drawable.food_temp1,commentses));
+
+        for (int i = 0; i < noObjectsLevel1; i++) {
+            ArrayList<Comments> objectsLvl2 = new ArrayList<Comments>();
+            for (int j = 0; j < noObjectsLevel2; j++) {
+                ArrayList<Comments> objectsLvl3 = new ArrayList<Comments>();
+                for (int k = 0; k < noObjectsLevel3; k++) {
+                    objectsLvl3.add(new Comments("user", "hello", null));
+                }
+                objectsLvl2.add(new Comments("user", "sds", objectsLvl3));
+            }
+            objectsLvl1.add(new FoodFeedFeedbacks(R.drawable.food_temp1, objectsLvl2));
+        }
+
+        RelativeLayout parent = (RelativeLayout) findViewById(R.id.parent);
+
+        ExpAdapter = new CustomExpandableListView(this);
+        CustomAdapterFoodFeedbacks customAdapterFoodFeedbacks = new CustomAdapterFoodFeedbacks(HomePage.this, objectsLvl1);
+        ExpAdapter.setAdapter(customAdapterFoodFeedbacks);
+        parent.addView(ExpAdapter);
+
+        /**End Custom Adapter **/
+
+
      /* Shared Preferences */
         welcome = (TextView) findViewById(R.id.welcomeText);
 
@@ -86,48 +107,28 @@ public class HomePage extends BaseActivity {
 
     }
 
-    JSONArray usernames;
-    JSONArray comments;
-    JSONArray FoodName;
-    JSONArray FoodDesc;
-    JSONArray Images;
-    JSONArray Rating;
-    JSONArray Price;
+    // Codes that are not changed
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home_page, menu);
+        return true;
+    }
+    //  END  DATABASE
 
-    //TODO: SETTING OF VALUES TO THE LIST
-    // Dummy data method for pictures and comments
-    public ArrayList<FoodFeedFeedbacks> SetStandardGroups() {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-        String names[] = {"Geraldine", "Marielle", "Gina", "Bryan",
-                "Pat", "Eugene", "Shermaine", "Kook"};
-
-        String comments[] = {"TasteGood", "Nah", "DONT EAT HERE", "Cameroon",
-                "Nice place", "chill", "woah Spain", "lalala"};
-
-        int Images[] = {R.drawable.food_temp1, R.drawable.food_temp};
-
-        ArrayList<FoodFeedFeedbacks> list = new ArrayList<FoodFeedFeedbacks>();
-
-        ArrayList<Comments> comments_list;
-
-
-        for (int images : Images) {
-            FoodFeedFeedbacks gru = new FoodFeedFeedbacks();
-            gru.setIcon(images);
-
-            comments_list = new ArrayList<Comments>();
-            for (int j = 0; j < 4; j++) {
-                Comments comments1 = new Comments();
-                comments1.setName(names[j]);
-                comments1.setComments(comments[j]);
-
-                comments_list.add(comments1);
-            }
-            gru.setComments(comments_list);
-            list.add(gru);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
 
-        return list;
+        return super.onOptionsItemSelected(item);
     }
 
     //   DATABASE
@@ -142,14 +143,12 @@ public class HomePage extends BaseActivity {
             // Stop Activity?
             okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
 
-            //Setting Parameters
-            RequestBody requestbody = new FormEncodingBuilder().build();
 
             Request request = null;
             Response response = null;
 
             //Connecting to Servlet
-            request = new Request.Builder().url(url.ip + "GetTopServlet").post(requestbody).build();
+            request = new Request.Builder().url(url.ip + "GetTopServlet").build();
             String result = "";
 
             try {
@@ -179,14 +178,23 @@ public class HomePage extends BaseActivity {
                     Log.i("ENTER", s);
                     JSONObject jo = new JSONObject(s);
 
+
+                    if (jo != null) {
+                        for (int i = 0; i < jo.length(); i++) {
+                            //    food.add(jo.getJSONObject(jo.getString()))
+                            // listdata.add(jArray.get(i).toString());
+                        }
+                    }
+
+
                     //Setting Json variable
-                    usernames = jo.getJSONArray("foodID");
-                    FoodName = jo.getJSONArray("foodName");
-                    FoodDesc = jo.getJSONArray("foodDescription");
-                    Images = jo.getJSONArray("picture");
-                    Price = jo.getJSONArray("price");
-                    Rating = jo.getJSONArray("rating");
-                    comments = jo.getJSONArray("comments");
+                    jo.getJSONArray("foodID");
+                    jo.getJSONArray("foodName");
+                    jo.getJSONArray("foodDescription");
+                    jo.getJSONArray("picture");
+                    jo.getJSONArray("price");
+                    jo.getJSONArray("rating");
+                    jo.getJSONArray("comments");
 
                 } catch (JSONException e) {
                 }
@@ -195,29 +203,6 @@ public class HomePage extends BaseActivity {
             }
         }
     }
-    //  END  DATABASE
-
-    // Codes that are not changed
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_page, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 // end codes that are not changed
 }
+

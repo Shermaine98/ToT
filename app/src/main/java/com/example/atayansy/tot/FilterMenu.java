@@ -21,8 +21,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import Location.AppLocationService;
-import Location.LocationAddress;
+import com.example.atayansy.tot.Location.AppLocationService;
+import com.example.atayansy.tot.Location.LocationAddress;
 
 public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Switch location;

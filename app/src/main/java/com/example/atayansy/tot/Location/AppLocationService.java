@@ -1,4 +1,4 @@
-package Location;
+package com.example.atayansy.tot.Location;
 
 import android.app.Service;
 import android.content.Context;
