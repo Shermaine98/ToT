@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.User;
+import com.google.gson.Gson;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -105,25 +106,22 @@ public class MainActivity extends AppCompatActivity {
 
     //    DATABASE URLHELPER
     private class SignIn extends AsyncTask<String, Void, String> {
-        User currentUser = new User();
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            currentUser.setUserName(userName.getText().toString());
-            currentUser.setPassword(password.getText().toString());
+            user.setUserName(userName.getText().toString());
+            user.setPassword(password.getText().toString());
         }
 
         @Override
         protected String doInBackground(String... params) {
 
             OkHttpClient okHttpClient = new OkHttpClient();
-
             okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
-
             RequestBody requestbody = new FormEncodingBuilder()
-                    .add("username", currentUser.getUserName())
-                    .add("password", currentUser.getPassword()).build();
+                    .add("username", user.getUserName())
+                    .add("password", user.getPassword()).build();
 
             Request request = null;
             Response response = null;
@@ -144,22 +142,19 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            user = new User();
-            JSONObject jo = new JSONObject();
             try {
-                jo = new JSONObject(s);
-
-                user.setUserName(jo.getString("username"));
-                user.setUserID(jo.getInt("idUser"));
-
+                JSONObject jo = new JSONObject(s);
+                user = new User(jo.getInt("idUser"), jo.getString("email"), jo.getString("username"), jo.getString("password"));
             } catch (JSONException e) {
             }
 
             if (user != null) {
                 /* TODO: Shared Preference works BUT displays null (Walang nakukuha sa Json) */
-                SharedPreferences.Editor editor = getSharedPreferences("login", MODE_PRIVATE).edit();
-                editor.putString("username", user.getUserName());
-                editor.putInt("id", user.getUserID());
+                SharedPreferences sp = getSharedPreferences("login", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(user);
+                editor.putString("user", json);
                 editor.commit();
 
                 Intent i = new Intent();

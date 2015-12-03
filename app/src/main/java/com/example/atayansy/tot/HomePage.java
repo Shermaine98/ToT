@@ -57,10 +57,9 @@ public class HomePage extends BaseActivity {
         welcome = (TextView) findViewById(R.id.welcomeText);
 
         SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
-        String username = prefs.getString("username", null);
-        int userId = prefs.getInt("id", 0);
+        String user = prefs.getString("user", null);
 
-        welcome.append(username + "!");
+        //welcome.append(username + "!");
 
     }
 
