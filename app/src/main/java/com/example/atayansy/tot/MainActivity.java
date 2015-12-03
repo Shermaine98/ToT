@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             Request request = null;
             Response response = null;
 
-            request = new Request.Builder().url(url.ip2 + "/LoginServlet").post(requestbody).build();
+            request = new Request.Builder().url(url.ip2 + "LoginServlet").post(requestbody).build();
 
             try {
                 response = okHttpClient.newCall(request).execute();

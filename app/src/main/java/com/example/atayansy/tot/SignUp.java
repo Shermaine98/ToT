@@ -90,19 +90,12 @@ public class SignUp extends AppCompatActivity {
                     .add("email", newUser.getEmail())
                     .build();
 
-            request = new Request.Builder().url(url.ip2 + "/RegisterServlet").post(requestbody).build();
-
-            try {
-                response = okHttpClient.newCall(request).execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            request = new Request.Builder().url(url.ip2 + "RegisterServlet").post(requestbody).build();
             String result = "";
 
             try {
+                response = okHttpClient.newCall(request).execute();
                 result = response.body().string();
-                Log.i("result", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
