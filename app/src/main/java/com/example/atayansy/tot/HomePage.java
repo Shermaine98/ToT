@@ -56,20 +56,20 @@ public class HomePage extends BaseActivity {
 
         welcome = (TextView) findViewById(R.id.welcomeText);
 
-        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
-        String user = prefs.getString("user", null);
-        JSONObject json = null;
-        try {
-            json = new JSONObject(user);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            welcome.append(json.getString("username") + "!");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+//        String user = prefs.getString("user", null);
+//        JSONObject json = null;
+//        try {
+//            json = new JSONObject(user);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            welcome.append(json.getString("username") + "!");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
