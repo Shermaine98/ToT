@@ -103,12 +103,12 @@ public class SignUp extends AppCompatActivity {
             return result;
         }
 
-
+//TODO: What Error is this? HAHA
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("PostExecute", s);
-            if (s.equals("Username Exists")) {
+            if (s=="Username Exists") {
                 Toast.makeText(getBaseContext(), "Username already taken", Toast.LENGTH_LONG).show();
             } else if (s.equals("Email Exists")) {
                 Toast.makeText(getBaseContext(), "Email already taken", Toast.LENGTH_LONG).show();
