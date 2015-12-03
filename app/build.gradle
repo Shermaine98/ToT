@@ -10,7 +10,7 @@ android {
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "LOCAL_IP", '\"' + getLocalIp("eth0") + '\"'
+        //  buildConfigField "String", "LOCAL_IP", '\"' + getLocalIp("eth0") + '\"'
     }
     buildTypes {
         release {
@@ -20,6 +20,8 @@ android {
     }
 }
 
+// TODO: what?
+/*
 // Get the ip address by interface name
 def getLocalIp(String interfaceName) {
     NetworkInterface iface =  NetworkInterface.getByName(interfaceName);
@@ -30,7 +32,7 @@ def getLocalIp(String interfaceName) {
         }
     }
 }
-
+*/
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

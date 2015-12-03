@@ -20,9 +20,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -32,21 +29,6 @@ public class SignUp extends AppCompatActivity {
     EditText EdtEmail;
     EditText EdtUsername;
     EditText EdtPassword;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-
-        btnSignUp = (Button) findViewById(R.id.bt_signUp);
-        EdtEmail = (EditText) findViewById(R.id.et_inputEmail);
-        EdtUsername = (EditText) findViewById(R.id.et_inputUsername);
-        EdtPassword = (EditText) findViewById(R.id.et_password);
-
-        btnSignUp.setOnClickListener(signUp);
-
-    }
-
     View.OnClickListener signUp = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -64,6 +46,42 @@ public class SignUp extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
+
+        btnSignUp = (Button) findViewById(R.id.bt_signUp);
+        EdtEmail = (EditText) findViewById(R.id.et_inputEmail);
+        EdtUsername = (EditText) findViewById(R.id.et_inputUsername);
+        EdtPassword = (EditText) findViewById(R.id.et_password);
+
+        btnSignUp.setOnClickListener(signUp);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_sign_up, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private class Register extends AsyncTask<String, Void, String> {
         User newUser = new User();
@@ -90,7 +108,7 @@ public class SignUp extends AppCompatActivity {
                     .add("email", newUser.getEmail())
                     .build();
 
-            request = new Request.Builder().url(url.ip2 + "RegisterServlet").post(requestbody).build();
+            request = new Request.Builder().url(url.ip + "RegisterServlet").post(requestbody).build();
             String result = "";
 
             try {
@@ -103,45 +121,23 @@ public class SignUp extends AppCompatActivity {
             return result;
         }
 
-//TODO: What Error is this? HAHA
+        //TODO: What Error is this? HAHA
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("PostExecute", s);
-            if (s=="Username Exists") {
+            if (s == "Username Exists") {
                 Toast.makeText(getBaseContext(), "Username already taken", Toast.LENGTH_LONG).show();
             } else if (s.equals("Email Exists")) {
                 Toast.makeText(getBaseContext(), "Email already taken", Toast.LENGTH_LONG).show();
             } else {
                 Intent i = new Intent();
-                i.setClass(getBaseContext(),MainActivity.class);
+                i.setClass(getBaseContext(), MainActivity.class);
                 startActivity(i);
                 finish();
                 Toast.makeText(getBaseContext(), "Successfully Signed Up!", Toast.LENGTH_LONG).show();
             }
 
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sign_up, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,9 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -37,9 +33,24 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnSignIn;
     TextView btnSignUp;
-    private EditText userName, password;
     User user;
     SharedPreferences sp;
+    //    Another Page
+    View.OnClickListener redirect = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent();
+            if (v.equals(btnSignIn)) {
+                /** Connect to Database **/
+                SignIn signIn = new SignIn();
+                signIn.execute();
+            } else if (v.equals(btnSignUp)) {
+                i.setClass(getBaseContext(), SignUp.class);
+                startActivity(i);
+            }
+        }
+    };
+    private EditText userName, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,22 +74,6 @@ public class MainActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(redirect);
 
     }
-
-    //    Another Page
-    View.OnClickListener redirect = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent();
-            if (v.equals(btnSignIn)) {
-                /** Connect to Database **/
-                SignIn signIn = new SignIn();
-                signIn.execute();
-            } else if (v.equals(btnSignUp)) {
-                i.setClass(getBaseContext(), SignUp.class);
-                startActivity(i);
-            }
-        }
-    };
 
 //    CODES THAT ARE NOT CHANGED
 
@@ -126,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             Request request = null;
             Response response = null;
 
-            request = new Request.Builder().url(url.ip2 + "LoginServlet").post(requestbody).build();
+            request = new Request.Builder().url(url.ip + "LoginServlet").post(requestbody).build();
             String result = "";
 
             try {
