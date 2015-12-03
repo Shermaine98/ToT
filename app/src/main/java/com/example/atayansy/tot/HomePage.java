@@ -58,8 +58,18 @@ public class HomePage extends BaseActivity {
 
         SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
         String user = prefs.getString("user", null);
+        JSONObject json = null;
+        try {
+            json = new JSONObject(user);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        //welcome.append(username + "!");
+        try {
+            welcome.append(json.getString("username") + "!");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
