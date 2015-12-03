@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -129,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 response = okHttpClient.newCall(request).execute();
                 result = response.body().string();
+                Log.i("result", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -139,17 +141,25 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            try {
-                userLogin = new User();
-                JSONObject jo = new JSONObject(s);
+            Log.i("ENTER", "POSTEXCUTE");
+            if (!s.equalsIgnoreCase("null")) {
+                try {
+                    Log.i("ENTER", "AFTER TRY");
+                    Log.i("ENTER", s);
+                    userLogin = new User();
+                    JSONObject jo = new JSONObject(s);
 
-                userLogin.setUserName(jo.getString("username"));
-                userLogin.setUserID(jo.getInt("idUser"));
 
-            } catch (JSONException e) {
-            }
+                    userLogin.setUserName(jo.getString("userName"));
+                    userLogin.setUserID(Integer.parseInt(jo.getString("userID")));
 
-            if (userLogin != null) {
+                    Log.i("UserName THIS", userLogin.getUserName() + "");
+                    Log.i("password THIS", userLogin.getUserID() + "");
+
+                } catch (JSONException e) {
+                }
+
+
                 /* TODO: Shared Preference works BUT displays null (Walang nakukuha sa Json) */
                 SharedPreferences.Editor editor = getSharedPreferences("login", MODE_PRIVATE).edit();
                 editor.putString("username", userLogin.getUserName());
