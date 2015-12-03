@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnSignIn;
     TextView btnSignUp;
-    User user;
+    User userLogin;
     SharedPreferences sp;
     //    Another Page
     View.OnClickListener redirect = new View.OnClickListener() {
@@ -140,20 +140,20 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
-                user = new User();
+                userLogin = new User();
                 JSONObject jo = new JSONObject(s);
 
-                user.setUserName(jo.getString("username"));
-                user.setUserID(jo.getInt("idUser"));
+                userLogin.setUserName(jo.getString("username"));
+                userLogin.setUserID(jo.getInt("idUser"));
 
             } catch (JSONException e) {
             }
 
-            if (user != null) {
+            if (userLogin != null) {
                 /* TODO: Shared Preference works BUT displays null (Walang nakukuha sa Json) */
                 SharedPreferences.Editor editor = getSharedPreferences("login", MODE_PRIVATE).edit();
-                editor.putString("username", user.getUserName());
-                editor.putInt("id", user.getUserID());
+                editor.putString("username", userLogin.getUserName());
+                editor.putInt("id", userLogin.getUserID());
                 editor.commit();
 
                 Intent i = new Intent();

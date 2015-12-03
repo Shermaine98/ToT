@@ -8,7 +8,7 @@ public class url {
     /**
      * Shermaine's IP Address
      **/
-    public static String ip = "http://192.168.1.4:8081/ToT/";
+    public static String ip = "http://192.168.1.5:8081/ToT/";
 
     /**Geraldine's IP Address**/
     //   public static String ip = "http://192.168.1.9:8084/ToT/";
