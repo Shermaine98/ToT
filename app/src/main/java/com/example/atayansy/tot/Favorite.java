@@ -155,14 +155,11 @@ public class Favorite extends BaseActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("ENTER", "POSTEXCUTE- favorites");
             //check if result is null
             if (!s.equalsIgnoreCase("null")) {
                 try {
 
                     //getting result body and converting to JSON
-                    Log.i("ENTER", "AFTER TRY - favorites");
-                    Log.i("ENTER", s);
                     JSONObject jo = new JSONObject(s);
 
                     JSONArray fList = jo.getJSONArray("Favorites");
@@ -177,7 +174,6 @@ public class Favorite extends BaseActivity {
                                 obj.getInt("price")
                         );
                         userFavorites.add(food);
-
                     }
 
                     gridview.setAdapter(new CustomAdapterFavorites(getBaseContext(), userFavorites));
