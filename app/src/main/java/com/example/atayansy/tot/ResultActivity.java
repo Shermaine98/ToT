@@ -7,12 +7,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.atayansy.tot.java.FoodFeedFeedbacks;
+import com.example.atayansy.tot.java.ImageResources;
 
 public class ResultActivity extends AppCompatActivity {
 
     Button button_eat;
     Button button_main;
+    ImageView imageView;
     TextView resultFoodName, resultDescription, resultPrice;
     View.OnClickListener decision = new View.OnClickListener() {
         @Override
@@ -28,7 +33,7 @@ public class ResultActivity extends AppCompatActivity {
             finish();
         }
     };
-    private String result;
+    private FoodFeedFeedbacks result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +44,25 @@ public class ResultActivity extends AppCompatActivity {
         resultPrice = (TextView) findViewById(R.id.tv_price);
         button_eat = (Button) findViewById(R.id.button_eat);
         button_main = (Button) findViewById(R.id.button_main);
-
+        imageView = (ImageView) findViewById(R.id.tv_foodImage);
 
         button_eat.setOnClickListener(decision);
         button_main.setOnClickListener(decision);
 
-        result = getIntent().getExtras().getString("Result");
+        result = (FoodFeedFeedbacks) getIntent().getSerializableExtra("Result");
 
-        if (result.equalsIgnoreCase("No Result")) {
-            resultFoodName.setText(result);
+        if (result.equals(null)) {
+            resultFoodName.setText("NONE");
             button_eat.setVisibility(Button.INVISIBLE);
             button_main.setVisibility(Button.INVISIBLE);
             resultPrice.setText("");
             resultDescription.setText("");
-
         } else {
-            resultFoodName.setText(result);
+            resultPrice.setText("P" + String.valueOf(result.getPrice()));
+            resultFoodName.setText(result.getFoodName());
+            resultDescription.setText(result.getDefinition());
+            ImageResources imageResources = new ImageResources();
+            imageView.setImageResource(imageResources.getImage(result.getIcon(), getBaseContext()));
         }
     }
 

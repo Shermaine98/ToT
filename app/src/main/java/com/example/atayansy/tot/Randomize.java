@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.Food;
+import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -30,14 +31,16 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Randomize extends AppCompatActivity {
-    ArrayList<Food> FoodList;
+    ArrayList<FoodFeedFeedbacks> FoodList;
     ImageView iv_randomize;
     TextView tv_randomize;
-    ArrayList<Food> FilteredResult;
+    ArrayList<FoodFeedFeedbacks> FilteredResult;
     int result;
     boolean x = true;
     Random random = new Random();
-    Food foodTempResult = new Food();
+
+    FoodFeedFeedbacks foodTempResult = new FoodFeedFeedbacks();
+
     private Handler handler = new Handler();
     private double Distance;
     private double CurrLatitude;
@@ -101,7 +104,7 @@ public class Randomize extends AppCompatActivity {
 
         for (int i = 0; i < FoodList.size(); i++) {
             Location otherLocation = new Location("Other Location");
-            otherLocation.setLatitude(FoodList.get(i).getLatitue());
+            otherLocation.setLatitude(FoodList.get(i).getLatitude());
             otherLocation.setLongitude(FoodList.get(i).getLongtitude());
             float distanceResult = currentLocation.distanceTo(otherLocation);
             if (Distance <= distanceResult) {
@@ -113,7 +116,7 @@ public class Randomize extends AppCompatActivity {
         }
         if (x) {
             result = random.nextInt(FilteredResult.size());
-            intent(FilteredResult);
+            //   intent(FilteredResult.get();
         } else {
             intent();
         }
@@ -141,10 +144,9 @@ public class Randomize extends AppCompatActivity {
                 Log.i("this", foodTempResult.getFoodName());
             } catch (JSONException e) {
             }
-
             // TODO: Result
             Intent i = new Intent();
-            i.putExtra("Result", foodTempResult.getFoodName());
+            i.putExtra("Result", foodTempResult);
             i.setClass(getBaseContext(), ResultActivity.class);
             startActivity(i);
             finish();
