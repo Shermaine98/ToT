@@ -41,20 +41,19 @@ public class HomePage extends BaseActivity {
     JSONArray FoodArray = null;
     JSONArray CommentsArray = null;
     ArrayList<Food> food;
-    private ArrayList<Comments> commentses;
+    ArrayList<Comments> comments;
     private ExpandableListView ExpandList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setUp(R.layout.activity_home_page);
-
+        food = new ArrayList<>();
+        comments = new ArrayList<>();
         GetTopFood get = new GetTopFood();
         get.execute();
 
         /**Custom Adapter **/
-
-
         int noObjectsLevel1 = 1;
         int noObjectsLevel2 = 1;
         int noObjectsLevel3 = 1;
@@ -160,7 +159,7 @@ public class HomePage extends BaseActivity {
                 response = okHttpClient.newCall(request).execute();
                 //get the page body
                 result = response.body().string();
-                Log.i("result", result);
+//                Log.i("result", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -175,33 +174,34 @@ public class HomePage extends BaseActivity {
             if (!s.equalsIgnoreCase("null")) {
                 //Food
                 try {
-                    Food Foodtemp;
-                    food = new ArrayList<>();
-                    JSONObject jsonObj = new JSONObject(s);
-                    // Getting JSON Array node
-                    FoodArray = jsonObj.getJSONArray("Food");
-                    for (int i = 0; i < FoodArray.length(); i++) {
-                        JSONObject temp = FoodArray.getJSONObject(i);
-                        Foodtemp = new Food();
-                        Foodtemp.setFoodID(Integer.parseInt(temp.getString("foodID")));
-                        Foodtemp.setDefinition(temp.getString("foodDescription"));
-                        Foodtemp.setFoodName(temp.getString("foodName"));
-                        Foodtemp.setPrice(Double.parseDouble(temp.getString("price")));
-                        Foodtemp.setRating(Double.parseDouble(temp.getString("rating")));
-                        Foodtemp.setFoodName(temp.getString("foodName"));
-                        food.add(Foodtemp);
+
+                    JSONObject jo = new JSONObject(s);
+                    JSONArray fList = jo.getJSONArray("Food");
+                    JSONArray cList = jo.getJSONArray("Comments");
+                    Food foodtemp;
+                    Comments commentstemp;
+
+                    for (int i = 0; i < fList.length(); i++) {
+                        JSONObject obj = fList.getJSONObject(i);
+                        foodtemp = new Food();
+                        foodtemp.setFoodID(obj.getInt("foodID"));
+                        foodtemp.setFoodName(obj.getString("foodName"));
+                        foodtemp.setDefinition(obj.getString("foodDescription"));
+                        foodtemp.setPrice(obj.getDouble("price"));
+                        foodtemp.setRating(obj.getDouble("rating"));
+                        foodtemp.setImage(obj.getInt("picture"));
+                        food.add(foodtemp);
+                        Log.i("food:", food.get(i).getFoodName());
                     }
 
-                    Comments Comments;
-                    commentses = new ArrayList<>();
-                    CommentsArray = jsonObj.getJSONArray("Comments");
-                    for (int i = 0; i < CommentsArray.length(); i++) {
-                        JSONObject temp = CommentsArray.getJSONObject(i);
-                        Comments = new Comments();
-                        Comments.setName(temp.getString("IDUser"));
-                        Comments.setFoodID(Integer.parseInt(temp.getString("foodID")));
-                        Comments.setComments(temp.getString("comments"));
-                        commentses.add(Comments);
+                    for(int i = 0; i< cList.length(); i++){
+                        JSONObject obj = cList.getJSONObject(i);
+                        commentstemp = new Comments();
+                        commentstemp.setName(obj.getString("IDUser"));
+                        commentstemp.setFoodID(obj.getInt("foodID"));
+                        commentstemp.setComments(obj.getString("comments"));
+                        comments.add(commentstemp);
+                        Log.i("comment:", comments.get(i).getComments());
                     }
 
                 } catch (JSONException e) {

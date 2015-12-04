@@ -10,12 +10,12 @@ public class Comments {
     private String name;
     private String comments;
     private int FoodID;
-    private ArrayList<Comments> commentses;
+    private ArrayList<Comments> commentsArray;
 
     public Comments(String name, String comments, ArrayList<Comments> commentses) {
         this.name = name;
         this.comments = comments;
-        this.setCommentses(commentses);
+        this.setCommentsArray(commentses);
     }
 
     public Comments() {
@@ -37,12 +37,12 @@ public class Comments {
         this.comments = comments;
     }
 
-    public ArrayList<Comments> getCommentses() {
-        return commentses;
+    public ArrayList<Comments> getCommentsArray() {
+        return commentsArray;
     }
 
-    public void setCommentses(ArrayList<Comments> commentses) {
-        this.commentses = commentses;
+    public void setCommentsArray(ArrayList<Comments> commentses) {
+        this.commentsArray = commentses;
     }
 
     public int getFoodID() {

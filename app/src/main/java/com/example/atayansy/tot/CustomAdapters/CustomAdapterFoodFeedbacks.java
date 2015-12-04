@@ -117,7 +117,7 @@ class Adapter2 extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return comments.getCommentses().get(childPosition);
+        return comments.getCommentsArray().get(childPosition);
     }
 
     @Override
@@ -154,7 +154,7 @@ class Adapter2 extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return comments.getCommentses().size();
+        return comments.getCommentsArray().size();
     }
 
     @Override
