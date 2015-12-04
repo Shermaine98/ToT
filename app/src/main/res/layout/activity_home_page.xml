@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="#5aa27e"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/topFive"
