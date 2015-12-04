@@ -40,39 +40,6 @@ public class Randomize extends AppCompatActivity {
         iv_randomize = (ImageView) findViewById(R.id.ivRandomize);
         tv_randomize = (TextView) findViewById(R.id.tvrandomize);
 
-        //  iv_randomize.setBackgroundResource(R.drawable.random_animation);
-//        tv_randomize.setBackgroundResource(R.drawable.text_animation);
-
-        //     AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
-
-        //  AnimationDrawable frameAnimation1 = (AnimationDrawable) tv_randomize.getBackground();
-
-        //   frameAnimation.start();
-        //    frameAnimation1.start();
-
-        //TODO: delete if database
-
-
-        FoodList = new ArrayList<>();
-        FoodList.add(new Food("Chicken Katsu", "Crazy Katsu",
-                "Breaded, deep-fried chicken cutlet served with shredded lettuce and rice",
-                155.00, "Ermita One Archers Place, Taft Avenue, Manila", "Main Course", 1, 14.57, 120.98));
-        FoodList.add(new Food("Tonkatsu", "Crazy Katsu",
-                "Breaded, deep-fried pork cutlet served with shredded lettuce and rice",
-                150.00, "Ermita One Archers Place, Taft Avenue, Manila", "Main Course", 2, 14.57, 120.98));
-        FoodList.add(new Food("Katsu Curry", "Crazy Katsu",
-                "Breaded pork cutlet in curry sauce served with rice",
-                190.00, "Ermita One Archers Place, Taft Avenue, Manila", "Main Course", 2, 14.57, 120.99));
-
-
-        FoodList.add(new Food("Breakfast Beef Bulgogi Ricebox", "Chicken Bonchon - Taft (University Mall)",
-                "Beef bulgogi with egg and rice", 135.00,
-                "University Mall, Taft Avenue, Manila City, Metro Manila", "Main Course", 3, 14.56, 120.99));
-        FoodList.add(new Food("Breakfast Chops Ricebox", "Chicken Bonchon - Taft (University Mall)",
-                "Chicken chops with egg and garlic rice", 50.00,
-                "University Mall, Taft Avenue, Manila City, Metro Manila", "Main Course", 4, 14.56, 120.99));
-
-
         //Get Chosen
         location_spinner = getIntent().getExtras().getBoolean("location_spinner");
         budget_spinner = getIntent().getExtras().getBoolean("Budget_spinner");
@@ -82,7 +49,7 @@ public class Randomize extends AppCompatActivity {
         CurrLongitude = getIntent().getExtras().getDouble("Longitude");
 
         //printing Console
-//TODO: delete
+        //TODO: delete
         Log.e("location_spinner", String.valueOf(location_spinner));
         Log.e("Budget_spinner", String.valueOf(budget_spinner));
         Log.e("Budget", String.valueOf(Budget));
