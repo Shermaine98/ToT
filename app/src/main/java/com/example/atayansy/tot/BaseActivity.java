@@ -1,6 +1,7 @@
 package com.example.atayansy.tot;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -42,7 +43,11 @@ public class BaseActivity extends AppCompatActivity {
                 } else if (v.equals(ibButtonHistory)) {
                     i.setClass(getBaseContext(), History.class);
                 } else if (v.equals(ibButtonLogOut)) {
-                    //TODO: something code here to not crash on activity exit??
+                    SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    finish();
                     i.setClass(getBaseContext(), MainActivity.class);
                 }
 
