@@ -7,23 +7,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.atayansy.tot.CustomAdapters.CustomAdapterFavorites;
+import com.example.atayansy.tot.CustomAdapters.CustomAdapterComments;
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.FavoriteObject;
-import com.example.atayansy.tot.java.Food;
 import com.example.atayansy.tot.java.ImageResources;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -34,8 +30,19 @@ public class Result_Favorite_History extends BaseActivity {
     TextView price;
     ImageView image;
     Button remove;
-    private FavoriteObject clicked;
     int userID;
+    ListView listView;
+    View.OnClickListener removeItem = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            RemoveFromFavorites r = new RemoveFromFavorites();
+            r.execute();
+
+        }
+    };
+    private FavoriteObject clicked;
+    private CustomAdapterComments customAdapterComments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,7 @@ public class Result_Favorite_History extends BaseActivity {
         price = (TextView) findViewById(R.id.tvFh_price);
         image = (ImageView) findViewById(R.id.tvFh_foodImage);
         remove = (Button) findViewById(R.id.btn_removeFromFave);
+        listView = (ListView) findViewById(R.id.listview_comments);
 
         clicked = (FavoriteObject) getIntent().getSerializableExtra("FaveClicked");
         userID = getIntent().getExtras().getInt("userID");
@@ -56,20 +64,11 @@ public class Result_Favorite_History extends BaseActivity {
         name.setText(clicked.getfName());
         desc.setText(clicked.getDescription());
         price.setText("P" + clicked.getPrice() + ".00");
-
+        customAdapterComments = new CustomAdapterComments(getBaseContext(), clicked.getComments());
+        listView.setAdapter(customAdapterComments);
         image.setImageResource(ir.getImage(clicked.getfPictureIcon(), getBaseContext()));
         remove.setOnClickListener(removeItem);
     }
-
-    View.OnClickListener removeItem = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            RemoveFromFavorites r = new RemoveFromFavorites();
-            r.execute();
-
-        }
-    };
 
     private class RemoveFromFavorites extends AsyncTask<String, Void, String> {
 

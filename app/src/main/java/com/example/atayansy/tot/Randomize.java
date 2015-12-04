@@ -207,6 +207,11 @@ public class Randomize extends AppCompatActivity {
         }
 
         @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
         protected String doInBackground(String... params) {
 
 

@@ -1,6 +1,7 @@
 package com.example.atayansy.tot.java;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by shermainesy on 10/10/15.
@@ -13,6 +14,7 @@ public class FavoriteObject implements Serializable {
     private String description;
     private int price;
     private int foodID;
+    private ArrayList<Comments> comments;
 
     public FavoriteObject(int fPictureIcon, String fName, float fRatingStar, String description, int price, int foodID) {
         this.fPictureIcon = fPictureIcon;
@@ -69,5 +71,13 @@ public class FavoriteObject implements Serializable {
 
     public void setFoodID(int foodID) {
         this.foodID = foodID;
+    }
+
+    public ArrayList<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comments> comments) {
+        this.comments = comments;
     }
 }

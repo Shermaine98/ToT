@@ -8,8 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.atayansy.tot.CustomAdapters.CustomAdapterComments;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 import com.example.atayansy.tot.java.ImageResources;
 
@@ -19,6 +21,8 @@ public class ResultActivity extends AppCompatActivity {
     Button button_main;
     ImageView imageView;
     TextView resultFoodName, resultDescription, resultPrice;
+    CustomAdapterComments customAdapterComments;
+    ListView listView;
     View.OnClickListener decision = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -45,6 +49,7 @@ public class ResultActivity extends AppCompatActivity {
         button_eat = (Button) findViewById(R.id.button_eat);
         button_main = (Button) findViewById(R.id.button_main);
         imageView = (ImageView) findViewById(R.id.tv_foodImage);
+        listView = (ListView) findViewById(R.id.evFoodComment_Result);
 
         button_eat.setOnClickListener(decision);
         button_main.setOnClickListener(decision);
@@ -63,6 +68,8 @@ public class ResultActivity extends AppCompatActivity {
             resultDescription.setText(result.getDefinition());
             ImageResources imageResources = new ImageResources();
             imageView.setImageResource(imageResources.getImage(result.getImage(), getBaseContext()));
+            customAdapterComments = new CustomAdapterComments(getBaseContext(), result.getComments());
+            listView.setAdapter(customAdapterComments);
         }
     }
 

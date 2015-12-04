@@ -15,12 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#c2534d"
-            android:gravity="center_horizontal"
             android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
             android:padding="8dp"
-            android:textSize="30sp"
+            android:text="FAVORITES"
             android:textColor="#ebebeb"
-            android:text="FAVORITES" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/tvfh_foodescription"
@@ -46,9 +46,9 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:background="#d74a4a"
             android:text="X"
             android:textAllCaps="false"
-            android:background="#d74a4a"
             android:textColor="#f3f3f3" />
 
 
@@ -56,10 +56,16 @@
             android:id="@+id/tvFh_foodImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_marginTop="15dp"
+            android:padding="10dp"
             android:text="food description" />
 
+        <ListView
+            android:id="@+id/listview_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
     </LinearLayout>
 
 
