@@ -7,7 +7,6 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.example.atayansy.tot.R;
 import com.example.atayansy.tot.java.ImageResources;
 
 /**
@@ -16,11 +15,18 @@ import com.example.atayansy.tot.java.ImageResources;
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private int[] mThumbIds;
+    private int mThumbIds2;
 
     // Constructor
     public ImageAdapter(Context c, int[] resources) {
         mContext = c;
         mThumbIds = resources;
+    }
+
+    // Constructor
+    public ImageAdapter(Context c, int resources) {
+        mContext = c;
+        mThumbIds2 = resources;
     }
 
     public int getCount() {

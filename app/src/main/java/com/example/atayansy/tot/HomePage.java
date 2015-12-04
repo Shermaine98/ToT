@@ -8,15 +8,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterFoodFeedbacks;
-import com.example.atayansy.tot.CustomAdapters.CustomExpandableListView;
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.Comments;
-import com.example.atayansy.tot.java.Food;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -33,63 +30,33 @@ import java.util.concurrent.TimeUnit;
 public class HomePage extends BaseActivity {
 
 
-    public CustomExpandableListView ExpAdapter;
+    public CustomAdapterFoodFeedbacks ExpAdapter;
     TextView welcome;
     SharedPreferences sharedPreferences;
     String username;
 
     JSONArray FoodArray = null;
     JSONArray CommentsArray = null;
-    ArrayList<Food> food;
+    ArrayList<FoodFeedFeedbacks> foodFeedFeedbacks;
     ArrayList<Comments> comments;
     private ExpandableListView ExpandList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setUp(R.layout.activity_home_page);
-        food = new ArrayList<>();
-        comments = new ArrayList<>();
+        foodFeedFeedbacks = new ArrayList<>();
+        ExpandList = (ExpandableListView) findViewById(R.id.evFoodFeed);
+
         GetTopFood get = new GetTopFood();
         get.execute();
-
-        /**Custom Adapter **/
-        int noObjectsLevel1 = 1;
-        int noObjectsLevel2 = 1;
-        int noObjectsLevel3 = 1;
-
-
-        ArrayList<FoodFeedFeedbacks> objectsLvl1 = new ArrayList<FoodFeedFeedbacks>();
-        // objectsLvl1.add(new FoodFeedFeedbacks(R.drawable.food_temp1,commentses));
-
-        for (int i = 0; i < noObjectsLevel1; i++) {
-            ArrayList<Comments> objectsLvl2 = new ArrayList<Comments>();
-            for (int j = 0; j < noObjectsLevel2; j++) {
-                ArrayList<Comments> objectsLvl3 = new ArrayList<Comments>();
-                for (int k = 0; k < noObjectsLevel3; k++) {
-                    objectsLvl3.add(new Comments("user", "hello", null));
-                }
-                objectsLvl2.add(new Comments("user", "sds", objectsLvl3));
-            }
-            objectsLvl1.add(new FoodFeedFeedbacks(R.drawable.food_temp1, objectsLvl2));
-        }
-
-        RelativeLayout parent = (RelativeLayout) findViewById(R.id.parent);
-
-        ExpAdapter = new CustomExpandableListView(this);
-        CustomAdapterFoodFeedbacks customAdapterFoodFeedbacks = new CustomAdapterFoodFeedbacks(HomePage.this, objectsLvl1);
-        ExpAdapter.setAdapter(customAdapterFoodFeedbacks);
-        parent.addView(ExpAdapter);
-
-        /**End Custom Adapter **/
 
 
      /* Shared Preferences */
         welcome = (TextView) findViewById(R.id.welcomeText);
-
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
-
         if (username.isEmpty()) {
             Intent intent = new Intent();
             intent.setClass(getBaseContext(), MainActivity.class);
@@ -97,6 +64,15 @@ public class HomePage extends BaseActivity {
         } else {
             onResume();
         }
+        /*Shared Preference End*/
+
+    }
+
+
+    public void ShowView() {
+
+        ExpAdapter = new CustomAdapterFoodFeedbacks(getBaseContext(), foodFeedFeedbacks);
+        ExpandList.setAdapter(ExpAdapter);
 
     }
 
@@ -178,34 +154,38 @@ public class HomePage extends BaseActivity {
                     JSONObject jo = new JSONObject(s);
                     JSONArray fList = jo.getJSONArray("Food");
                     JSONArray cList = jo.getJSONArray("Comments");
-                    Food foodtemp;
+                    FoodFeedFeedbacks foodtemp;
                     Comments commentstemp;
 
                     for (int i = 0; i < fList.length(); i++) {
                         JSONObject obj = fList.getJSONObject(i);
-                        foodtemp = new Food();
+                        foodtemp = new FoodFeedFeedbacks();
                         foodtemp.setFoodID(obj.getInt("foodID"));
                         foodtemp.setFoodName(obj.getString("foodName"));
                         foodtemp.setDefinition(obj.getString("foodDescription"));
                         foodtemp.setPrice(obj.getDouble("price"));
                         foodtemp.setRating(obj.getDouble("rating"));
-                        foodtemp.setImage(obj.getInt("picture"));
-                        food.add(foodtemp);
-                        Log.i("food:", food.get(i).getFoodName());
+                        foodtemp.setIcon(obj.getInt("picture"));
+                        comments = new ArrayList<>();
+                        for (int j = 0; j < cList.length(); j++) {
+                            JSONObject objC = cList.getJSONObject(j);
+                            commentstemp = new Comments();
+                            if (foodtemp.getFoodID() == objC.getInt("foodID")) {
+                                commentstemp.setName(objC.getString("IDUser"));
+                                commentstemp.setFoodID(objC.getInt("foodID"));
+                                commentstemp.setComments(objC.getString("comments"));
+                                comments.add(commentstemp);
+                                Log.i("print:", comments.get(j).getComments());
+                            }
+                        }
+                        foodtemp.setComments(comments);
+                        foodFeedFeedbacks.add(foodtemp);
+                        Log.i("print:", foodFeedFeedbacks.get(i).getFoodName());
                     }
-
-                    for(int i = 0; i< cList.length(); i++){
-                        JSONObject obj = cList.getJSONObject(i);
-                        commentstemp = new Comments();
-                        commentstemp.setName(obj.getString("IDUser"));
-                        commentstemp.setFoodID(obj.getInt("foodID"));
-                        commentstemp.setComments(obj.getString("comments"));
-                        comments.add(commentstemp);
-                        Log.i("comment:", comments.get(i).getComments());
-                    }
-
                 } catch (JSONException e) {
                 }
+
+                ShowView();
             } else {
                 Toast.makeText(getBaseContext(), "Error!", Toast.LENGTH_LONG).show();
             }
