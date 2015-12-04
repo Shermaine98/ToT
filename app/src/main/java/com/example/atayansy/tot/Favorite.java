@@ -56,6 +56,7 @@ public class Favorite extends BaseActivity {
         gridview = (GridView) findViewById(R.id.gridview);
         userFavorites = new ArrayList<>();
 
+
          /* Shared Preferences */
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
@@ -73,7 +74,6 @@ public class Favorite extends BaseActivity {
         f.execute();
 
 
-
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
@@ -81,7 +81,6 @@ public class Favorite extends BaseActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
     }
@@ -147,23 +146,25 @@ public class Favorite extends BaseActivity {
 
                     FavoriteObject food;
 
-                    for(int i= 0; i<fList.length(); i++){
+                    for (int i = 0; i < fList.length(); i++) {
                         JSONObject obj = fList.getJSONObject(i);
                         food = new FavoriteObject(
-                                obj.getInt("picture"),obj.getString("foodName"),
-                                obj.getInt("rating"),obj.getString("foodDescription"),
+                                obj.getInt("picture"), obj.getString("foodName"),
+                                obj.getInt("rating"), obj.getString("foodDescription"),
                                 obj.getInt("price")
                         );
                         userFavorites.add(food);
+                        Log.i("user Favorite:", userFavorites.get(i).getfName());
                     }
 
-                    Log.i("IMAGE RESOURCES:", "Image resources");
-                    for(int i=0; i<userFavorites.size(); i++){
+
+                    imageResources = new Integer[userFavorites.size()];
+                    for (int i = 0; i < imageResources.length; i++) {
                         imageResources[i] = userFavorites.get(i).getfPictureIcon();
-                        Log.i("Image" + i, imageResources[i].toString());
+                        Log.i("Img", String.valueOf(userFavorites.get(i).getfPictureIcon()));
                     }
 
-//                    gridview.setAdapter(new ImageAdapter(getBaseContext(), imageResources));
+                    gridview.setAdapter(new ImageAdapter(getBaseContext(), imageResources));
 
                 } catch (JSONException e) {
                 }
