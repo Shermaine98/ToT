@@ -16,7 +16,7 @@
         android:background="#d3d4c8"
         android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
-        android:padding="8dp"
+        android:padding="5dp"
         android:text="TOP FOOD"
         android:textColor="#3a3a3a"
         android:textSize="30sp" />
@@ -28,6 +28,7 @@
         android:layout_below="@id/topFive"
         android:background="#d3d4c8"
         android:fontFamily="sans-serif-light"
+        android:paddingBottom="7dp"
         android:gravity="center_horizontal"
         android:textColor="#3a3a3a"
         android:textSize="20sp" />
