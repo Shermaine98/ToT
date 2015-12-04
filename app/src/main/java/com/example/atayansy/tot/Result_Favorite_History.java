@@ -1,6 +1,7 @@
 package com.example.atayansy.tot;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ public class Result_Favorite_History extends BaseActivity {
     TextView desc;
     TextView price;
     ImageView image;
+    Button remove;
     private FavoriteObject clicked;
 
     @Override
@@ -25,6 +27,7 @@ public class Result_Favorite_History extends BaseActivity {
         desc = (TextView) findViewById(R.id.tvfh_foodescription);
         price = (TextView) findViewById(R.id.tvFh_price);
         image = (ImageView) findViewById(R.id.tvFh_foodImage);
+        remove = (Button) findViewById(R.id.btn_removeFromFave);
 
         clicked = (FavoriteObject) getIntent().getSerializableExtra("FaveClicked");
 
