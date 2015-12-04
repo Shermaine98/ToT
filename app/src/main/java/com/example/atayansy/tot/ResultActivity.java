@@ -68,7 +68,7 @@ public class ResultActivity extends AppCompatActivity {
             resultDescription.setText(result.getDefinition());
             ImageResources imageResources = new ImageResources();
             imageView.setImageResource(imageResources.getImage(result.getImage(), getBaseContext()));
-            customAdapterComments = new CustomAdapterComments(getBaseContext(), result.getComments());
+            customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, result.getComments());
             listView.setAdapter(customAdapterComments);
         }
     }

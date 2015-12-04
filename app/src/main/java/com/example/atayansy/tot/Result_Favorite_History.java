@@ -64,7 +64,7 @@ public class Result_Favorite_History extends BaseActivity {
         name.setText(clicked.getfName());
         desc.setText(clicked.getDescription());
         price.setText("P" + clicked.getPrice() + ".00");
-        customAdapterComments = new CustomAdapterComments(getBaseContext(), clicked.getComments());
+        customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, clicked.getComments());
         listView.setAdapter(customAdapterComments);
         image.setImageResource(ir.getImage(clicked.getfPictureIcon(), getBaseContext()));
         remove.setOnClickListener(removeItem);
