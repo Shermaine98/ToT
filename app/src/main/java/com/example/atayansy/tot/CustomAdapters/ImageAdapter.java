@@ -14,10 +14,12 @@ import com.example.atayansy.tot.R;
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    private Integer[] mThumbIds;
 
     // Constructor
-    public ImageAdapter(Context c) {
+    public ImageAdapter(Context c, Integer[] resources) {
         mContext = c;
+        mThumbIds = resources;
     }
 
     public int getCount() {
@@ -50,7 +52,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     // Keep all Images in array
-    public Integer[] mThumbIds = {
-            R.drawable.p0, R.drawable.p1, R.drawable.p2
-    };
+//    public Integer[] mThumbIds = {
+//            R.drawable.p0, R.drawable.p1, R.drawable.p2
+//    };
 }
