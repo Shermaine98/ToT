@@ -48,7 +48,7 @@ public class CustomAdapterFoodFeedbacks extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.comment_list_view, null);
         }
 
-        if (childPosition % 2 != 1) {
+        if (childPosition % 2 == 0) {
             convertView.setBackgroundColor(Color.parseColor("#D5D5D5"));
         }
 

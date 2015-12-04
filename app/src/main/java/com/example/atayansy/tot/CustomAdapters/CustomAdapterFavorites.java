@@ -61,7 +61,7 @@ public class CustomAdapterFavorites extends BaseAdapter {
 
         holder.img.setImageResource(ir.getImage(favoriteObjects.get(position).getfPictureIcon(), context));
         holder.foodName.setText(favoriteObjects.get(position).getfName());
-        holder.foodPrice.setText(String.valueOf(favoriteObjects.get(position).getPrice()));
+        holder.foodPrice.setText("P" + String.valueOf(favoriteObjects.get(position).getPrice())+ ".00");
 
 
         return rowView;
