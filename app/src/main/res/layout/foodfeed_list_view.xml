@@ -11,9 +11,45 @@
         android:scaleType="centerCrop" />
 
     <TextView
-        android:id="@+id/comments"
+        android:id="@+id/fv_foodName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_feedbackIcon"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/fv_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fv_foodName"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/fv_restaurantName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fv_restaurantName"
+        android:layout_centerVertical="true"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/fv_restaurantAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fv_restaurantName"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fv_restaurantAddress"
+        android:textSize="20sp" />
+
 </RelativeLayout>

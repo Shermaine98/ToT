@@ -166,6 +166,9 @@ public class HomePage extends BaseActivity {
                         foodtemp.setPrice(obj.getDouble("price"));
                         foodtemp.setRating(obj.getDouble("rating"));
                         foodtemp.setIcon(obj.getInt("picture"));
+                        foodtemp.setRestaurant(obj.getString("RestaurantName"));
+                        foodtemp.setLocation(obj.getString("address"));
+
                         comments = new ArrayList<>();
                         for (int j = 0; j < cList.length(); j++) {
                             JSONObject objC = cList.getJSONObject(j);

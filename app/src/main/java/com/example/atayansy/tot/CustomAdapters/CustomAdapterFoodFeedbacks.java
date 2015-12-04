@@ -89,9 +89,20 @@ public class CustomAdapterFoodFeedbacks extends BaseExpandableListAdapter {
         String stringId = "p" + Integer.toString(FoodFeedFeedbacks.getIcon());
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_feedbackIcon);
-        TextView textView = (TextView) convertView.findViewById(R.id.comments);
+        TextView comments = (TextView) convertView.findViewById(R.id.comments);
+        TextView foodName = (TextView) convertView.findViewById(R.id.fv_foodName);
+        TextView price = (TextView) convertView.findViewById(R.id.fv_price);
+        TextView restaurantName = (TextView) convertView.findViewById(R.id.fv_restaurantName);
+        TextView address = (TextView) convertView.findViewById(R.id.fv_restaurantAddress);
+
         imageView.setImageResource(Context.getResources().getIdentifier(stringId, "drawable", Context.getPackageName()));
-        textView.setText(String.valueOf(FoodFeedFeedbacks.getComments().size()) + " Comment/s");
+        foodName.setText(FoodFeedFeedbacks.getFoodName());
+        price.setText(String.valueOf(FoodFeedFeedbacks.getPrice()));
+        restaurantName.setText(FoodFeedFeedbacks.getRestaurant());
+        address.setText(FoodFeedFeedbacks.getLocation());
+        comments.setText(String.valueOf(FoodFeedFeedbacks.getComments().size()) + " Comment/s");
+
+
         return convertView;
     }
 
