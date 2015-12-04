@@ -42,17 +42,17 @@ public class ImageAdapter extends BaseAdapter {
             imageView = new ImageView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        }
-        else
-        {
+        } else {
             imageView = (ImageView) convertView;
         }
-        imageView.setImageResource(mThumbIds[position]);
+
+        imageView.setImageResource(Images[mThumbIds[position]]);
         return imageView;
     }
 
     // Keep all Images in array
-//    public Integer[] mThumbIds = {
-//            R.drawable.p0, R.drawable.p1, R.drawable.p2
-//    };
+    public Integer[] Images = {
+            R.drawable.p0, R.drawable.p1, R.drawable.p2, R.drawable.p3,
+            R.drawable.p4, R.drawable.p5
+    };
 }
