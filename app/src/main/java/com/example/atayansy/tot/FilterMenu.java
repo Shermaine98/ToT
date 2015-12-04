@@ -13,10 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -30,23 +28,19 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
 
     Spinner spinner_Bd;
     Spinner spinner_lt;
-    ImageButton ibFilterButtonHome;
-    ImageButton ibFilterButtonFavorite;
-    ImageButton ibFilterButtonRandomize;
-    ImageButton ibFilterButtonHistory;
-    ImageButton ibFilterButtonLogOut;
     TextView tvAddress;
     TextView tvBudgetLocation;
-
+    String locationAddress;
     AppLocationService appLocationService;
     //location end
     Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (spinner_Bd.isEnabled())
+            if (spinner_Bd.isEnabled()) {
                 spinner_Bd.setEnabled(false);
-            else {
+            } else {
                 spinner_Bd.setEnabled(true);
+
 
             }
         }
@@ -61,73 +55,43 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 spinner_lt.setEnabled(false);
             else {
                 spinner_lt.setEnabled(true);
-
-
-// two types, since GPS sometimes wont work or took long time to load
-                Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
-
-                Location networkLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
-
-                if (gpsLocation != null) {
-                    latitude = gpsLocation.getLatitude();
-                    longitude = gpsLocation.getLongitude();
-                    //   String result = "Latitude:" + gpsLocation.getLatitude() + "Longitude:" + gpsLocation.getLongitude();
-                    // tvAddress.setText(result);
-                    LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
-                } else if (networkLocation != null) {
-                    latitude = networkLocation.getLatitude();
-                    longitude = networkLocation.getLongitude();
-                    //  String result = "Latitude:" + networkLocation.getLatitude() + "Longitude:" + networkLocation.getLongitude();
-                    //   tvAddress.setText(result);
-                    LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
-                } else {
-                    showSettingsAlert();
-                }
-
-                //address
-                //you can hard-code the lat & long if you have issues with getting it
-                //remove the below if-condition and use the following couple of lines
-                //double latitude = 37.422005;
-                //double longitude = -122.084095
+                location();
             }
         }
+
     };
 
+    public void location() {
 
-    // Method for Naviagtion bar
-    OnClickListener randomizeOnClick = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
 
-            Intent i = new Intent();
-            if (v.equals(ibFilterButtonHome)) {
-                i.setClass(getBaseContext(), HomePage.class);
-            } else if (v.equals(ibFilterButtonFavorite)) {
-                i.setClass(getBaseContext(), Favorite.class);
-            } else if (v.equals(ibFilterButtonRandomize)) {
-                i.setClass(getBaseContext(), Randomize.class);
-                //put Extra Filter Options
-                int budget = Integer.parseInt(spinner_Bd.getSelectedItem().toString());
-                float distance = Float.parseFloat(spinner_lt.getSelectedItem().toString());
-                //return spinner
-                i.putExtra("location_spinner", spinner_lt.isEnabled());
-                i.putExtra("Budget_spinner", spinner_Bd.isEnabled());
-                //
-                i.putExtra("Budget", budget);
-                i.putExtra("Distance", distance);
-                i.putExtra("Latitude", latitude);
-                i.putExtra("Longitude", longitude);
-            } else if (v.equals(ibFilterButtonHistory)) {
-                i.setClass(getBaseContext(), History.class);
-            } else if (v.equals(ibFilterButtonLogOut)) {
-                //TODO: something code here to not crash on activity exit??
-                i.setClass(getBaseContext(), MainActivity.class);
-            }
+        // two types, since GPS sometimes wont work or took long time to load
+        Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
 
-            startActivity(i);
-            finish();
+        Location networkLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
+
+        if (gpsLocation != null) {
+            latitude = gpsLocation.getLatitude();
+            longitude = gpsLocation.getLongitude();
+            //   String result = "Latitude:" + gpsLocation.getLatitude() + "Longitude:" + gpsLocation.getLongitude();
+            // tvAddress.setText(result);
+            LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
+        } else if (networkLocation != null) {
+            latitude = networkLocation.getLatitude();
+            longitude = networkLocation.getLongitude();
+            //  String result = "Latitude:" + networkLocation.getLatitude() + "Longitude:" + networkLocation.getLongitude();
+            //   tvAddress.setText(result);
+            LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
+        } else {
+            showSettingsAlert();
         }
-    };
+
+        //address
+        //you can hard-code the lat & long if you have issues with getting it
+        //remove the below if-condition and use the following couple of lines
+        //double latitude = 37.422005;
+        //double longitude = -122.084095
+
+    }
 
     // Ask user to change location permission setting
     public void showSettingsAlert() {
@@ -151,6 +115,30 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 });
         alertDialog.show();
     }
+
+    // Ask user to change location permission setting
+    public void PrintLocation() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                FilterMenu.this);
+        alertDialog.setTitle("CURRENT LOCATION");
+        alertDialog.setMessage(locationAddress + "/n IS THIS YOUR CURRENT LOCATION");
+        AlertDialog.Builder settings = alertDialog.setPositiveButton("Refresh",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        location();
+                    }
+                });
+        alertDialog.setNegativeButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        alertDialog.show();
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,36 +177,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_lt.setAdapter(adapter2);
         location.setOnClickListener(switchSpinLt);
 
-// TODO: delete if useless, dapat pag ni on lang lalabas, nilgay ko sa if else statement ayaw gumana
-//to show what user selected
-        spinner_Bd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                tvBudgetLocation.setText("You Selected" + spinner_Bd.getSelectedItem().toString());
-            }
-
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                return;
-            }
-        });
-
-
-        spinner_lt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                tvBudgetLocation.setText("You Selected" + spinner_lt.getSelectedItem().toString());
-            }
-
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                return;
-            }
-        });
-
-        ibFilterButtonHome.setOnClickListener(randomizeOnClick);
-        ibFilterButtonFavorite.setOnClickListener(randomizeOnClick);
-        ibFilterButtonRandomize.setOnClickListener(randomizeOnClick);
-        ibFilterButtonHistory.setOnClickListener(randomizeOnClick);
-        ibFilterButtonLogOut.setOnClickListener(randomizeOnClick);
     }
 
     @Override
@@ -257,7 +216,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     private class GeocoderHandler extends Handler {
         @Override
         public void handleMessage(Message message) {
-            String locationAddress;
             switch (message.what) {
                 case 1:
                     Bundle bundle = message.getData();
@@ -266,6 +224,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 default:
                     locationAddress = null;
             }
+            PrintLocation();
             tvAddress.setText(locationAddress);
         }
     }

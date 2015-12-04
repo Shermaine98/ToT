@@ -19,11 +19,11 @@
     </string-array>
 
     <string-array name="distance">
-        <item>500</item>
-        <item>1000</item>
-        <item>100000</item>
-        <item>500</item>
-        <item>300</item>
+        <item>500meters</item>
+        <item>1000meters</item>
+        <item>100000meters</item>
+        <item>500meters</item>
+        <item>300meters</item>
     </string-array>
     <string name="title_activity_favorite">Favorite</string>
     <string name="title_activity_history">History</string>
