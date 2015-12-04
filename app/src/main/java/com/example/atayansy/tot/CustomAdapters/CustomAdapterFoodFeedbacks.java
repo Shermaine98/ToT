@@ -89,8 +89,9 @@ public class CustomAdapterFoodFeedbacks extends BaseExpandableListAdapter {
         String stringId = "p" + Integer.toString(FoodFeedFeedbacks.getIcon());
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_feedbackIcon);
+        TextView textView = (TextView) convertView.findViewById(R.id.comments);
         imageView.setImageResource(Context.getResources().getIdentifier(stringId, "drawable", Context.getPackageName()));
-
+        textView.setText(String.valueOf(FoodFeedFeedbacks.getComments().size()) + " Comment/s");
         return convertView;
     }
 
