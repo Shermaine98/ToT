@@ -191,12 +191,8 @@ public class HomePage extends BaseActivity {
                         Foodtemp.setFoodName(temp.getString("foodName"));
                         food.add(Foodtemp);
                     }
-                } catch (JSONException e) {
-                }
-                //Getting Comments
-                try {
+
                     Comments Comments;
-                    JSONObject jsonObj = new JSONObject(s);
                     commentses = new ArrayList<>();
                     CommentsArray = jsonObj.getJSONArray("Comments");
                     for (int i = 0; i < CommentsArray.length(); i++) {
@@ -206,15 +202,10 @@ public class HomePage extends BaseActivity {
                         Comments.setFoodID(Integer.parseInt(temp.getString("foodID")));
                         Comments.setComments(temp.getString("comments"));
                         commentses.add(Comments);
-
                     }
 
                 } catch (JSONException e) {
                 }
-
-
-
-
             } else {
                 Toast.makeText(getBaseContext(), "Error!", Toast.LENGTH_LONG).show();
             }
