@@ -2,27 +2,17 @@ package com.example.atayansy.tot;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuItem;
-import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.example.atayansy.tot.CustomAdapters.CustomAdapterFavorite;
-import com.example.atayansy.tot.CustomAdapters.ImageAdapter;
+import com.example.atayansy.tot.CustomAdapters.CustomAdapterFavorites;
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.FavoriteObject;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -36,19 +26,27 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Favorite extends BaseActivity {
-    private CustomAdapterFavorite customAdapterFavorite;
-    private SwipeMenuListView mListView;
-    int[] imageResources;
     ArrayList<FavoriteObject> userFavorites;
     SharedPreferences sharedPreferences;
     int userId;
     String username;
     GridView gridview;
+    AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            Toast.makeText(Favorite.this, "" + position,
+                    Toast.LENGTH_SHORT).show();
+
+            Intent i = new Intent();
+            i.setClass(getBaseContext(), Result_Favorite_History.class);
+            i.putExtra("FaveClicked", userFavorites.get(position));
+            startActivity(i);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +72,10 @@ public class Favorite extends BaseActivity {
         GetFavorites f = new GetFavorites();
         f.execute();
 
-
         gridview.setOnItemClickListener(showItem);
 
 
     }
-
-    AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            Toast.makeText(Favorite.this, "" + position,
-                    Toast.LENGTH_SHORT).show();
-
-            Intent i = new Intent();
-            i.setClass(getBaseContext(), Result_Favorite_History.class);
-            i.putExtra("FaveClicked", userFavorites.get(position));
-            startActivity(i);
-        }
-    };
-
 
     @Override
     protected void onResume() {
@@ -102,6 +85,38 @@ public class Favorite extends BaseActivity {
         username = sharedPreferences.getString("username", "");
         userId = sharedPreferences.getInt("userID", 0);
 
+    }
+
+    private void delete(FavoriteObject item) {
+        // delete app
+        try {
+            Intent intent = new Intent(Intent.ACTION_DELETE);
+            //   intent.setData(Uri.fromParts("package", item.getfName(), null));
+            startActivity(intent);
+        } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_result, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     // TODO: Database
@@ -163,17 +178,10 @@ public class Favorite extends BaseActivity {
                                 obj.getInt("price")
                         );
                         userFavorites.add(food);
-                        Log.i("user Favorite:", userFavorites.get(i).getfName());
+
                     }
 
-
-                    imageResources = new int[userFavorites.size()];
-                    for (int i = 0; i < imageResources.length; i++) {
-                        imageResources[i] = userFavorites.get(i).getfPictureIcon();
-                        Log.i("Img", String.valueOf(userFavorites.get(i).getfPictureIcon()));
-                    }
-
-                    gridview.setAdapter(new ImageAdapter(getBaseContext(), imageResources));
+                    gridview.setAdapter(new CustomAdapterFavorites(getBaseContext(), userFavorites));
 
                 } catch (JSONException e) {
                 }
@@ -181,37 +189,5 @@ public class Favorite extends BaseActivity {
                 Toast.makeText(getBaseContext(), "Error!", Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    private void delete(FavoriteObject item) {
-        // delete app
-        try {
-            Intent intent = new Intent(Intent.ACTION_DELETE);
-            //   intent.setData(Uri.fromParts("package", item.getfName(), null));
-            startActivity(intent);
-        } catch (Exception e) {
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_result, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
