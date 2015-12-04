@@ -45,7 +45,7 @@ public class Favorite extends BaseActivity {
     Integer[] imageResources;
     ArrayList<FavoriteObject> userFavorites;
     SharedPreferences sharedPreferences;
-    String userId;
+    int userId;
     String username;
     GridView gridview;
 
@@ -55,6 +55,19 @@ public class Favorite extends BaseActivity {
         super.setUp(R.layout.activity_favorite);
         gridview = (GridView) findViewById(R.id.gridview);
         userFavorites = new ArrayList<>();
+
+         /* Shared Preferences */
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+        userId = sharedPreferences.getInt("userID", 0);
+
+        if (username.isEmpty()) {
+            Intent intent = new Intent();
+            intent.setClass(getBaseContext(), MainActivity.class);
+            startActivity(intent);
+        } else {
+            onResume();
+        }
 
         GetFavorites f = new GetFavorites();
         f.execute();
@@ -69,18 +82,7 @@ public class Favorite extends BaseActivity {
             }
         });
 
-        /* Shared Preferences */
-        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
-        username = sharedPreferences.getString("username", "");
-        userId = sharedPreferences.getString("userID", "");
 
-        if (username.isEmpty()) {
-            Intent intent = new Intent();
-            intent.setClass(getBaseContext(), MainActivity.class);
-            startActivity(intent);
-        } else {
-            onResume();
-        }
 
     }
 
@@ -90,7 +92,7 @@ public class Favorite extends BaseActivity {
 
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
-        userId = sharedPreferences.getString("userID", "");
+        userId = sharedPreferences.getInt("userID", 0);
 
     }
 
@@ -109,9 +111,7 @@ public class Favorite extends BaseActivity {
             okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
 
             RequestBody requestbody = new FormEncodingBuilder()
-                    .add("userId", userId).build();
-            Log.i("Show user ID", userId);
-
+                    .add("userID", String.valueOf(userId)).build();
 
             //Connecting to Servlet
             request = new Request.Builder().url(url.ip + "GetFavoritesServlet").build();
