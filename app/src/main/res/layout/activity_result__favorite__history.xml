@@ -14,13 +14,13 @@
             android:id="@+id/Fh_ResultText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#d3d4c8"
-            android:fontFamily="sans-serif-light"
+            android:background="#c2534d"
             android:gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
             android:padding="8dp"
-            android:text="FAVORITE"
-            android:textColor="#3a3a3a"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textColor="#ebebeb"
+            android:text="FAVORITES" />
 
         <TextView
             android:id="@+id/tvfh_foodescription"
