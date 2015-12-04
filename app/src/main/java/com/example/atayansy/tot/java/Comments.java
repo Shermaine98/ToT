@@ -1,11 +1,12 @@
 package com.example.atayansy.tot.java;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by shermainesy on 10/8/15.
  */
-public class Comments {
+public class Comments implements Serializable {
 
     private String name;
     private String comments;

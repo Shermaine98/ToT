@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.atayansy.tot.URL.url;
+import com.example.atayansy.tot.java.Comments;
 import com.example.atayansy.tot.java.Food;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -141,6 +142,8 @@ public class Randomize extends AppCompatActivity {
                 foodTempResult.setRating(jo.getDouble("rating"));
                 foodTempResult.setImage(jo.getInt("picture"));
                 foodTempResult.setRestaurant(jo.getString("restaurantName"));
+                ArrayList<Comments> commentses = new ArrayList<>();
+                foodTempResult.setComments(commentses);
                 Log.i("this", foodTempResult.getFoodName());
             } catch (JSONException e) {
             }

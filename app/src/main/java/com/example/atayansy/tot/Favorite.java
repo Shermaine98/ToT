@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterFavorites;
 import com.example.atayansy.tot.URL.url;
+import com.example.atayansy.tot.java.Comments;
 import com.example.atayansy.tot.java.FavoriteObject;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -158,6 +159,8 @@ public class Favorite extends BaseActivity {
                                 obj.getInt("rating"), obj.getString("foodDescription"),
                                 obj.getInt("price"), obj.getInt("foodID")
                         );
+                        ArrayList<Comments> commentses = new ArrayList<>();
+                        food.setComments(commentses);
                         userFavorites.add(food);
                     }
 
