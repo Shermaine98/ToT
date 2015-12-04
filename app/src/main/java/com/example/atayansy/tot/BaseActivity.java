@@ -47,7 +47,6 @@ public class BaseActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.clear();
                     editor.commit();
-                    finish();
                     i.setClass(getBaseContext(), MainActivity.class);
                 }
 
