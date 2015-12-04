@@ -10,21 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="#a89179"
-        android:scaleType="centerCrop"
-        android:src="@drawable/woodbg"
-        android:tint="#63dbcfc2" />
+        android:background="#efefef"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/FilterText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#a8d4d3ca"
+        android:background="#fe74659c"
         android:fontFamily="sans-serif-light"
+        android:textColor="#ebebeb"
         android:gravity="center_horizontal"
         android:padding="8dp"
         android:text="FILTER"
-        android:textSize="30dp"
+        android:textSize="30sp"
         />
 
     <LinearLayout
@@ -32,7 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/FilterText"
-        android:layout_marginTop="8dp"
         android:orientation="vertical">
 
         <Switch
@@ -95,30 +93,32 @@
             android:textSize="15sp" />
 
         <LinearLayout
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#64010101"
+            android:layout_height="55dp"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:background="#cacac5">
+
             <ImageButton
                 android:id="@+id/fbutton_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:background="#005f5f5f"
+                android:src="@drawable/ic_home"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_home" />
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
 
             <ImageButton
                 android:id="@+id/fbutton_randomize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:background="#005f5f5f"
+                android:src="@drawable/dice"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_toys_black_24dp" />
+                android:adjustViewBounds="true"
+                android:background="#005f5f5f" />
 
 
         </LinearLayout>
