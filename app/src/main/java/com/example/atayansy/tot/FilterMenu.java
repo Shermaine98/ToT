@@ -36,6 +36,52 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     ImageButton buttonHome;
     ImageButton buttonRandomize;
 
+    private double latitude;
+    private double longitude;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_filter_menu);
+        //budget
+        Budget = (Switch) findViewById(R.id.ms_budget);
+        spinner_Bd = (Spinner) findViewById(R.id.sn_budget);
+        spinner_lt = (Spinner) findViewById(R.id.sn_location);
+        location = (Switch) findViewById(R.id.ms_nearMe);
+        tvAddress = (TextView) findViewById(R.id.tvAddress);
+        tvBudgetLocation = (TextView) findViewById(R.id.selectedBudgetLocation);
+        buttonHome = (ImageButton) findViewById(R.id.fbutton_home);
+        buttonRandomize = (ImageButton) findViewById(R.id.fbutton_randomize);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer> (this, android.R.layout.simple_dropdown_item_1line, budget);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.budget, android.R.layout.simple_dropdown_item_1line);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        // Apply the adapter to the spinner
+        spinner_Bd.setEnabled(false);
+        spinner_Bd.setAdapter(adapter);
+
+        Budget.setOnClickListener(switchSpinBd);
+
+
+        appLocationService = new AppLocationService(FilterMenu.this);
+        //location
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.distance, android.R.layout.simple_dropdown_item_1line);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        // Apply the adapter to the spinner
+        spinner_lt.setEnabled(false);
+
+        spinner_lt.setAdapter(adapter2);
+        location.setOnClickListener(switchSpinLt);
+
+        buttonHome.setOnClickListener(Navigation);
+        buttonRandomize.setOnClickListener(Navigation);
+
+    }
+
     // Redirect
     //location end
     Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener() {
@@ -48,8 +94,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             }
         }
     };
-    private double latitude;
-    private double longitude;
+
     View.OnClickListener Navigation = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -77,13 +122,16 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             finish();
         }
     };
+
     Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (spinner_lt.isEnabled())
+            if (spinner_lt.isEnabled()) {
                 spinner_lt.setEnabled(false);
-            else {
+                tvAddress.setVisibility(View.INVISIBLE);
+            } else {
                 spinner_lt.setEnabled(true);
+                tvAddress.setVisibility(View.VISIBLE);
                 location();
             }
         }
@@ -156,52 +204,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                     }
                 });
         alertDialog.show();
-    }
-
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter_menu);
-        //budget
-        Budget = (Switch) findViewById(R.id.ms_budget);
-        spinner_Bd = (Spinner) findViewById(R.id.sn_budget);
-        spinner_lt = (Spinner) findViewById(R.id.sn_location);
-        location = (Switch) findViewById(R.id.ms_nearMe);
-        tvAddress = (TextView) findViewById(R.id.tvAddress);
-        tvBudgetLocation = (TextView) findViewById(R.id.selectedBudgetLocation);
-        buttonHome = (ImageButton) findViewById(R.id.fbutton_home);
-        buttonRandomize = (ImageButton) findViewById(R.id.fbutton_randomize);
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer> (this, android.R.layout.simple_dropdown_item_1line, budget);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.budget, android.R.layout.simple_dropdown_item_1line);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        // Apply the adapter to the spinner
-        spinner_Bd.setEnabled(false);
-        spinner_Bd.setAdapter(adapter);
-
-        Budget.setOnClickListener(switchSpinBd);
-
-
-        appLocationService = new AppLocationService(FilterMenu.this);
-        //location
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.distance, android.R.layout.simple_dropdown_item_1line);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        // Apply the adapter to the spinner
-        spinner_lt.setEnabled(false);
-
-        spinner_lt.setAdapter(adapter2);
-        location.setOnClickListener(switchSpinLt);
-
-        buttonHome.setOnClickListener(Navigation);
-        buttonRandomize.setOnClickListener(Navigation);
-
     }
 
     @Override
