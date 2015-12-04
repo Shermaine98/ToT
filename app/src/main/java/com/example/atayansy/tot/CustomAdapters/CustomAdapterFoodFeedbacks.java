@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.atayansy.tot.R;
 import com.example.atayansy.tot.java.Comments;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
+import com.example.atayansy.tot.java.ImageResources;
 
 import java.util.ArrayList;
 
@@ -86,8 +87,6 @@ public class CustomAdapterFoodFeedbacks extends BaseExpandableListAdapter {
             convertView = inf.inflate(R.layout.foodfeed_list_view, null);
         }
 
-        String stringId = "p" + Integer.toString(FoodFeedFeedbacks.getIcon());
-
         ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_feedbackIcon);
         TextView comments = (TextView) convertView.findViewById(R.id.comments);
         TextView foodName = (TextView) convertView.findViewById(R.id.fv_foodName);
@@ -95,7 +94,9 @@ public class CustomAdapterFoodFeedbacks extends BaseExpandableListAdapter {
         TextView restaurantName = (TextView) convertView.findViewById(R.id.fv_restaurantName);
         TextView address = (TextView) convertView.findViewById(R.id.fv_restaurantAddress);
 
-        imageView.setImageResource(Context.getResources().getIdentifier(stringId, "drawable", Context.getPackageName()));
+        ImageResources ir = new ImageResources();
+
+        imageView.setImageResource(ir.getImage(FoodFeedFeedbacks.getIcon(),Context));
         foodName.setText(FoodFeedFeedbacks.getFoodName());
         price.setText(String.valueOf(FoodFeedFeedbacks.getPrice()));
         restaurantName.setText(FoodFeedFeedbacks.getRestaurant());
