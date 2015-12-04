@@ -27,6 +27,7 @@ public class CustomAdapterFoodFeedbacks extends BaseExpandableListAdapter {
     public CustomAdapterFoodFeedbacks(Context context, ArrayList<FoodFeedFeedbacks> objects) {
         this.Context = context;
         this.foodfeeds = objects;
+
     }
 
     @Override

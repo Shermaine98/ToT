@@ -38,7 +38,6 @@ public class Favorite extends BaseActivity {
     AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-
             Intent i = new Intent();
             i.setClass(getBaseContext(), Result_Favorite_History.class);
             i.putExtra("FaveClicked", userFavorites.get(position));
@@ -53,8 +52,6 @@ public class Favorite extends BaseActivity {
         super.setUp(R.layout.activity_favorite);
         gridview = (GridView) findViewById(R.id.gridview);
         userFavorites = new ArrayList<>();
-
-
          /* Shared Preferences */
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
