@@ -1,11 +1,12 @@
 package com.example.atayansy.tot.java;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by shermainesy on 10/8/15.
  */
-public class FoodFeedFeedbacks {
+public class FoodFeedFeedbacks implements Serializable {
     private String foodName;
     private String restaurant;
     private String definition;
@@ -100,11 +101,11 @@ public class FoodFeedFeedbacks {
         this.image = image;
     }
 
-    public double getLatitue() {
+    public double getLatitude() {
         return latitue;
     }
 
-    public void setLatitue(double latitue) {
+    public void setLatitude(double latitue) {
         this.latitue = latitue;
     }
 

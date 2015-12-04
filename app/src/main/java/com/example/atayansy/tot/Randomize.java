@@ -2,6 +2,7 @@ package com.example.atayansy.tot;
 
 import android.content.Intent;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,20 +11,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.Food;
+import com.example.atayansy.tot.java.FoodFeedFeedbacks;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Randomize extends AppCompatActivity {
-    ArrayList<Food> FoodList;
+    ArrayList<FoodFeedFeedbacks> FoodList;
     ImageView iv_randomize;
     TextView tv_randomize;
-    ArrayList<Food> FilteredResult;
+    ArrayList<FoodFeedFeedbacks> FilteredResult;
     int result;
     boolean x = true;
     Random random = new Random();
+
+    FoodFeedFeedbacks foodTempResult = new FoodFeedFeedbacks();
+
     private Handler handler = new Handler();
     private double Distance;
     private double CurrLatitude;
@@ -43,10 +60,6 @@ public class Randomize extends AppCompatActivity {
         //Get Chosen
         location_spinner = getIntent().getExtras().getBoolean("location_spinner");
         budget_spinner = getIntent().getExtras().getBoolean("Budget_spinner");
-        Budget = getIntent().getExtras().getInt("Budget");
-        Distance = getIntent().getExtras().getFloat("Distance");
-        CurrLatitude = getIntent().getExtras().getDouble("Latitude");
-        CurrLongitude = getIntent().getExtras().getDouble("Longitude");
 
         //printing Console
         //TODO: delete
@@ -64,11 +77,13 @@ public class Randomize extends AppCompatActivity {
 
         FilteredResult = new ArrayList<>();
         if (location_spinner == false && budget_spinner == false) {
-            randomize();
+            none none = new none();
+            none.execute();
         }
         //sort/filter budget then randomize
         else if (location_spinner == false && budget_spinner == true) {
-            filterBudget();
+            randomizeFilterBudget randomizeFilterBudget = new randomizeFilterBudget();
+            randomizeFilterBudget.execute();
         }
         //sort/filter location then randomize
         else if (location_spinner == true && budget_spinner == false) {
@@ -89,7 +104,7 @@ public class Randomize extends AppCompatActivity {
 
         for (int i = 0; i < FoodList.size(); i++) {
             Location otherLocation = new Location("Other Location");
-            otherLocation.setLatitude(FoodList.get(i).getLatitue());
+            otherLocation.setLatitude(FoodList.get(i).getLatitude());
             otherLocation.setLongitude(FoodList.get(i).getLongtitude());
             float distanceResult = currentLocation.distanceTo(otherLocation);
             if (Distance <= distanceResult) {
@@ -101,34 +116,47 @@ public class Randomize extends AppCompatActivity {
         }
         if (x) {
             result = random.nextInt(FilteredResult.size());
-            intent(FilteredResult);
+            //   intent(FilteredResult.get();
         } else {
             intent();
         }
     }
 
-    //sort/filter budget then randomize
-    public void filterBudget() {
-        for (int i = 0; i < FoodList.size(); i++) {
-            if (FoodList.get(i).getPrice() <= Budget) {
-                FilteredResult.add(FoodList.get(i));
-                x = true;
-            } else {
-                x = false;
+    //Filter by location
+
+    //Result intent
+    public void Result(String s) {
+        //check if result is null
+        if (!s.equalsIgnoreCase("null")) {
+            try {
+                //getting result body and coverting to JSON
+
+                JSONObject jo = new JSONObject(s);
+
+                //Setting Json variable
+                foodTempResult.setFoodID(jo.getInt("foodID"));
+                foodTempResult.setFoodName(jo.getString("foodName"));
+                foodTempResult.setDefinition(jo.getString("foodDescription"));
+                foodTempResult.setPrice(jo.getDouble("price"));
+                foodTempResult.setRating(jo.getDouble("rating"));
+                foodTempResult.setImage(jo.getInt("picture"));
+                foodTempResult.setRestaurant(jo.getString("restaurantName"));
+                Log.i("this", foodTempResult.getFoodName());
+            } catch (JSONException e) {
             }
-        }
-        if (x) {
-            result = random.nextInt(FilteredResult.size());
-            intent(FilteredResult);
-        } else {
-            intent();
-        }
-    }
+            // TODO: Result
+            Intent i = new Intent();
+            i.putExtra("Result", foodTempResult);
+            i.setClass(getBaseContext(), ResultActivity.class);
+            startActivity(i);
+            finish();
 
-    public void randomize() {
-        result = random.nextInt(FoodList.size());
-        intent(FoodList);
+        } else {
+            Toast.makeText(getBaseContext(), "Invalid Username/Password!", Toast.LENGTH_LONG).show();
+        }
+
     }
+    //end sort
 
     public void intent(ArrayList<Food> FoodResult) {
         Intent i = new Intent();
@@ -137,6 +165,7 @@ public class Randomize extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+    // end none
 
     public void intent() {
         Intent i = new Intent();
@@ -145,6 +174,7 @@ public class Randomize extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+    // end filter by budget
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -166,5 +196,148 @@ public class Randomize extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //Filter by Location
+    private class filterByLocation extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Distance = getIntent().getExtras().getFloat("Distance");
+            CurrLatitude = getIntent().getExtras().getDouble("Latitude");
+            CurrLongitude = getIntent().getExtras().getDouble("Longitude");
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            OkHttpClient okHttpClient = new OkHttpClient();
+
+            // Stop Activity?
+            okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
+
+            //Setting Parameters
+
+            RequestBody requestbody = new FormEncodingBuilder()
+                    .add("filterBy", "Both").build();
+
+            Request request = null;
+            Response response = null;
+
+            //Connecting to Servlet
+            request = new Request.Builder().url(url.ip + "RandomizeServlet").post(requestbody).build();
+            String result = "";
+            try {
+                //Run
+                response = okHttpClient.newCall(request).execute();
+                //get the page body
+                result = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.i("ENTER", "POSTEXCUTE");
+
+        }
+    }
+
+    // Filter NONE then randomize
+    private class none extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            OkHttpClient okHttpClient = new OkHttpClient();
+
+            // Stop Activity?
+            okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
+
+            //Setting Parameters
+
+            RequestBody requestbody = new FormEncodingBuilder()
+                    .add("filterBy", "none").build();
+
+            Request request = null;
+            Response response = null;
+
+            //Connecting to Servlet
+            request = new Request.Builder().url(url.ip + "RandomizeServlet").post(requestbody).build();
+            String result = "";
+            try {
+                //Run
+                response = okHttpClient.newCall(request).execute();
+                //get the page body
+                result = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.i("ENTER", "POSTEXCUTE");
+            Result(s);
+
+        }
+    }
+
+    // Filter budget then randomize
+    private class randomizeFilterBudget extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Budget = getIntent().getExtras().getInt("Budget");
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            OkHttpClient okHttpClient = new OkHttpClient();
+
+            // Stop Activity?
+            okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
+
+            //Setting Parameters
+
+            RequestBody requestbody = new FormEncodingBuilder()
+                    .add("filterBy", "price").build();
+
+            Request request = null;
+            Response response = null;
+
+            //Connecting to Servlet
+            request = new Request.Builder().url(url.ip + "RandomizeServlet").post(requestbody).build();
+            String result = "";
+            try {
+                //Run
+                response = okHttpClient.newCall(request).execute();
+                //get the page body
+                result = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.i("ENTER", "POSTEXCUTE");
+            Result(s);
+
+        }
     }
 }
