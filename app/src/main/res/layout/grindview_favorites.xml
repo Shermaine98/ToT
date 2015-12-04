@@ -19,7 +19,7 @@
         android:fontFamily="sans-serif-bold"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/gf_price"
@@ -28,6 +28,6 @@
         android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
 </LinearLayout>
