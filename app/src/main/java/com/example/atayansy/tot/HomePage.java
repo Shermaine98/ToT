@@ -22,6 +22,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,7 +37,8 @@ public class HomePage extends BaseActivity {
     TextView welcome;
     SharedPreferences sharedPreferences;
     String username;
-    private ArrayList<Food> food;
+    ArrayList<Food> food;
+    JSONArray FoodArray = null;
     private ArrayList<Comments> commentses;
     private ExpandableListView ExpandList;
 
@@ -171,30 +173,21 @@ public class HomePage extends BaseActivity {
             //check if result is null
             if (!s.equalsIgnoreCase("null")) {
                 try {
-
-                    //TODO: IS THIS CORRECT? JSON ARRAY....
-                    //getting result body and converting to JSON
-                    Log.i("ENTER", "AFTER TRY");
-                    Log.i("ENTER", s);
-                    JSONObject jo = new JSONObject(s);
-
-
-                    if (jo != null) {
-                        for (int i = 0; i < jo.length(); i++) {
-                            //    food.add(jo.getJSONObject(jo.getString()))
-                            // listdata.add(jArray.get(i).toString());
-                        }
+                    Log.i("results", "s");
+                    JSONObject jsonObj = new JSONObject(s);
+                    // Getting JSON Array node
+                    FoodArray = jsonObj.getJSONArray("Food");
+                    for (int i = 0; i < FoodArray.length(); i++) {
+                        JSONObject temp = FoodArray.getJSONObject(i);
+                        Log.i("lenght", String.valueOf(FoodArray.length()));
+                        Food Foodtemp = new Food();
+                        //   temp.setFoodID(Integer.parseInt(arr.getJSONObject(i).getString("foodName")));
+                        Foodtemp.setFoodName(temp.getString("foodName"));
+                        Foodtemp.setDefinition(temp.getString("foodDescription"));
+                        food.add(Foodtemp);
+                        Log.i("trial", food.get(i).getFoodName());
                     }
 
-
-                    //Setting Json variable
-                    jo.getJSONArray("foodID");
-                    jo.getJSONArray("foodName");
-                    jo.getJSONArray("foodDescription");
-                    jo.getJSONArray("picture");
-                    jo.getJSONArray("price");
-                    jo.getJSONArray("rating");
-                    jo.getJSONArray("comments");
 
                 } catch (JSONException e) {
                 }
