@@ -37,10 +37,9 @@ public class Randomize extends AppCompatActivity {
     ArrayList<FoodFeedFeedbacks> FilteredResult;
     int result;
     boolean x = true;
-    Random random = new Random();
-
-    FoodFeedFeedbacks foodTempResult = new FoodFeedFeedbacks();
-
+    Random random;
+    none none;
+    FoodFeedFeedbacks foodTempResult;
     private Handler handler = new Handler();
     private double Distance;
     private double CurrLatitude;
@@ -53,6 +52,7 @@ public class Randomize extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_randomize);
+        random = new Random();
 
         iv_randomize = (ImageView) findViewById(R.id.ivRandomize);
         tv_randomize = (TextView) findViewById(R.id.tvrandomize);
@@ -77,7 +77,7 @@ public class Randomize extends AppCompatActivity {
 
         FilteredResult = new ArrayList<>();
         if (location_spinner == false && budget_spinner == false) {
-            none none = new none();
+            none = new none();
             none.execute();
         }
         //sort/filter budget then randomize
@@ -128,11 +128,11 @@ public class Randomize extends AppCompatActivity {
     public void Result(String s) {
         //check if result is null
         if (!s.equalsIgnoreCase("null")) {
+            foodTempResult = new FoodFeedFeedbacks();
             try {
                 //getting result body and coverting to JSON
 
                 JSONObject jo = new JSONObject(s);
-
                 //Setting Json variable
                 foodTempResult.setFoodID(jo.getInt("foodID"));
                 foodTempResult.setFoodName(jo.getString("foodName"));
@@ -144,13 +144,11 @@ public class Randomize extends AppCompatActivity {
                 Log.i("this", foodTempResult.getFoodName());
             } catch (JSONException e) {
             }
-            // TODO: Result
             Intent i = new Intent();
             i.putExtra("Result", foodTempResult);
             i.setClass(getBaseContext(), ResultActivity.class);
             startActivity(i);
             finish();
-
         } else {
             Toast.makeText(getBaseContext(), "Invalid Username/Password!", Toast.LENGTH_LONG).show();
         }

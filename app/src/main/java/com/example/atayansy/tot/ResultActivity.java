@@ -62,7 +62,7 @@ public class ResultActivity extends AppCompatActivity {
             resultFoodName.setText(result.getFoodName());
             resultDescription.setText(result.getDefinition());
             ImageResources imageResources = new ImageResources();
-            imageView.setImageResource(imageResources.getImage(result.getIcon(), getBaseContext()));
+            imageView.setImageResource(imageResources.getImage(result.getImage(), getBaseContext()));
         }
     }
 
