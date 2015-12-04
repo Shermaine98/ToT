@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.atayansy.tot.R;
 import com.example.atayansy.tot.java.FavoriteObject;
+import com.example.atayansy.tot.java.ImageResources;
 
 import java.util.ArrayList;
 
@@ -55,9 +56,10 @@ public class CustomAdapterFavorites extends BaseAdapter {
         holder.img = (ImageView) rowView.findViewById(R.id.gf_image);
         holder.foodName = (TextView) rowView.findViewById(R.id.gf_foodName);
         holder.foodPrice = (TextView) rowView.findViewById(R.id.gf_price);
-        String stringId = "p" + Integer.toString(favoriteObjects.get(position).getfPictureIcon());
+        ImageResources ir = new ImageResources();
 
-        holder.img.setImageResource(context.getResources().getIdentifier(stringId, "drawable", context.getPackageName()));
+
+        holder.img.setImageResource(ir.getImage(favoriteObjects.get(position).getfPictureIcon(), context));
         holder.foodName.setText(favoriteObjects.get(position).getfName());
         holder.foodPrice.setText(String.valueOf(favoriteObjects.get(position).getPrice()));
 
