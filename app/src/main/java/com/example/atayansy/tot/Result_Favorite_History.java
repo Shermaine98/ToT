@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.atayansy.tot.java.FavoriteObject;
 import com.example.atayansy.tot.java.Food;
+import com.example.atayansy.tot.java.ImageResources;
 
 public class Result_Favorite_History extends BaseActivity {
     TextView name;
@@ -19,17 +20,19 @@ public class Result_Favorite_History extends BaseActivity {
         super.onCreate(savedInstanceState);
         super.setUp(R.layout.activity_result__favorite__history);
 
+        ImageResources ir = new ImageResources();
         name = (TextView) findViewById(R.id.Fh_ResultText);
         desc = (TextView) findViewById(R.id.tvfh_foodescription);
         price = (TextView) findViewById(R.id.tvFh_price);
+        image = (ImageView) findViewById(R.id.tvFh_foodImage);
 
         clicked = (FavoriteObject) getIntent().getSerializableExtra("FaveClicked");
 
         name.setText(clicked.getfName());
         desc.setText(clicked.getDescription());
-        price.setText("P"+ clicked.getPrice() +".00");
-//        image.setImageDrawable();
+        price.setText("P" + clicked.getPrice() + ".00");
 
+        image.setImageResource(ir.getImage(clicked.getfPictureIcon(), getBaseContext()));
     }
 
 }

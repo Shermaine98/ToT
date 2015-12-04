@@ -8,16 +8,17 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.example.atayansy.tot.R;
+import com.example.atayansy.tot.java.ImageResources;
 
 /**
  * Created by Dindin on 12/4/2015.
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    private Integer[] mThumbIds;
+    private int[] mThumbIds;
 
     // Constructor
-    public ImageAdapter(Context c, Integer[] resources) {
+    public ImageAdapter(Context c, int[] resources) {
         mContext = c;
         mThumbIds = resources;
     }
@@ -46,13 +47,9 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(Images[mThumbIds[position]]);
+        ImageResources ir = new ImageResources();
+        imageView.setImageResource(ir.getImage(mThumbIds[position], mContext));
         return imageView;
     }
 
-    // Keep all Images in array
-    public Integer[] Images = {
-            R.drawable.p0, R.drawable.p1, R.drawable.p2, R.drawable.p3,
-            R.drawable.p4, R.drawable.p5
-    };
 }

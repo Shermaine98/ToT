@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 public class Favorite extends BaseActivity {
     private CustomAdapterFavorite customAdapterFavorite;
     private SwipeMenuListView mListView;
-    Integer[] imageResources;
+    int[] imageResources;
     ArrayList<FavoriteObject> userFavorites;
     SharedPreferences sharedPreferences;
     int userId;
@@ -167,7 +167,7 @@ public class Favorite extends BaseActivity {
                     }
 
 
-                    imageResources = new Integer[userFavorites.size()];
+                    imageResources = new int[userFavorites.size()];
                     for (int i = 0; i < imageResources.length; i++) {
                         imageResources[i] = userFavorites.get(i).getfPictureIcon();
                         Log.i("Img", String.valueOf(userFavorites.get(i).getfPictureIcon()));
