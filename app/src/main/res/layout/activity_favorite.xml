@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="${relativePackage}.${activityClass}">
 
     <TextView
@@ -10,15 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
         android:padding="8dp"
         android:textSize="30sp"
         android:textColor="#ebebeb"
-        android:background="#5aa27e"
+        android:background="#577da2"
         android:text="FAVORITES" />
 
     <GridView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/gridview"
+        android:paddingTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:layout_below="@id/historyText"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
