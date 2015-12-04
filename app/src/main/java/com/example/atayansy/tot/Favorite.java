@@ -114,7 +114,7 @@ public class Favorite extends BaseActivity {
                     .add("userID", String.valueOf(userId)).build();
 
             //Connecting to Servlet
-            request = new Request.Builder().url(url.ip + "GetFavoritesServlet").build();
+            request = new Request.Builder().url(url.ip + "GetFavoritesServlet").post(requestbody).build();
             String result = "";
 
             try {
