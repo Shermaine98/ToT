@@ -44,6 +44,7 @@ public class Favorite extends BaseActivity {
             Intent i = new Intent();
             i.setClass(getBaseContext(), Result_Favorite_History.class);
             i.putExtra("FaveClicked", userFavorites.get(position));
+            i.putExtra("userID", userId);
             startActivity(i);
         }
     };
@@ -86,16 +87,6 @@ public class Favorite extends BaseActivity {
 
     }
 
-    private void delete(FavoriteObject item) {
-        // delete app
-        try {
-            Intent intent = new Intent(Intent.ACTION_DELETE);
-            //   intent.setData(Uri.fromParts("package", item.getfName(), null));
-            startActivity(intent);
-        } catch (Exception e) {
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -118,7 +109,6 @@ public class Favorite extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO: Database
     private class GetFavorites extends AsyncTask<String, Void, String> {
 
         //Connecting to Servlet
@@ -171,7 +161,7 @@ public class Favorite extends BaseActivity {
                         food = new FavoriteObject(
                                 obj.getInt("picture"), obj.getString("foodName"),
                                 obj.getInt("rating"), obj.getString("foodDescription"),
-                                obj.getInt("price")
+                                obj.getInt("price"), obj.getInt("foodID")
                         );
                         userFavorites.add(food);
                     }

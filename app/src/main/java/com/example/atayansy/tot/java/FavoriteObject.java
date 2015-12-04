@@ -12,13 +12,15 @@ public class FavoriteObject implements Serializable {
     private float fRatingStar;
     private String description;
     private int price;
+    private int foodID;
 
-    public FavoriteObject(int fPictureIcon, String fName, float fRatingStar, String description, int price) {
+    public FavoriteObject(int fPictureIcon, String fName, float fRatingStar, String description, int price, int foodID) {
         this.fPictureIcon = fPictureIcon;
         this.fName = fName;
         this.fRatingStar = fRatingStar;
         this.description = description;
         this.price = price;
+        this.foodID = foodID;
     }
 
     public int getfPictureIcon() {
@@ -59,5 +61,13 @@ public class FavoriteObject implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getFoodID() {
+        return foodID;
+    }
+
+    public void setFoodID(int foodID) {
+        this.foodID = foodID;
     }
 }
