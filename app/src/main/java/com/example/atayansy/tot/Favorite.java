@@ -3,35 +3,28 @@ package com.example.atayansy.tot;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterFavorite;
+import com.example.atayansy.tot.CustomAdapters.ImageAdapter;
 import com.example.atayansy.tot.java.FavoriteObject;
 
 import java.util.ArrayList;
 
 public class Favorite extends BaseActivity {
     ArrayList<FavoriteObject> favorites1;
-    AdapterView.OnItemClickListener showMoreResult = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent Intent = new Intent();
-            Intent.setClass(getBaseContext(), Result_Favorite_History.class);
-            Intent.putExtra("Class", "Favorite");
-            String name = favorites1.get(position).getfName();
-            Intent.putExtra("FoodName", name);
-            startActivity(Intent);
-        }
-    };
     private CustomAdapterFavorite customAdapterFavorite;
     private SwipeMenuListView mListView;
 
@@ -40,87 +33,18 @@ public class Favorite extends BaseActivity {
         super.onCreate(savedInstanceState);
         super.setUp(R.layout.activity_favorite);
 
-        //Swiper
-        mListView = (SwipeMenuListView) findViewById(R.id.listView_favorite);
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(getBaseContext()));
 
-        //TODO: delete this Add items
-        favorites1 = new ArrayList<>();
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Food Salad", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Chicken", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Hotdong", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "BBQ", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Food Salad", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Chicken", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Hotdong", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "BBQ", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Food Salad", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Chicken", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "Hotdong", R.id.rb_star));
-        favorites1.add(new FavoriteObject(R.mipmap.ic_launcher, "BBQ", R.id.rb_star));
-
-        //Custom adapter
-        customAdapterFavorite = new CustomAdapterFavorite(getBaseContext(), R.layout.activity_favorite, favorites1);
-        mListView.setAdapter(customAdapterFavorite);
-        // step 1. create a MenuCreator
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
-            @Override
-            public void create(SwipeMenu menu) {
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-                        0x3F, 0x25)));
-                // set item width
-                deleteItem.setWidth(dp2px(90));
-                // set a icon
-                deleteItem.setIcon(R.drawable.ic_delete);
-                // add to menu
-                menu.addMenuItem(deleteItem);
-            }
-        };
-        // set creator
-        mListView.setMenuCreator(creator);
-
-        // step 2. listener item click event
-        mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                FavoriteObject item = favorites1.get(position);
-                // delete
-//					delete(item);
-                favorites1.remove(position);
-                customAdapterFavorite.notifyDataSetChanged();
-                return false;
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Toast.makeText(Favorite.this, "" + position,
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
-        // set SwipeListener
-        mListView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
 
-            @Override
-            public void onSwipeStart(int position) {
-                // swipe start
-            }
-
-            @Override
-            public void onSwipeEnd(int position) {
-                // swipe end
-            }
-        });
-
-        // set MenuStateChangeListener
-        mListView.setOnMenuStateChangeListener(new SwipeMenuListView.OnMenuStateChangeListener() {
-            @Override
-            public void onMenuOpen(int position) {
-            }
-
-            @Override
-            public void onMenuClose(int position) {
-            }
-        });
-
-        mListView.setOnItemClickListener(showMoreResult);
     }
 
     // TODO: Database
@@ -134,10 +58,6 @@ public class Favorite extends BaseActivity {
         }
     }
 
-    private int dp2px(int dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-                getResources().getDisplayMetrics());
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
