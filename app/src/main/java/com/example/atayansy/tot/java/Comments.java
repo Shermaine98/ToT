@@ -9,6 +9,7 @@ public class Comments {
 
     private String name;
     private String comments;
+    private int FoodID;
     private ArrayList<Comments> commentses;
 
     public Comments(String name, String comments, ArrayList<Comments> commentses) {
@@ -42,5 +43,13 @@ public class Comments {
 
     public void setCommentses(ArrayList<Comments> commentses) {
         this.commentses = commentses;
+    }
+
+    public int getFoodID() {
+        return FoodID;
+    }
+
+    public void setFoodID(int foodID) {
+        FoodID = foodID;
     }
 }

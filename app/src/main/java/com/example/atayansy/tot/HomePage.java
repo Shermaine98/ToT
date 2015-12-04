@@ -37,8 +37,10 @@ public class HomePage extends BaseActivity {
     TextView welcome;
     SharedPreferences sharedPreferences;
     String username;
-    ArrayList<Food> food;
+
     JSONArray FoodArray = null;
+    JSONArray CommentsArray = null;
+    ArrayList<Food> food;
     private ArrayList<Comments> commentses;
     private ExpandableListView ExpandList;
 
@@ -169,28 +171,50 @@ public class HomePage extends BaseActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("ENTER", "POSTEXCUTE");
             //check if result is null
             if (!s.equalsIgnoreCase("null")) {
+                //Food
                 try {
-                    Log.i("results", "s");
+                    Food Foodtemp;
+                    food = new ArrayList<>();
                     JSONObject jsonObj = new JSONObject(s);
                     // Getting JSON Array node
                     FoodArray = jsonObj.getJSONArray("Food");
                     for (int i = 0; i < FoodArray.length(); i++) {
                         JSONObject temp = FoodArray.getJSONObject(i);
-                        Log.i("lenght", String.valueOf(FoodArray.length()));
-                        Food Foodtemp = new Food();
-                        //   temp.setFoodID(Integer.parseInt(arr.getJSONObject(i).getString("foodName")));
-                        Foodtemp.setFoodName(temp.getString("foodName"));
+                        Foodtemp = new Food();
+                        Foodtemp.setFoodID(Integer.parseInt(temp.getString("foodID")));
                         Foodtemp.setDefinition(temp.getString("foodDescription"));
+                        Foodtemp.setFoodName(temp.getString("foodName"));
+                        Foodtemp.setPrice(Double.parseDouble(temp.getString("price")));
+                        Foodtemp.setRating(Double.parseDouble(temp.getString("rating")));
+                        Foodtemp.setFoodName(temp.getString("foodName"));
                         food.add(Foodtemp);
-                        Log.i("trial", food.get(i).getFoodName());
                     }
+                } catch (JSONException e) {
+                }
+                //Getting Comments
+                try {
+                    Comments Comments;
+                    JSONObject jsonObj = new JSONObject(s);
+                    commentses = new ArrayList<>();
+                    CommentsArray = jsonObj.getJSONArray("Comments");
+                    for (int i = 0; i < CommentsArray.length(); i++) {
+                        JSONObject temp = CommentsArray.getJSONObject(i);
+                        Comments = new Comments();
+                        Comments.setName(temp.getString("IDUser"));
+                        Comments.setFoodID(Integer.parseInt(temp.getString("foodID")));
+                        Comments.setComments(temp.getString("comments"));
+                        commentses.add(Comments);
 
+                    }
 
                 } catch (JSONException e) {
                 }
+
+
+
+
             } else {
                 Toast.makeText(getBaseContext(), "Error!", Toast.LENGTH_LONG).show();
             }
