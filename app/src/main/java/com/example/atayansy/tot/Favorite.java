@@ -59,7 +59,7 @@ public class Favorite extends BaseActivity {
          /* Shared Preferences */
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
-        userId = sharedPreferences.getInt("userID", 0);
+        userId = sharedPreferences.getInt("id", 0);
 
         if (username.isEmpty()) {
             Intent intent = new Intent();
@@ -80,10 +80,9 @@ public class Favorite extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
-        userId = sharedPreferences.getInt("userID", 0);
+        userId = sharedPreferences.getInt("id", 0);
 
     }
 
