@@ -36,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -74,16 +75,24 @@ public class Favorite extends BaseActivity {
         f.execute();
 
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(Favorite.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        gridview.setOnItemClickListener(showItem);
 
 
     }
+
+    AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            Toast.makeText(Favorite.this, "" + position,
+                    Toast.LENGTH_SHORT).show();
+
+            Intent i = new Intent();
+            i.setClass(getBaseContext(), Result_Favorite_History.class);
+            i.putExtra("FaveClicked", userFavorites.get(position));
+            startActivity(i);
+        }
+    };
+
 
     @Override
     protected void onResume() {

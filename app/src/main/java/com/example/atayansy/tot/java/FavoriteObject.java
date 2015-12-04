@@ -1,9 +1,11 @@
 package com.example.atayansy.tot.java;
 
+import java.io.Serializable;
+
 /**
  * Created by shermainesy on 10/10/15.
  */
-public class FavoriteObject {
+public class FavoriteObject implements Serializable {
 
     private int fPictureIcon;
     private String fName;
