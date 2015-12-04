@@ -30,7 +30,7 @@
         android:columnWidth="100dp"
         android:stretchMode="columnWidth"
         android:gravity="center"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="57dp"
         />
 
 
