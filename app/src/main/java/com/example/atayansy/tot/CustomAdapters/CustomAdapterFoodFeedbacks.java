@@ -2,6 +2,7 @@ package com.example.atayansy.tot.CustomAdapters;
 
 import android.app.Service;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,10 +48,14 @@ public class CustomAdapterFoodFeedbacks extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.comment_list_view, null);
         }
 
+        if (childPosition % 2 != 1) {
+            convertView.setBackgroundColor(Color.parseColor("#D5D5D5"));
+        }
+
         TextView name = (TextView) convertView.findViewById(R.id.tv_nameUser);
         TextView setComments = (TextView) convertView.findViewById(R.id.tv_userComments);
 
-        name.setText(comments.getName());
+        name.setText("@"+comments.getName());
         setComments.setText(comments.getComments());
         return convertView;
 
