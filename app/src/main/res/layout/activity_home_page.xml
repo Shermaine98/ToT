@@ -1,19 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_above="@id/THENAV"
     android:orientation="vertical"
     tools:context="com.example.atayansy.tot.HomePage">
 
-    <TextView
-        android:id="@+id/welcomeText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:padding="8dp"
-        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/topFive"
@@ -21,18 +13,38 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/welcomeText"
-        android:fontFamily="sans-serif-thin"
+        android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
-        android:paddingBottom="10dp"
-        android:text="Top Food of the Week!"
-        android:textSize="20dp" />
+        android:text="TOP FOOD"
+        android:padding="8dp"
+        android:textSize="30sp"
+        android:background="#d3d4c8"
+        android:textColor="#3a3a3a" />
 
-    <ExpandableListView
-        android:id="@+id/evFoodFeed"
+    <TextView
+        android:id="@+id/welcomeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/topFive"
-        android:layout_marginBottom="45dp" />
+        android:gravity="center_horizontal"
+        android:fontFamily="sans-serif-light"
+        android:background="#d3d4c8"
+        android:textColor="#3a3a3a"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcomeText"
+        android:id="@+id/parent"
+        android:layout_marginBottom="55dp" >
+
+        <ExpandableListView
+            android:id="@+id/evFoodFeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

@@ -10,10 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="#a89179"
-        android:scaleType="centerCrop"
-        android:src="@drawable/woodbg"
-        android:tint="#bbefe8e8" />
+        android:background="#efefef"
+        android:scaleType="centerCrop" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -24,17 +22,17 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="55dp"
             android:orientation="horizontal"
             android:padding="8dp"
-            android:background="#a39b9791">
+            android:background="#cacac5">
 
             <ImageButton
                 android:id="@+id/button_Home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_home_black_24dp"
+                android:src="@drawable/ic_home"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:background="#005f5f5f" />
@@ -44,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_grade_black_24dp"
+                android:src="@drawable/ic_action"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:background="#005f5f5f" />
@@ -54,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_toys_black_24dp"
+                android:src="@drawable/dice"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:background="#005f5f5f" />
@@ -64,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_history_black_24dp"
+                android:src="@drawable/ic_history"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:background="#005f5f5f" />
@@ -74,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_settings_power_black_24dp"
+                android:src="@drawable/ic_logout"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:background="#005f5f5f" />

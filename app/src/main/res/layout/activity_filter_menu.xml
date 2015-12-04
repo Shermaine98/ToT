@@ -94,7 +94,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="60dp"
             android:background="#64010101"
             android:orientation="horizontal"
             android:padding="8dp">
@@ -107,7 +107,7 @@
                 android:adjustViewBounds="true"
                 android:background="#005f5f5f"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_home_black_24dp" />
+                android:src="@drawable/ic_home" />
 
             <ImageButton
                 android:id="@+id/button_randomize"
@@ -117,7 +117,7 @@
                 android:adjustViewBounds="true"
                 android:background="#005f5f5f"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_grade_black_24dp" />
+                android:src="@drawable/ic_toys_black_24dp" />
 
 
         </LinearLayout>
