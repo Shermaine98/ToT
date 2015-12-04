@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,6 +33,10 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     TextView tvBudgetLocation;
     String locationAddress;
     AppLocationService appLocationService;
+    ImageButton buttonHome;
+    ImageButton buttonRandomize;
+
+    // Redirect
     //location end
     Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener() {
         @Override
@@ -40,14 +45,38 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 spinner_Bd.setEnabled(false);
             } else {
                 spinner_Bd.setEnabled(true);
-
-
             }
         }
     };
     private double latitude;
     private double longitude;
+    View.OnClickListener Navigation = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent();
+            if (v.equals(buttonHome)) {
+                i.setClass(getBaseContext(), HomePage.class);
+            } else if (v.equals(buttonRandomize)) {
+                //put Extra Filter Options
+                int budget = Integer.parseInt(spinner_Bd.getSelectedItem().toString());
+                String distancevalue = spinner_lt.getSelectedItem().toString();
+                distancevalue = distancevalue.replaceAll("meters", "");
+                float distance = Float.parseFloat(distancevalue);
+                //return spinner
+                i.putExtra("location_spinner", spinner_lt.isEnabled());
+                i.putExtra("Budget_spinner", spinner_Bd.isEnabled());
+                //
+                i.putExtra("Budget", budget);
+                i.putExtra("Distance", distance);
+                i.putExtra("Latitude", latitude);
+                i.putExtra("Longitude", longitude);
+                i.setClass(getBaseContext(), Randomize.class);
 
+            }
+            startActivity(i);
+            finish();
+        }
+    };
     Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -63,7 +92,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
 
     public void location() {
 
-
         // two types, since GPS sometimes wont work or took long time to load
         Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
 
@@ -72,24 +100,16 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         if (gpsLocation != null) {
             latitude = gpsLocation.getLatitude();
             longitude = gpsLocation.getLongitude();
-            //   String result = "Latitude:" + gpsLocation.getLatitude() + "Longitude:" + gpsLocation.getLongitude();
-            // tvAddress.setText(result);
+
             LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
         } else if (networkLocation != null) {
             latitude = networkLocation.getLatitude();
             longitude = networkLocation.getLongitude();
-            //  String result = "Latitude:" + networkLocation.getLatitude() + "Longitude:" + networkLocation.getLongitude();
-            //   tvAddress.setText(result);
+
             LocationAddress.getAddressFromLocation(latitude, longitude, getApplicationContext(), new GeocoderHandler());
         } else {
             showSettingsAlert();
         }
-
-        //address
-        //you can hard-code the lat & long if you have issues with getting it
-        //remove the below if-condition and use the following couple of lines
-        //double latitude = 37.422005;
-        //double longitude = -122.084095
 
     }
 
@@ -121,7 +141,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                 FilterMenu.this);
         alertDialog.setTitle("CURRENT LOCATION");
-        alertDialog.setMessage(locationAddress + "/n IS THIS YOUR CURRENT LOCATION");
+        alertDialog.setMessage(locationAddress + "\n IS THIS YOUR CURRENT LOCATION? ");
         AlertDialog.Builder settings = alertDialog.setPositiveButton("Refresh",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -131,6 +151,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         alertDialog.setNegativeButton("YES",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        tvAddress.setText("Your Current Location: \n" + locationAddress);
                         dialog.cancel();
                     }
                 });
@@ -151,7 +172,8 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         location = (Switch) findViewById(R.id.ms_nearMe);
         tvAddress = (TextView) findViewById(R.id.tvAddress);
         tvBudgetLocation = (TextView) findViewById(R.id.selectedBudgetLocation);
-
+        buttonHome = (ImageButton) findViewById(R.id.fbutton_home);
+        buttonRandomize = (ImageButton) findViewById(R.id.fbutton_randomize);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer> (this, android.R.layout.simple_dropdown_item_1line, budget);
@@ -177,6 +199,8 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_lt.setAdapter(adapter2);
         location.setOnClickListener(switchSpinLt);
 
+        buttonHome.setOnClickListener(Navigation);
+        buttonRandomize.setOnClickListener(Navigation);
 
     }
 
@@ -225,8 +249,9 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                     locationAddress = null;
             }
             PrintLocation();
-            tvAddress.setText(locationAddress);
         }
     }
+
+
 }
 

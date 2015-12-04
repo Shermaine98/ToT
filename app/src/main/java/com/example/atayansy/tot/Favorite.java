@@ -40,7 +40,6 @@ public class Favorite extends BaseActivity {
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             Toast.makeText(Favorite.this, "" + position,
                     Toast.LENGTH_SHORT).show();
-
             Intent i = new Intent();
             i.setClass(getBaseContext(), Result_Favorite_History.class);
             i.putExtra("FaveClicked", userFavorites.get(position));
