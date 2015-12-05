@@ -61,10 +61,22 @@
             android:scaleType="centerCrop"
             android:text="food description" />
 
+        <TextView
+            android:id="@+id/NumberofComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Comments"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="17sp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#9d2334" />
+
         <ListView
             android:id="@+id/listview_comments"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
         </ListView>
     </LinearLayout>
 

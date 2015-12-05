@@ -28,6 +28,7 @@ public class Result_Favorite_History extends BaseActivity {
     TextView name;
     TextView desc;
     TextView price;
+    TextView noComments;
     ImageView image;
     Button remove;
     int userID;
@@ -57,6 +58,7 @@ public class Result_Favorite_History extends BaseActivity {
         image = (ImageView) findViewById(R.id.tvFh_foodImage);
         remove = (Button) findViewById(R.id.btn_removeFromFave);
         listView = (ListView) findViewById(R.id.listview_comments);
+        noComments = (TextView) findViewById(R.id.NumberofComments);
 
         clicked = (FavoriteObject) getIntent().getSerializableExtra("FaveClicked");
         kind = getIntent().getExtras().getString("Kind");
@@ -66,11 +68,12 @@ public class Result_Favorite_History extends BaseActivity {
         name.setText(clicked.getfName());
         desc.setText(clicked.getDescription());
         price.setText("P" + clicked.getPrice() + ".00");
+        noComments.setText("Comments("+clicked.getComments().size()+")");
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, clicked.getComments());
         listView.setAdapter(customAdapterComments);
 
         if(kind.equalsIgnoreCase("history"))
-            remove.setVisibility(View.INVISIBLE);
+            remove.setVisibility(View.GONE);
 
         image.setImageResource(ir.getImage(clicked.getfPictureIcon(), getBaseContext()));
         remove.setOnClickListener(removeItem);
