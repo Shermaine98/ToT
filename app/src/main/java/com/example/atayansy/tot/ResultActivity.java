@@ -17,13 +17,13 @@ import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 import com.example.atayansy.tot.java.ImageResources;
 
 public class ResultActivity extends AppCompatActivity {
-
     Button button_eat;
     ImageButton button_main;
     ImageView imageView;
     TextView resultFoodName, resultDescription, resultPrice;
     CustomAdapterComments customAdapterComments;
     ListView listView;
+    private FoodFeedFeedbacks result;
     View.OnClickListener decision = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -31,6 +31,7 @@ public class ResultActivity extends AppCompatActivity {
             Intent i = new Intent();
             if (v.equals(button_eat)) {
                 i.setClass(getBaseContext(), Feedback.class);
+                i.putExtra("ResultFeedBack", result);
             } else if (v.equals(button_main)) {
                 i.setClass(getBaseContext(), FilterMenu.class);
             }
@@ -38,7 +39,6 @@ public class ResultActivity extends AppCompatActivity {
             finish();
         }
     };
-    private FoodFeedFeedbacks result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
