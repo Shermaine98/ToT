@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,8 +18,8 @@ import com.example.atayansy.tot.java.ImageResources;
 
 public class ResultActivity extends AppCompatActivity {
 
-    Button button_eat;
-    Button button_main;
+    ImageButton button_eat;
+    ImageButton button_main;
     ImageView imageView;
     TextView resultFoodName, resultDescription, resultPrice;
     CustomAdapterComments customAdapterComments;
@@ -46,8 +47,8 @@ public class ResultActivity extends AppCompatActivity {
         resultFoodName = (TextView) findViewById(R.id.tv_fodName);
         resultDescription = (TextView) findViewById(R.id.tv_foodescription);
         resultPrice = (TextView) findViewById(R.id.tv_price);
-        button_eat = (Button) findViewById(R.id.button_eat);
-        button_main = (Button) findViewById(R.id.button_main);
+        button_eat = (ImageButton) findViewById(R.id.button_eat);
+        button_main = (ImageButton) findViewById(R.id.button_main);
         imageView = (ImageView) findViewById(R.id.tv_foodImage);
         listView = (ListView) findViewById(R.id.evFoodComment_Result);
 

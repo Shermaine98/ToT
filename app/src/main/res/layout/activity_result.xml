@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,76 +6,92 @@
     android:orientation="vertical"
     tools:context="com.example.atayansy.tot.ResultActivity">
 
-    <TextView
-        android:id="@+id/tv_fodName"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:gravity="center_horizontal"
-        android:padding="8dp"
-        android:textSize="30sp"
-        android:textColor="#ebebeb"
-        android:background="#4dc0c0"
-        android:text="RESULT"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_foodescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="20sp"  />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4dc0c0"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:padding="8dp"
+            android:text="RESULT"
+            android:textColor="#ebebeb"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="sans-serif-light"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/tv_fodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/tv_foodImage"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="15dp"
-        android:padding="10dp" />
+        <TextView
+            android:id="@+id/tv_foodescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="20sp" />
 
-    <ListView
-        android:id="@+id/evFoodComment_Result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/topFive"
-        android:layout_marginBottom="55dp" />
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/tv_foodImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            android:scaleType="centerCrop" />
+
+        <ListView
+            android:id="@+id/evFoodComment_Result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:background="#cacac5"
         android:orientation="horizontal"
-        android:padding="8dp"
-        android:background="#cacac5">
+        android:padding="8dp">
 
-        <Button
+        <ImageButton
             android:id="@+id/button_eat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="I WILL EAT THIS"
-            android:textColor="#FFFFFF" />
+            android:scaleType="fitCenter"
+            android:background="#cacac5"
+            android:src="@drawable/dice" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/button_eat"
             android:layout_weight="1"
-            android:text="NAAAH"
-            android:textColor="#FFFFFF" />
+            android:scaleType="fitCenter"
+            android:background="#cacac5"
+            android:src="@drawable/ic_back" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
