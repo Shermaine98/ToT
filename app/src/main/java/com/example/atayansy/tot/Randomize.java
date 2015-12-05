@@ -142,6 +142,8 @@ public class Randomize extends AppCompatActivity {
                 foodTempResult.setRating(jo.getDouble("rating"));
                 foodTempResult.setImage(jo.getInt("picture"));
                 foodTempResult.setRestaurant(jo.getString("restaurantName"));
+                //TODO: add restaurant name here
+                // TODO: Result restaurant here add loop here etc
                 ArrayList<Comments> commentses = new ArrayList<>();
                 foodTempResult.setComments(commentses);
                 Log.i("this", foodTempResult.getFoodName());

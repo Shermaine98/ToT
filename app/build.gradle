@@ -20,19 +20,6 @@ android {
     }
 }
 
-// TODO: what?
-/*
-// Get the ip address by interface name
-def getLocalIp(String interfaceName) {
-    NetworkInterface iface =  NetworkInterface.getByName(interfaceName);
-    for (InterfaceAddress address : iface.getInterfaceAddresses()) {
-        String ip =  address.getAddress().getHostAddress()
-        if (ip.length() <= 15) {
-            return ip;
-        }
-    }
-}
-*/
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

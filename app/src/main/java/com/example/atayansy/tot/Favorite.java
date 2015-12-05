@@ -159,6 +159,9 @@ public class Favorite extends BaseActivity {
                                 obj.getInt("rating"), obj.getString("foodDescription"),
                                 obj.getInt("price"), obj.getInt("foodID")
                         );
+
+                        //TODO: add restaurant name here
+                        // TODO: Result restaurant here annd loop here
                         ArrayList<Comments> commentses = new ArrayList<>();
                         food.setComments(commentses);
                         userFavorites.add(food);

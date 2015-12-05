@@ -35,16 +35,6 @@ public class History extends BaseActivity {
         super.setUp(R.layout.activity_history);
         menulistView = (SwipeMenuListView) findViewById(R.id.listView_history);
 
-        //TODO: delete this
-        histories1 = new ArrayList<>();
-        histories1.add(new HistoryObject(R.mipmap.ic_launcher, "Food Salad", R.id.rb_star));
-        histories1.add(new HistoryObject(R.mipmap.ic_launcher, "BBQ", R.id.rb_star));
-        histories1.add(new HistoryObject(R.mipmap.ic_launcher, "Chicken Adobo", R.id.rb_star));
-        histories1.add(new HistoryObject(R.mipmap.ic_launcher, "Macaroni", R.id.rb_star));
-        histories1.add(new HistoryObject(R.mipmap.ic_launcher, "Porter", R.id.rb_star));
-        histories1.add(new HistoryObject(R.mipmap.ic_launcher, "Rib Eye", R.id.rb_star));
-        histories1.add(new HistoryObject(R.mipmap.ic_launcher, "TBone", R.id.rb_star));
-
         customAdapterHistory = new CustomAdapterHistory(getBaseContext(), R.layout.activity_history, histories1);
         menulistView.setAdapter(customAdapterHistory);
         menulistView.setOnItemClickListener(showMoreResult);
