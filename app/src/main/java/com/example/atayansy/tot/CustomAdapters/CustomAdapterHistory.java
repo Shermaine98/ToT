@@ -54,13 +54,13 @@ public class CustomAdapterHistory extends BaseAdapter {
 
         holder.img = (ImageView) rowView.findViewById(R.id.gh_image);
         holder.foodName = (TextView) rowView.findViewById(R.id.gh_foodName);
-        holder.foodPrice = (TextView) rowView.findViewById(R.id.gh_price);
+//        holder.foodPrice = (TextView) rowView.findViewById(R.id.gh_price);
         ImageResources ir = new ImageResources();
 
 
         holder.img.setImageResource(ir.getImage(historyObjects.get(position).getfPictureIcon(), context));
         holder.foodName.setText(historyObjects.get(position).getfName());
-        holder.foodPrice.setText("P" + String.valueOf(historyObjects.get(position).getPrice()) + ".00");
+//        holder.foodPrice.setText("P" + String.valueOf(historyObjects.get(position).getPrice()) + ".00");
 
 
         return rowView;

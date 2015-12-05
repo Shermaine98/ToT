@@ -54,13 +54,13 @@ public class CustomAdapterFavorites extends BaseAdapter {
 
         holder.img = (ImageView) rowView.findViewById(R.id.gf_image);
         holder.foodName = (TextView) rowView.findViewById(R.id.gf_foodName);
-        holder.foodPrice = (TextView) rowView.findViewById(R.id.gf_price);
+//        holder.foodPrice = (TextView) rowView.findViewById(R.id.gf_price);
         ImageResources ir = new ImageResources();
 
 
         holder.img.setImageResource(ir.getImage(favoriteObjects.get(position).getfPictureIcon(), context));
         holder.foodName.setText(favoriteObjects.get(position).getfName());
-        holder.foodPrice.setText("P" + String.valueOf(favoriteObjects.get(position).getPrice())+ ".00");
+//        holder.foodPrice.setText("P" + String.valueOf(favoriteObjects.get(position).getPrice())+ ".00");
 
 
         return rowView;
