@@ -11,13 +11,13 @@ public class Food {
     String location;
     String type;
     int image;
-    float latitude;
-    float longitude;
+    double latitude;
+    double longitude;
     private int foodID;
     private double rating;
 
 
-    public Food(String foodName, String restaurant, String definition, double price, String location, String type, int image, float latitude, float longitude) {
+    public Food(String foodName, String restaurant, String definition, double price, String location, String type, int image, double latitude, double longitude) {
         this.foodName = foodName;
         this.restaurant = restaurant;
         this.definition = definition;
@@ -95,15 +95,15 @@ public class Food {
         return longitude;
     }
 
-    public void setlongitude(float longitude) {
+    public void setlongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitue() {
+    public double getLatitue() {
         return latitude;
     }
 
-    public void setLatitue(float latitude) {
+    public void setLatitue(double latitude) {
         this.latitude = latitude;
     }
 
