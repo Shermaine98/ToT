@@ -143,7 +143,6 @@ public class History extends BaseActivity {
             //check if result is null
             if (!s.equalsIgnoreCase("null")) {
                 try {
-                    //TODO: not getting comments
                     JSONObject jo = new JSONObject(s);
                     JSONArray fList = jo.getJSONArray("History");
                     JSONArray cList = jo.getJSONArray("Comments");

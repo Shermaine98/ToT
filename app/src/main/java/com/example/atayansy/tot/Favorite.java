@@ -36,6 +36,7 @@ public class Favorite extends BaseActivity {
     int userId;
     String username;
     GridView gridview;
+    ArrayList<Comments> comments1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,22 +152,34 @@ public class Favorite extends BaseActivity {
                     JSONObject jo = new JSONObject(s);
 
                     JSONArray fList = jo.getJSONArray("Favorites");
+                    JSONArray cList = jo.getJSONArray("Comments");
 
-                    FavoriteObject food;
+                    FavoriteObject foodtemp;
+                    Comments commentstemp;
 
                     for (int i = 0; i < fList.length(); i++) {
                         JSONObject obj = fList.getJSONObject(i);
-                        food = new FavoriteObject(
+                        foodtemp = new FavoriteObject(
                                 obj.getInt("picture"), obj.getString("foodName"),
                                 obj.getInt("rating"), obj.getString("foodDescription"),
                                 obj.getInt("price"), obj.getInt("foodID")
                         );
+                        foodtemp.setRestaurantName(obj.getString("RestaurantName"));
+                        foodtemp.setAddress(obj.getString("address"));
 
-                        //TODO: add restaurant name here
-                        // TODO: Result restaurant here annd loop here
-                        ArrayList<Comments> commentses = new ArrayList<>();
-                        food.setComments(commentses);
-                        userFavorites.add(food);
+                        comments1 = new ArrayList<>();
+                        for (int j = 0; j < cList.length(); j++) {
+                            JSONObject objC = cList.getJSONObject(j);
+                            commentstemp = new Comments();
+                            if (foodtemp.getFoodID() == objC.getInt("foodID")) {
+                                commentstemp.setName(objC.getString("IDUser"));
+                                commentstemp.setFoodID(objC.getInt("foodID"));
+                                commentstemp.setComments(objC.getString("comments"));
+                                comments1.add(commentstemp);
+                            }
+                        }
+                        foodtemp.setComments(comments1);
+                        userFavorites.add(foodtemp);
                     }
 
                     gridview.setAdapter(new CustomAdapterFavorites(getBaseContext(), userFavorites));
