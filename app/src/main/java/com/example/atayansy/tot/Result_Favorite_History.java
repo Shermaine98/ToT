@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class Result_Favorite_History extends BaseActivity {
     ImageView image;
     Button remove;
     ScrollView fh_scroll;
+    RatingBar rating;
     int userID;
     ListView listView;
     String kind;
@@ -67,6 +69,7 @@ public class Result_Favorite_History extends BaseActivity {
         noComments = (TextView) findViewById(R.id.NumberofComments);
         resto = (TextView) findViewById(R.id.tvfh_restaurant);
         fh_scroll = (ScrollView) findViewById(R.id.fh_scroll);
+        rating = (RatingBar) findViewById(R.id.fh_rating);
 
         clicked = (FavoriteObject) getIntent().getSerializableExtra("FaveClicked");
         kind = getIntent().getExtras().getString("Kind");
@@ -79,6 +82,8 @@ public class Result_Favorite_History extends BaseActivity {
         desc.setText(clicked.getDescription());
         price.setText("P" + clicked.getPrice() + ".00");
         noComments.setText("Comments("+clicked.getComments().size()+")");
+        rating.setRating(Float.parseFloat(String.valueOf(clicked.getfRatingStar())));
+
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, clicked.getComments());
         listView.setAdapter(customAdapterComments);
 

@@ -29,6 +29,15 @@
         android:layout_marginBottom="55dp"
         android:orientation="vertical">
 
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="5"
+            android:clickable="false"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/fh_rating" />
+
         <TextView
             android:id="@+id/tvfh_restaurant"
             android:layout_width="wrap_content"
@@ -36,10 +45,11 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-light"
             android:gravity="center_horizontal"
             android:textSize="20sp" />
+
 
         <TextView
             android:id="@+id/tvfh_foodescription"
