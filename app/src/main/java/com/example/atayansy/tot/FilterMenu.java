@@ -104,6 +104,8 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         buttonHome = (ImageButton) findViewById(R.id.fbutton_home);
         buttonRandomize = (ImageButton) findViewById(R.id.fbutton_randomize);
 
+        tvAddress.setVisibility(View.GONE);
+
         // Create an ArrayAdapter using the string array and a default spinner layout
         //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer> (this, android.R.layout.simple_dropdown_item_1line, budget);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.budget, android.R.layout.simple_dropdown_item_1line);
