@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#4dc0c0"
+            android:background="#43a3a3"
             android:fontFamily="sans-serif-light"
             android:gravity="center_horizontal"
             android:padding="8dp"
