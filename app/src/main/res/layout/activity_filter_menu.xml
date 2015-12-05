@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_home"
+                android:src="@drawable/ic_back"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:background="#005f5f5f" />
