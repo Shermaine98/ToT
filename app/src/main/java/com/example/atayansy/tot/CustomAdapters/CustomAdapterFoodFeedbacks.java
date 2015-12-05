@@ -104,7 +104,7 @@ public class CustomAdapterFoodFeedbacks extends BaseExpandableListAdapter {
 
         imageView.setImageResource(ir.getImage(FoodFeedFeedbacks.getIcon(),Context));
         foodName.setText(FoodFeedFeedbacks.getFoodName());
-        price.setText(String.valueOf(FoodFeedFeedbacks.getPrice()));
+        price.setText("P"+String.valueOf(FoodFeedFeedbacks.getPrice())+".00");
         restaurantName.setText(FoodFeedFeedbacks.getRestaurant());
         address.setText(FoodFeedFeedbacks.getLocation());
         comments.setText(String.valueOf(FoodFeedFeedbacks.getComments().size()) + " Comment/s");
