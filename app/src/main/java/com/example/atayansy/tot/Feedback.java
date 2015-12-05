@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,6 +37,7 @@ public class Feedback extends AppCompatActivity {
     TextView textInfo;
     TextView textResto;
     TextView textPrice;
+    TextView numberofComments;
     ListView listViewC;
     CustomAdapterComments customAdapterComments;
     SharedPreferences sharedPreferences;
@@ -46,6 +48,31 @@ public class Feedback extends AppCompatActivity {
     ImageView cancel;
     Button buttonAddToFavorite;
     EditText comments;
+    View.OnClickListener sendFeedBack = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent i = new Intent();
+            if (v.equals(send)) {
+                SendComments sendComments = new SendComments();
+                sendComments.execute();
+
+            } else if (v.equals(cancel)) {
+                i.setClass(getBaseContext(), HomePage.class);
+                startActivity(i);
+                finish();
+            }
+
+        }
+    };
+    View.OnClickListener addToFavorite = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            AddThisTofavorite AddThisTofavorite = new AddThisTofavorite();
+            AddThisTofavorite.execute();
+
+        }
+    };
     private FoodFeedFeedbacks feedbackResult;
 
     @Override
@@ -62,8 +89,10 @@ public class Feedback extends AppCompatActivity {
         buttonAddToFavorite = (Button) findViewById(R.id.addToFavorite);
         send = (ImageView) findViewById(R.id.send);
         cancel = (ImageView) findViewById(R.id.back);
+        numberofComments = (TextView) findViewById(R.id.NumberofCommentsFeedBack);
         comments = (EditText) findViewById(R.id.tv_FeedBack);
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+
         userName = sharedPreferences.getString("username", "");
         userID = sharedPreferences.getInt("id", 0);
 
@@ -74,6 +103,7 @@ public class Feedback extends AppCompatActivity {
         } else {
             onResume();
         }
+
 
         feedbackResult = (FoodFeedFeedbacks) getIntent().getSerializableExtra("ResultFeedBack");
         textName.setText(feedbackResult.getFoodName());
@@ -86,42 +116,29 @@ public class Feedback extends AppCompatActivity {
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, feedbackResult.getComments());
         listViewC.setAdapter(customAdapterComments);
         ratingbar.setRating(Float.parseFloat(String.valueOf(feedbackResult.getRating())));
-        addListenerOnRatingBar();
+        numberofComments.setText(String.valueOf(feedbackResult.getComments()));
+        ViewGroup.LayoutParams lp = listViewC.getLayoutParams();
+        if (feedbackResult.getComments().size() != 0) {
+            if (feedbackResult.getComments().size() <= 3) {
+                lp.height = 200;
+            } else {
+                lp.height = 350;
+            }
+            listViewC.setLayoutParams(lp);
+        } else {
+            listViewC.setVisibility(View.GONE);
+        }
 
+
+        addListenerOnRatingBar();
         send.setOnClickListener(sendFeedBack);
         cancel.setOnClickListener(sendFeedBack);
 
-        //TODO: if working
-        // CheckIFfavorite CheckIFfavorite = new CheckIFfavorite();
-        //CheckIFfavorite.execute();
-        // buttonAddToFavorite.setOnClickListener(addToFavorite);
+        CheckIFfavorite CheckIFfavorite = new CheckIFfavorite();
+        CheckIFfavorite.execute();
+
 
     }
-
-    View.OnClickListener sendFeedBack = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            Intent i = new Intent();
-            if (v.equals(send)) {
-                SendComments sendComments = new SendComments();
-                sendComments.execute();
-            } else if (v.equals(cancel)) {
-                i.setClass(getBaseContext(), HomePage.class);
-            }
-            startActivity(i);
-            finish();
-        }
-    };
-
-    View.OnClickListener addToFavorite = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            AddThisTofavorite AddThisTofavorite = new AddThisTofavorite();
-            AddThisTofavorite.execute();
-
-        }
-    };
 
     @Override
     protected void onResume() {
@@ -169,13 +186,20 @@ public class Feedback extends AppCompatActivity {
     private class SendComments extends AsyncTask<String, Void, String> {
         float rating;
         String Comment;
-
         @Override
-
         protected void onPreExecute() {
             super.onPreExecute();
             rating = ratingbar.getRating();
             Comment = comments.getText().toString();
+
+            if (Comment.matches("") && rating == 0.0) {
+                rating = (float) 0.0;
+                Comment = "null%";
+            } else if (Comment.matches("")) {
+                Comment = "null%";
+            } else if (rating == 0.0) {
+                rating = (float) 0.0;
+            }
         }
 
         @Override
@@ -190,7 +214,6 @@ public class Feedback extends AppCompatActivity {
             RequestBody requestbody = new FormEncodingBuilder()
                     .add("rating", String.valueOf(rating)).add("Comment", Comment).add("userID", String.valueOf(userID))
                     .add("foodID", String.valueOf(feedbackResult.getFoodID())).build();
-
             Request request = null;
             Response response = null;
 
@@ -213,6 +236,10 @@ public class Feedback extends AppCompatActivity {
             super.onPostExecute(s);
 
             if (s.equalsIgnoreCase("true")) {
+                Intent i = new Intent();
+                i.setClass(getBaseContext(), History.class);
+                startActivity(i);
+                finish();
             } else {
                 Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_LONG).show();
 
@@ -258,6 +285,8 @@ public class Feedback extends AppCompatActivity {
             super.onPostExecute(s);
 
             if (s.equalsIgnoreCase("true")) {
+                Toast.makeText(getBaseContext(), "ADDED TO FAVORITES", Toast.LENGTH_LONG).show();
+                buttonAddToFavorite.setVisibility(View.GONE);
             } else {
                 Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_LONG).show();
 
@@ -300,6 +329,8 @@ public class Feedback extends AppCompatActivity {
             super.onPostExecute(s);
             if (s.equalsIgnoreCase("true")) {
                 buttonAddToFavorite.setVisibility(View.GONE);
+            } else if (s.equalsIgnoreCase("false")) {
+                buttonAddToFavorite.setOnClickListener(addToFavorite);
             } else {
                 Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_LONG).show();
             }

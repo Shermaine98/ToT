@@ -83,11 +83,29 @@
                 android:layout_marginTop="10dp"
                 android:max="5" />
 
+            <TextView
+                android:id="@+id/NumberofCommentsFeedBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Comments"
+                android:textColor="#9d2334"
+                android:textSize="17sp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="55dp">
             <ListView
                 android:id="@+id/listView_feedComments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></ListView>
-
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp" />
+            </ScrollView>
             <EditText
                 android:id="@+id/tv_FeedBack"
                 android:layout_width="match_parent"
@@ -105,12 +123,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="25dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:layout_marginBottom="25dp"
                 android:text="Add To Favorites"
                 android:textAllCaps="false"
                 android:textColor="#f3f3f3" />
@@ -121,27 +139,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:background="#005f5f5f">
+        android:background="#005f5f5f"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
-            android:scaleType="fitCenter"
             android:layout_weight="1"
-            android:background="#005f5f5f"/>
+            android:background="#005f5f5f"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back" />
 
         <ImageButton
             android:id="@+id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_send"
-            android:scaleType="fitCenter"
             android:layout_weight="1"
-            android:background="#005f5f5f" />
+            android:background="#005f5f5f"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_send" />
 
     </LinearLayout>
 </RelativeLayout>

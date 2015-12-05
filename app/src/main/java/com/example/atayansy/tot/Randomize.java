@@ -5,7 +5,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -22,6 +21,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +35,7 @@ public class Randomize extends AppCompatActivity {
     TextView tv_randomize;
     Random random;
     FoodFeedFeedbacks foodTempResult;
+    ArrayList<Comments> comments1;
     private double Distance;
     private double CurrLatitude;
     private double CurrLongitude;
@@ -87,7 +88,10 @@ public class Randomize extends AppCompatActivity {
             foodTempResult = new FoodFeedFeedbacks();
             try {
                 //getting result body and coverting to JSON
-                JSONObject jo = new JSONObject(s);
+                JSONObject base = new JSONObject(s);
+                JSONObject jo = base.getJSONObject("Result");
+                JSONArray cList = base.getJSONArray("Comments");
+                Comments commentstemp;
                 //Setting Json variable
                 foodTempResult.setFoodID(jo.getInt("foodID"));
                 foodTempResult.setFoodName(jo.getString("foodName"));
@@ -95,22 +99,27 @@ public class Randomize extends AppCompatActivity {
                 foodTempResult.setPrice(jo.getDouble("price"));
                 foodTempResult.setRating(jo.getDouble("rating"));
                 foodTempResult.setImage(jo.getInt("picture"));
-                foodTempResult.setRestaurant(jo.getString("restaurantName"));
-                //TODO: add restaurant name here
-                // TODO: Result restaurant here add loop here etc
-                ArrayList<Comments> commentses = new ArrayList<>();
-                foodTempResult.setComments(commentses);
-                Log.i("this", foodTempResult.getFoodName());
+                foodTempResult.setRestaurant(jo.getString("RestaurantName"));
+                foodTempResult.setLocation(jo.getString("address"));
+                comments1 = new ArrayList<>();
+                for (int j = 0; j < cList.length(); j++) {
+                    JSONObject objC = cList.getJSONObject(j);
+                    commentstemp = new Comments();
+                    commentstemp.setName(objC.getString("IDUser"));
+                    commentstemp.setFoodID(objC.getInt("foodID"));
+                    commentstemp.setComments(objC.getString("comments"));
+                    comments1.add(commentstemp);
+                }
+                foodTempResult.setComments(comments1);
             } catch (JSONException e) {
             }
-
             Intent i = new Intent();
             i.putExtra("Result", foodTempResult);
             i.setClass(getBaseContext(), ResultActivity.class);
             startActivity(i);
             finish();
         } else {
-            Toast.makeText(getBaseContext(), "Invalid Username/Password!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -189,7 +198,6 @@ public class Randomize extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("ENTER", "POSTEXCUTE");
             Result(s);
 
         }
@@ -251,7 +259,6 @@ public class Randomize extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("ENTER", "POSTEXCUTE");
             Result(s);
 
         }
@@ -295,7 +302,6 @@ public class Randomize extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("ENTER", "POSTEXCUTE");
             Result(s);
 
         }
@@ -344,7 +350,6 @@ public class Randomize extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("ENTER", "POSTEXCUTE");
             Result(s);
 
         }

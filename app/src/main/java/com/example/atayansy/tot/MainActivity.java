@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnSignIn;
     TextView btnSignUp;
     User userLogin;
-    SharedPreferences sp;
+    SharedPreferences sharedPreferences;
+    String username;
     //    Another Page
     View.OnClickListener redirect = new View.OnClickListener() {
         @Override
@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         url.getIp();
         */
 
+          /* Shared Preferences */
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+
         userName = (EditText) findViewById(R.id.et_username);
         password = (EditText) findViewById(R.id.et_password);
 
@@ -73,6 +77,15 @@ public class MainActivity extends AppCompatActivity {
 
         btnSignIn.setOnClickListener(redirect);
         btnSignUp.setOnClickListener(redirect);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+
 
     }
 
@@ -142,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
                 response = okHttpClient.newCall(request).execute();
                 //get the page body
                 result = response.body().string();
-                Log.i("result", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -153,13 +165,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("ENTER", "POSTEXCUTE");
             //check if result is null
             if (!s.equalsIgnoreCase("null")) {
                 try {
                     //getting result body and coverting to JSON
-                    Log.i("ENTER", "AFTER TRY");
-                    Log.i("ENTER", s);
                     userLogin = new User();
                     JSONObject jo = new JSONObject(s);
 
@@ -167,8 +176,6 @@ public class MainActivity extends AppCompatActivity {
                     userLogin.setUserName(jo.getString("userName"));
                     userLogin.setUserID(Integer.parseInt(jo.getString("userID")));
 
-                    Log.i("UserName THIS", userLogin.getUserName() + "");
-                    Log.i("password THIS", userLogin.getUserID() + "");
 
                 } catch (JSONException e) {
                 }

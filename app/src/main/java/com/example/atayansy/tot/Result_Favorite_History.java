@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
@@ -19,6 +17,7 @@ import android.widget.Toast;
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterComments;
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.FavoriteObject;
+import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 import com.example.atayansy.tot.java.ImageResources;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -37,6 +36,7 @@ public class Result_Favorite_History extends BaseActivity {
     TextView noComments;
     ImageView image;
     Button remove;
+    Button feedBack;
     ScrollView fh_scroll;
     RatingBar rating;
     int userID;
@@ -51,7 +51,29 @@ public class Result_Favorite_History extends BaseActivity {
 
         }
     };
+    private FoodFeedFeedbacks feedbackResult;
     private FavoriteObject clicked;
+    View.OnClickListener feedBackClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent();
+
+            feedbackResult = new FoodFeedFeedbacks();
+            feedbackResult.setFoodID(clicked.getFoodID());
+            feedbackResult.setFoodName(clicked.getfName());
+            feedbackResult.setRating(clicked.getfRatingStar());
+            feedbackResult.setComments(clicked.getComments());
+            feedbackResult.setDefinition(clicked.getDescription());
+            feedbackResult.setPrice(clicked.getPrice());
+            feedbackResult.setLocation(clicked.getAddress());
+            feedbackResult.setRestaurant(clicked.getRestaurantName());
+            feedbackResult.setImage(clicked.getfPictureIcon());
+            intent.setClass(getBaseContext(), Feedback.class);
+            intent.putExtra("ResultFeedBack", feedbackResult);
+            startActivity(intent);
+            finish();
+        }
+    };
     private CustomAdapterComments customAdapterComments;
 
     @Override
@@ -70,12 +92,11 @@ public class Result_Favorite_History extends BaseActivity {
         resto = (TextView) findViewById(R.id.tvfh_restaurant);
         fh_scroll = (ScrollView) findViewById(R.id.fh_scroll);
         rating = (RatingBar) findViewById(R.id.fh_rating);
+        feedBack = (Button) findViewById(R.id.bt_FeedBack);
 
         clicked = (FavoriteObject) getIntent().getSerializableExtra("FaveClicked");
         kind = getIntent().getExtras().getString("Kind");
         userID = getIntent().getExtras().getInt("userID");
-        Log.i("userID", String.valueOf(userID));
-        Log.i("foodID", String.valueOf(clicked.getFoodID()));
         desc.setTypeface(desc.getTypeface(), Typeface.BOLD_ITALIC);
         name.setText(clicked.getfName());
         resto.setText(clicked.getRestaurantName() + ", " + clicked.getAddress());
@@ -83,12 +104,12 @@ public class Result_Favorite_History extends BaseActivity {
         price.setText("P" + clicked.getPrice() + ".00");
         noComments.setText("Comments(" + clicked.getComments().size() + ")");
         rating.setRating(Float.parseFloat(String.valueOf(clicked.getfRatingStar())));
-        Log.i("Rating", String.valueOf(clicked.getfRatingStar()));
 
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, clicked.getComments());
         listView.setAdapter(customAdapterComments);
 
-        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) listView.getLayoutParams();
+        ViewGroup.LayoutParams lp = listView.getLayoutParams();
+
         if(clicked.getComments().size()!=0) {
             if (clicked.getComments().size() <= 3) {
                 lp.height = 200;
@@ -105,6 +126,10 @@ public class Result_Favorite_History extends BaseActivity {
 
         image.setImageResource(ir.getImage(clicked.getfPictureIcon(), getBaseContext()));
         remove.setOnClickListener(removeItem);
+        if (kind.equalsIgnoreCase("Favorite"))
+            feedBack.setVisibility(View.GONE);
+
+        feedBack.setOnClickListener(feedBackClick);
 
         fh_scroll.scrollTo(0, 0);
     }
@@ -135,7 +160,6 @@ public class Result_Favorite_History extends BaseActivity {
                 response = okHttpClient.newCall(request).execute();
                 //get the page body
                 result = response.body().string();
-                Log.i("result", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }

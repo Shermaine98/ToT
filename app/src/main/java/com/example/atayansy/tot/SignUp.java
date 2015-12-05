@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -117,16 +116,12 @@ public class SignUp extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            Log.i("RESULT", result);
-
             return result;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("PostExecute", s);
             if (s == "Username Exists") {
                 Toast.makeText(getBaseContext(), "Username already taken", Toast.LENGTH_LONG).show();
             } else if (s.equals("Email Exists")) {

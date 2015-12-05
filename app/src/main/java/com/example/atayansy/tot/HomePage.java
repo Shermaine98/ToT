@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
@@ -135,7 +134,6 @@ public class HomePage extends BaseActivity {
                 response = okHttpClient.newCall(request).execute();
                 //get the page body
                 result = response.body().string();
-//                Log.i("result", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -178,12 +176,10 @@ public class HomePage extends BaseActivity {
                                 commentstemp.setFoodID(objC.getInt("foodID"));
                                 commentstemp.setComments(objC.getString("comments"));
                                 comments.add(commentstemp);
-                                Log.i("print:", comments.get(j).getComments());
                             }
                         }
                         foodtemp.setComments(comments);
                         foodFeedFeedbacks.add(foodtemp);
-                        Log.i("print:", foodFeedFeedbacks.get(i).getFoodName());
                     }
                 } catch (JSONException e) {
                 }

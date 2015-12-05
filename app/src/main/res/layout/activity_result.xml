@@ -23,6 +23,17 @@
             android:textColor="#ebebeb"
             android:textSize="30sp" />
 
+        <ScrollView
+            android:id="@+id/fh_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="55dp"
+                android:orientation="vertical">
         <TextView
             android:id="@+id/tv_fodName"
             android:layout_width="wrap_content"
@@ -35,15 +46,15 @@
             android:textSize="24sp" />
 
         <RatingBar
+            android:id="@+id/randomize_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:max="5"
-            android:isIndicator="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:clickable="false"
             android:focusable="false"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/randomize_rating" />
+            android:isIndicator="true"
+            android:max="5" />
 
         <TextView
             android:id="@+id/tv_restaurant"
@@ -84,7 +95,7 @@
             android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/tv_NumberofComments"
+            android:id="@+id/NumberofCommentsResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -94,13 +105,21 @@
             android:textColor="#9d2334"
             android:textSize="17sp" />
 
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="55dp">
         <ListView
             android:id="@+id/evFoodComment_Result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp" />
+                </ScrollView>
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -114,8 +133,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
             android:background="#cacac5"
+            android:scaleType="fitCenter"
             android:text="Give Feedback" />
 
         <ImageButton
@@ -123,8 +142,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
             android:background="#cacac5"
+            android:scaleType="fitCenter"
             android:src="@drawable/dice" />
     </LinearLayout>
 

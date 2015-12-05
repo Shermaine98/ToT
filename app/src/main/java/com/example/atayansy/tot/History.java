@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -129,7 +128,6 @@ public class History extends BaseActivity {
                 response = okHttpClient.newCall(request).execute();
                 //get the page body
                 result = response.body().string();
-                Log.i("result", result);
             } catch (IOException e) {
                 e.printStackTrace();
             }

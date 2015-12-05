@@ -30,15 +30,15 @@
         android:orientation="vertical">
 
         <RatingBar
+            android:id="@+id/fh_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:max="5"
-            android:isIndicator="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:clickable="false"
             android:focusable="false"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/fh_rating" />
+            android:isIndicator="true"
+            android:max="5" />
 
         <TextView
             android:id="@+id/tvfh_restaurant"
@@ -90,6 +90,10 @@
             android:textColor="#9d2334"
             android:textSize="17sp" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp">
         <ListView
             android:id="@+id/listview_comments"
             android:layout_width="fill_parent"
@@ -97,18 +101,34 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"></ListView>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/bt_FeedBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="25dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/shape"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Add Review"
+            android:textAllCaps="false"
+            android:textColor="#f3f3f3" />
 
         <Button
             android:id="@+id/btn_removeFromFave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:layout_marginBottom="25dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/shape"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:layout_marginBottom="25dp"
             android:text="Remove From Favorites"
             android:textAllCaps="false"
             android:textColor="#f3f3f3" />
