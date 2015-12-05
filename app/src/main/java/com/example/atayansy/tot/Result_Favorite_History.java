@@ -32,16 +32,8 @@ public class Result_Favorite_History extends BaseActivity {
     Button remove;
     int userID;
     ListView listView;
-    View.OnClickListener removeItem = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            RemoveFromFavorites r = new RemoveFromFavorites();
-            r.execute();
-
-        }
-    };
     private FavoriteObject clicked;
+    String kind;
     private CustomAdapterComments customAdapterComments;
 
     @Override
@@ -58,18 +50,33 @@ public class Result_Favorite_History extends BaseActivity {
         listView = (ListView) findViewById(R.id.listview_comments);
 
         clicked = (FavoriteObject) getIntent().getSerializableExtra("FaveClicked");
+        kind = getIntent().getExtras().getString("Kind");
         userID = getIntent().getExtras().getInt("userID");
         Log.i("userID", String.valueOf(userID));
         Log.i("foodID", String.valueOf(clicked.getFoodID()));
         name.setText(clicked.getfName());
         desc.setText(clicked.getDescription());
         price.setText("P" + clicked.getPrice() + ".00");
-        customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, clicked.getComments());
-        listView.setAdapter(customAdapterComments);
+//        customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, clicked.getComments());
+//        listView.setAdapter(customAdapterComments);
+
+        if(kind.equalsIgnoreCase("history"))
+            remove.setVisibility(View.INVISIBLE);
 
         image.setImageResource(ir.getImage(clicked.getfPictureIcon(), getBaseContext()));
         remove.setOnClickListener(removeItem);
     }
+
+
+    View.OnClickListener removeItem = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            RemoveFromFavorites r = new RemoveFromFavorites();
+            r.execute();
+
+        }
+    };
 
     private class RemoveFromFavorites extends AsyncTask<String, Void, String> {
 

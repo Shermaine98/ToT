@@ -70,6 +70,7 @@ public class Favorite extends BaseActivity {
             Intent i = new Intent();
             i.setClass(getBaseContext(), Result_Favorite_History.class);
             i.putExtra("FaveClicked", userFavorites.get(position));
+            i.putExtra("Kind", "Favorite");
             i.putExtra("userID", userId);
             startActivity(i);
         }

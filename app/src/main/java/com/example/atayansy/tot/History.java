@@ -148,7 +148,7 @@ public class History extends BaseActivity {
             //check if result is null
             if (!s.equalsIgnoreCase("null")) {
                 try {
-//TODO: not getting arraylist
+//TODO: not getting comments
                     JSONObject jo = new JSONObject(s);
                     JSONArray fList = jo.getJSONArray("History");
                     JSONArray cList = jo.getJSONArray("Comments");
@@ -163,24 +163,21 @@ public class History extends BaseActivity {
                         foodtemp.setRestaurantName(obj.getString("RestaurantName"));
                         foodtemp.setAddress(obj.getString("address"));
 
-                        comments1 = new ArrayList<>();
-                        for (int j = 0; j < cList.length(); j++) {
-                            JSONObject objC = cList.getJSONObject(j);
-                            commentstemp = new Comments();
-                            commentstemp.setName(objC.getString("IDUser"));
-                            commentstemp.setFoodID(objC.getInt("foodID"));
-                            commentstemp.setComments(objC.getString("comments"));
-                            if (foodtemp.getFoodID()==commentstemp.getFoodID()) {
-                                comments1.add(commentstemp);
-                            }
-                        }
+//                        comments1 = new ArrayList<>();
+//                        for (int j = 0; j < cList.length(); j++) {
+//                            JSONObject objC = cList.getJSONObject(j);
+//                            commentstemp = new Comments();
+//                            commentstemp.setName(objC.getString("IDUser"));
+//                            commentstemp.setFoodID(objC.getInt("foodID"));
+//                            commentstemp.setComments(objC.getString("comments"));
+//                            if (foodtemp.getFoodID() == commentstemp.getFoodID()) {
+//                                comments1.add(commentstemp);
+//                            }
+//                        }
 
-                        if (comments1 != null)
-                            foodtemp.setComments(comments1);
+//                      foodtemp.setComments(comments1);
                         userHistory.add(foodtemp);
                         Log.i("print:", userHistory.get(i).getfName());
-                        for (int x = 0; x < userHistory.get(i).getComments().size(); x++)
-                            Log.i("print:", userHistory.get(i).getComments().get(i).getName() + "--" + userHistory.get(i).getComments().get(x).getComments());
                     }
 
 
