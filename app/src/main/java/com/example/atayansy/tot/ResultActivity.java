@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterComments;
@@ -20,10 +21,58 @@ public class ResultActivity extends AppCompatActivity {
     Button button_eat;
     ImageButton button_main;
     ImageView imageView;
-    TextView resultFoodName, resultDescription, resultPrice;
+    TextView resultFoodName, resultDescription, resultPrice, resultResto;
+    RatingBar rating;
     CustomAdapterComments customAdapterComments;
     ListView listView;
     private FoodFeedFeedbacks result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_result);
+        initialize();
+
+        result = (FoodFeedFeedbacks) getIntent().getSerializableExtra("Result");
+
+        if (result.equals(null)) {
+            resultFoodName.setText("NONE");
+            button_eat.setVisibility(Button.INVISIBLE);
+            button_main.setVisibility(Button.INVISIBLE);
+            resultPrice.setText("");
+            resultDescription.setText("");
+        } else {
+            resultPrice.setText("P" + String.valueOf(result.getPrice()) + "0");
+            resultFoodName.setText(result.getFoodName());
+            resultDescription.setText(result.getDefinition());
+            resultResto.setText(result.getRestaurant()+", "+result.getLocation());
+            rating.setRating(Float.parseFloat(String.valueOf(result.getRating())));
+
+            ImageResources imageResources = new ImageResources();
+            imageView.setImageResource(imageResources.getImage(result.getImage(), getBaseContext()));
+            customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, result.getComments());
+            listView.setAdapter(customAdapterComments);
+        }
+    }
+
+    /**
+     * Clean codes
+     */
+    protected void initialize(){
+        resultFoodName = (TextView) findViewById(R.id.tv_fodName);
+        resultDescription = (TextView) findViewById(R.id.tv_foodescription);
+        resultPrice = (TextView) findViewById(R.id.tv_price);
+        resultResto = (TextView) findViewById(R.id.tv_restaurant);
+        button_eat = (Button) findViewById(R.id.button_eat);
+        button_main = (ImageButton) findViewById(R.id.button_main);
+        imageView = (ImageView) findViewById(R.id.tv_foodImage);
+        listView = (ListView) findViewById(R.id.evFoodComment_Result);
+        rating = (RatingBar) findViewById(R.id.randomize_rating);
+
+        button_eat.setOnClickListener(decision);
+        button_main.setOnClickListener(decision);
+    }
+
     View.OnClickListener decision = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -39,40 +88,6 @@ public class ResultActivity extends AppCompatActivity {
             finish();
         }
     };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
-        resultFoodName = (TextView) findViewById(R.id.tv_fodName);
-        resultDescription = (TextView) findViewById(R.id.tv_foodescription);
-        resultPrice = (TextView) findViewById(R.id.tv_price);
-        button_eat = (Button) findViewById(R.id.button_eat);
-        button_main = (ImageButton) findViewById(R.id.button_main);
-        imageView = (ImageView) findViewById(R.id.tv_foodImage);
-        listView = (ListView) findViewById(R.id.evFoodComment_Result);
-
-        button_eat.setOnClickListener(decision);
-        button_main.setOnClickListener(decision);
-
-        result = (FoodFeedFeedbacks) getIntent().getSerializableExtra("Result");
-
-        if (result.equals(null)) {
-            resultFoodName.setText("NONE");
-            button_eat.setVisibility(Button.INVISIBLE);
-            button_main.setVisibility(Button.INVISIBLE);
-            resultPrice.setText("");
-            resultDescription.setText("");
-        } else {
-            resultPrice.setText("P" + String.valueOf(result.getPrice()));
-            resultFoodName.setText(result.getFoodName());
-            resultDescription.setText(result.getDefinition());
-            ImageResources imageResources = new ImageResources();
-            imageView.setImageResource(imageResources.getImage(result.getImage(), getBaseContext()));
-            customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, result.getComments());
-            listView.setAdapter(customAdapterComments);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
