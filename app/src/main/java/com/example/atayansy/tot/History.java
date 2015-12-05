@@ -170,7 +170,6 @@ public class History extends BaseActivity {
                         }
                         foodtemp.setComments(comments1);
                         userHistory.add(foodtemp);
-                        Log.i("print:", userHistory.get(i).getComments().get(i).getComments());
                     }
                     grid.setAdapter(new CustomAdapterHistory(getBaseContext(), userHistory));
 
