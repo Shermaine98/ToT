@@ -80,7 +80,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         public void onClick(View v) {
             if (spinner_lt.isEnabled()) {
                 spinner_lt.setEnabled(false);
-                tvAddress.setVisibility(View.INVISIBLE);
+                tvAddress.setVisibility(View.GONE);
             } else {
                 spinner_lt.setEnabled(true);
                 tvAddress.setVisibility(View.VISIBLE);

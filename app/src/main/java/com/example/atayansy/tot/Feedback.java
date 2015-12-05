@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +40,7 @@ public class Feedback extends AppCompatActivity {
     TextView textResto;
     TextView textPrice;
     TextView numberofComments;
+    TextView numberChar;
     ListView listViewC;
     CustomAdapterComments customAdapterComments;
     SharedPreferences sharedPreferences;
@@ -48,6 +51,22 @@ public class Feedback extends AppCompatActivity {
     ImageView cancel;
     Button buttonAddToFavorite;
     EditText comments;
+    private final TextWatcher mTextEditorWatcher = new TextWatcher() {
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            //This sets a textview to the current length
+            int text = 100 - s.length();
+            numberChar.setText("Numbers of Character Left -" + String.valueOf(text));
+            if (s.length() >= 100) {
+                comments.setKeyListener(null);
+            }
+        }
+
+        public void afterTextChanged(Editable s) {
+        }
+    };
     View.OnClickListener sendFeedBack = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -91,6 +110,7 @@ public class Feedback extends AppCompatActivity {
         cancel = (ImageView) findViewById(R.id.back);
         numberofComments = (TextView) findViewById(R.id.NumberofCommentsFeedBack);
         comments = (EditText) findViewById(R.id.tv_FeedBack);
+        numberChar = (TextView) findViewById(R.id.characterCount);
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
 
         userName = sharedPreferences.getString("username", "");
@@ -136,7 +156,7 @@ public class Feedback extends AppCompatActivity {
 
         CheckIFfavorite CheckIFfavorite = new CheckIFfavorite();
         CheckIFfavorite.execute();
-
+        comments.addTextChangedListener(mTextEditorWatcher);
 
     }
 

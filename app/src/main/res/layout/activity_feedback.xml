@@ -118,6 +118,16 @@
                 android:scrollbars="vertical"
                 android:textColorHint="#c3c3c3" />
 
+            <TextView
+                android:id="@+id/characterCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Numbers of Character Left - 100"
+                android:textColor="#9d2334"
+                android:textSize="17sp" />
             <Button
                 android:id="@+id/addToFavorite"
                 android:layout_width="wrap_content"
