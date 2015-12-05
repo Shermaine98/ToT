@@ -120,6 +120,7 @@ public class Feedback extends AppCompatActivity {
             Intent intent = new Intent();
             intent.setClass(getBaseContext(), MainActivity.class);
             startActivity(intent);
+            finish();
         } else {
             onResume();
         }

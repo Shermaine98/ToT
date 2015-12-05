@@ -1,7 +1,11 @@
 package com.example.atayansy.tot;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -17,7 +21,40 @@ public class BaseActivity extends AppCompatActivity {
     private ImageButton ibButtonFilter;
     private ImageButton ibButtonHistory;
     private ImageButton ibButtonLogOut;
+    private String location;
 
+    /**
+     * Sets the specified image buttonto the given state, while modifying or
+     * "graying-out" the icon as well
+     *
+     * @param enabled   The state of the menu item
+     * @param item      The menu item to modify
+     * @param iconResId The icon ID
+     */
+    public static void setImageButtonEnabled(Context ctxt, boolean enabled, ImageButton item,
+                                             int iconResId) {
+        item.setEnabled(enabled);
+        Drawable originalIcon = ctxt.getResources().getDrawable(iconResId);
+        Drawable icon = enabled ? originalIcon : convertDrawableToGrayScale(originalIcon);
+        item.setImageDrawable(icon);
+    }
+
+    /**
+     * Mutates and applies a filter that converts the given drawable to a Gray
+     * image. This method may be used to simulate the color of disable icons in
+     * Honeycomb's ActionBar.
+     *
+     * @return a mutated version of the given drawable with a color filter
+     * applied.
+     */
+    public static Drawable convertDrawableToGrayScale(Drawable drawable) {
+        if (drawable == null) {
+            return null;
+        }
+        Drawable res = drawable.mutate();
+        res.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+        return res;
+    }
 
     public void setUp(int resource) {
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.base_container);
@@ -29,28 +66,69 @@ public class BaseActivity extends AppCompatActivity {
         ibButtonFilter = (ImageButton) findViewById(R.id.button_filter);
         ibButtonHistory = (ImageButton) findViewById(R.id.button_history);
         ibButtonLogOut = (ImageButton) findViewById(R.id.button_logout);
+        location = getIntent().getExtras().getString("currlocation");
+
+        if (location.equalsIgnoreCase("home")) {
+            setImageButtonEnabled(getBaseContext(), false, ibButtonHome, R.drawable.ic_home);
+        } else if (location.equalsIgnoreCase("favorites")) {
+            setImageButtonEnabled(getBaseContext(), false, ibButtonFavorite, R.drawable.ic_action);
+        } else if (location.equalsIgnoreCase("filter")) {
+            setImageButtonEnabled(getBaseContext(), false, ibButtonFilter, R.drawable.dice);
+        } else if (location.equalsIgnoreCase("history")) {
+            setImageButtonEnabled(getBaseContext(), false, ibButtonHistory, R.drawable.ic_history);
+        }
 
         View.OnClickListener Navigation = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent();
                 if (v.equals(ibButtonHome)) {
-                    i.setClass(getBaseContext(), HomePage.class);
+                    if (location.equalsIgnoreCase("home")) {
+                        setImageButtonEnabled(getBaseContext(), false, ibButtonHome, R.drawable.ic_home);
+                    } else {
+                        i.setClass(getBaseContext(), HomePage.class);
+                        i.putExtra("currlocation", "home");
+                        startActivity(i);
+                        finish();
+                    }
                 } else if (v.equals(ibButtonFavorite)) {
-                    i.setClass(getBaseContext(), Favorite.class);
+                    if (location.equalsIgnoreCase("favorites")) {
+                        setImageButtonEnabled(getBaseContext(), false, ibButtonFavorite, R.drawable.ic_action);
+                    } else {
+                        i.setClass(getBaseContext(), Favorite.class);
+
+                        i.putExtra("currlocation", "favorites");
+                        startActivity(i);
+                        finish();
+                    }
                 } else if (v.equals(ibButtonFilter)) {
-                    i.setClass(getBaseContext(), FilterMenu.class);
+                    if (location.equalsIgnoreCase("filter")) {
+                        setImageButtonEnabled(getBaseContext(), false, ibButtonFilter, R.drawable.dice);
+                    } else {
+                        i.setClass(getBaseContext(), FilterMenu.class);
+                        i.putExtra("currlocation", "filter");
+                        startActivity(i);
+                        finish();
+                    }
+
                 } else if (v.equals(ibButtonHistory)) {
-                    i.setClass(getBaseContext(), History.class);
+                    if (location.equalsIgnoreCase("history")) {
+                        setImageButtonEnabled(getBaseContext(), false, ibButtonHistory, R.drawable.ic_history);
+                    } else {
+                        i.setClass(getBaseContext(), History.class);
+                        i.putExtra("currlocation", "history");
+                        startActivity(i);
+                        finish();
+                    }
                 } else if (v.equals(ibButtonLogOut)) {
                     SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.clear();
                     editor.commit();
                     i.setClass(getBaseContext(), MainActivity.class);
+                    startActivity(i);
+                    finish();
                 }
-                startActivity(i);
-                finish();
             }
         };
 
@@ -60,6 +138,7 @@ public class BaseActivity extends AppCompatActivity {
         ibButtonHistory.setOnClickListener(Navigation);
         ibButtonLogOut.setOnClickListener(Navigation);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

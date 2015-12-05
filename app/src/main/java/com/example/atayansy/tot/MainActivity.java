@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
-
-
     }
 
     //  CODES THAT ARE NOT CHANGED
@@ -188,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), HomePage.class);
+                i.putExtra("currlocation", "home");
                 startActivity(i);
                 finish();
             } else {
