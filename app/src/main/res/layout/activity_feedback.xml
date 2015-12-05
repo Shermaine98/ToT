@@ -4,111 +4,145 @@
     android:layout_height="match_parent"
     tools:context="com.example.atayansy.tot.Feedback">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/fh_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="45dp"
-        android:orientation="vertical">
+        android:layout_below="@id/Fh_ResultText"
+        android:layout_marginBottom="55dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/material_deep_teal_200"
-            android:fontFamily="sans-serif-light"
-            android:gravity="center_horizontal"
-            android:padding="8dp"
-            android:text="FEEDBACK"
-            android:textSize="30sp" />
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_fodName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center_horizontal"
-            android:textSize="22sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#986782"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_horizontal"
+                android:padding="8dp"
+                android:text="FEEDBACK"
+                android:textColor="#ebebeb"
+                android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/addToFavorite"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="#d74a4a"
-            android:text="Add to Favorite"
-            android:textAllCaps="false"
-            android:textColor="#f3f3f3" />
-
-        <TextView
-            android:id="@+id/tv_foodinfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
-            android:gravity="center_horizontal"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
-            android:gravity="center_horizontal"
-            android:textSize="17sp" />
-
-        <ImageView
-            android:id="@+id/tv_foodImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="food description" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center_horizontal"
-            android:text="Rating"
-            android:textSize="20sp" />
-
-        <ListView
-            android:id="@+id/listView_feedComments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></ListView>
-
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:max="5"
-            android:numStars="5" />
-
-        <EditText
-            android:id="@+id/tv_FeedBack"
-            android:layout_width="match_parent"
-            android:layout_height="136dp"
-            android:hint="Comments"
-            android:inputType="textMultiLine"
-            android:lines="8"
-            android:maxLines="10"
-            android:minLines="3"
-            android:scrollbars="vertical"
-            android:textColorHint="#c3c3c3" />
+            <TextView
+                android:id="@+id/tv_fodName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-bold"
+                android:textSize="24sp" />
 
 
-        <!-- TODO: Send, may pa back??-->
+            <TextView
+                android:id="@+id/feedback_restaurant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_horizontal"
+                android:textSize="20sp" />
 
-        <ImageView
+            <TextView
+                android:id="@+id/tv_foodinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_horizontal"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-light"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/tv_foodImage"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerCrop" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:max="5" />
+
+            <ListView
+                android:id="@+id/listView_feedComments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></ListView>
+
+            <EditText
+                android:id="@+id/tv_FeedBack"
+                android:layout_width="match_parent"
+                android:layout_height="136dp"
+                android:hint="Comments"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:maxLines="10"
+                android:minLines="3"
+                android:scrollbars="vertical"
+                android:textColorHint="#c3c3c3" />
+
+            <Button
+                android:id="@+id/addToFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_marginBottom="25dp"
+                android:text="Add To Favorites"
+                android:textAllCaps="false"
+                android:textColor="#f3f3f3" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="#005f5f5f">
+
+        <ImageButton
             android:id="@+id/back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:background="#005f5f5f"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/send"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_send"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:background="#005f5f5f" />
 
     </LinearLayout>
-
-
 </RelativeLayout>

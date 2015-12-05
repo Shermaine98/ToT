@@ -34,6 +34,8 @@ public class Feedback extends AppCompatActivity {
     ImageView Image;
     TextView textName;
     TextView textInfo;
+    TextView textResto;
+    TextView textPrice;
     ListView listViewC;
     CustomAdapterComments customAdapterComments;
     SharedPreferences sharedPreferences;
@@ -53,6 +55,8 @@ public class Feedback extends AppCompatActivity {
         Image = (ImageView) findViewById(R.id.tv_foodImage);
         textName = (TextView) findViewById(R.id.tv_fodName);
         textInfo = (TextView) findViewById(R.id.tv_foodinfo);
+        textResto = (TextView) findViewById(R.id.feedback_restaurant);
+        textPrice = (TextView) findViewById(R.id.tv_price);
         ratingbar = (RatingBar) findViewById(R.id.ratingBar);
         listViewC = (ListView) findViewById(R.id.listView_feedComments);
         buttonAddToFavorite = (Button) findViewById(R.id.addToFavorite);
