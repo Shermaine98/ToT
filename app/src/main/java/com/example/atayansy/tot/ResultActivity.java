@@ -52,6 +52,7 @@ public class ResultActivity extends AppCompatActivity {
                 i.putExtra("ResultFeedBack", result);
             } else if (v.equals(button_main)) {
                 i.setClass(getBaseContext(), FilterMenu.class);
+                i.putExtra("currlocation", "filter");
             }
             startActivity(i);
             finish();

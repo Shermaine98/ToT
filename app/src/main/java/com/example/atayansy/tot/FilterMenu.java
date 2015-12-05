@@ -55,6 +55,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
             Intent i = new Intent();
             if (v.equals(buttonHome)) {
                 i.setClass(getBaseContext(), HomePage.class);
+                i.putExtra("currlocation", "home");
             } else if (v.equals(buttonRandomize)) {
                 //put Extra Filter Options
                 int budget = Integer.parseInt(spinner_Bd.getSelectedItem().toString());

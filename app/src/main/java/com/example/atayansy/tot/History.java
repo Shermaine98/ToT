@@ -44,6 +44,7 @@ public class History extends BaseActivity {
             i.putExtra("FaveClicked", userHistory.get(position));
             i.putExtra("Kind", "History");
             i.putExtra("userID", userId);
+            i.putExtra("currlocation", "null");
             startActivity(i);
             finish();
         }

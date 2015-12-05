@@ -78,6 +78,7 @@ public class Feedback extends AppCompatActivity {
 
             } else if (v.equals(cancel)) {
                 i.setClass(getBaseContext(), HomePage.class);
+                i.putExtra("currlocation", "home");
                 startActivity(i);
                 finish();
             }
@@ -259,6 +260,7 @@ public class Feedback extends AppCompatActivity {
             if (s.equalsIgnoreCase("true")) {
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), History.class);
+                i.putExtra("currlocation", "history");
                 startActivity(i);
                 finish();
             } else {
