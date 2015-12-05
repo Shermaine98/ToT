@@ -56,16 +56,15 @@
             android:id="@+id/tvFh_foodImage"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
             android:layout_marginTop="15dp"
             android:padding="10dp"
+            android:scaleType="centerCrop"
             android:text="food description" />
 
         <ListView
             android:id="@+id/listview_comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
         </ListView>
     </LinearLayout>
 

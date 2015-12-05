@@ -12,14 +12,10 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.example.atayansy.tot.CustomAdapters.CustomAdapterFavorites;
 import com.example.atayansy.tot.CustomAdapters.CustomAdapterHistory;
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.Comments;
 import com.example.atayansy.tot.java.FavoriteObject;
-import com.example.atayansy.tot.java.FoodFeedFeedbacks;
-import com.example.atayansy.tot.java.HistoryObject;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -40,8 +36,19 @@ public class History extends BaseActivity {
     SharedPreferences sharedPreferences;
     int userId;
     String username;
-    private CustomAdapterHistory customAdapterHistory;
     GridView grid;
+    AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            Intent i = new Intent();
+            i.setClass(getBaseContext(), Result_Favorite_History.class);
+            i.putExtra("FaveClicked", userHistory.get(position));
+            i.putExtra("Kind", "History");
+            i.putExtra("userID", userId);
+            startActivity(i);
+        }
+    };
+    private CustomAdapterHistory customAdapterHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,18 +74,6 @@ public class History extends BaseActivity {
 
         grid.setOnItemClickListener(showItem);
     }
-
-    AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            Intent i = new Intent();
-            i.setClass(getBaseContext(), Result_Favorite_History.class);
-            i.putExtra("FaveClicked", userHistory.get(position));
-            i.putExtra("Kind", "History");
-            i.putExtra("userID", userId);
-            startActivity(i);
-        }
-    };
 
     @Override
     protected void onResume() {
@@ -148,7 +143,7 @@ public class History extends BaseActivity {
             //check if result is null
             if (!s.equalsIgnoreCase("null")) {
                 try {
-//TODO: not getting comments
+                    //TODO: not getting comments
                     JSONObject jo = new JSONObject(s);
                     JSONArray fList = jo.getJSONArray("History");
                     JSONArray cList = jo.getJSONArray("Comments");
@@ -162,25 +157,21 @@ public class History extends BaseActivity {
                                 obj.getString("foodDescription"), obj.getInt("price"), obj.getInt("foodID"));
                         foodtemp.setRestaurantName(obj.getString("RestaurantName"));
                         foodtemp.setAddress(obj.getString("address"));
-
-//                        comments1 = new ArrayList<>();
-//                        for (int j = 0; j < cList.length(); j++) {
-//                            JSONObject objC = cList.getJSONObject(j);
-//                            commentstemp = new Comments();
-//                            commentstemp.setName(objC.getString("IDUser"));
-//                            commentstemp.setFoodID(objC.getInt("foodID"));
-//                            commentstemp.setComments(objC.getString("comments"));
-//                            if (foodtemp.getFoodID() == commentstemp.getFoodID()) {
-//                                comments1.add(commentstemp);
-//                            }
-//                        }
-
-//                      foodtemp.setComments(comments1);
+                        comments1 = new ArrayList<>();
+                        for (int j = 0; j < cList.length(); j++) {
+                            JSONObject objC = cList.getJSONObject(j);
+                            commentstemp = new Comments();
+                            if (foodtemp.getFoodID() == objC.getInt("foodID")) {
+                                commentstemp.setName(objC.getString("IDUser"));
+                                commentstemp.setFoodID(objC.getInt("foodID"));
+                                commentstemp.setComments(objC.getString("comments"));
+                                comments1.add(commentstemp);
+                            }
+                        }
+                        foodtemp.setComments(comments1);
                         userHistory.add(foodtemp);
-                        Log.i("print:", userHistory.get(i).getfName());
+                        Log.i("print:", userHistory.get(i).getComments().get(i).getComments());
                     }
-
-
                     grid.setAdapter(new CustomAdapterHistory(getBaseContext(), userHistory));
 
                 } catch (JSONException e) {
