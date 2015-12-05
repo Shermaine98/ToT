@@ -44,29 +44,6 @@ public class Feedback extends AppCompatActivity {
     ImageView cancel;
     Button buttonAddToFavorite;
     EditText comments;
-    View.OnClickListener sendFeedBack = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            Intent i = new Intent();
-            if (v.equals(send)) {
-                SendComments sendComments = new SendComments();
-                sendComments.execute();
-            } else if (v.equals(cancel)) {
-                i.setClass(getBaseContext(), HomePage.class);
-            }
-            startActivity(i);
-            finish();
-        }
-    };
-    View.OnClickListener addToFavorite = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            AddThisTofavorite AddThisTofavorite = new AddThisTofavorite();
-            AddThisTofavorite.execute();
-
-        }
-    };
     private FoodFeedFeedbacks feedbackResult;
 
     @Override
@@ -116,6 +93,31 @@ public class Feedback extends AppCompatActivity {
         // buttonAddToFavorite.setOnClickListener(addToFavorite);
 
     }
+
+    View.OnClickListener sendFeedBack = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent i = new Intent();
+            if (v.equals(send)) {
+                SendComments sendComments = new SendComments();
+                sendComments.execute();
+            } else if (v.equals(cancel)) {
+                i.setClass(getBaseContext(), HomePage.class);
+            }
+            startActivity(i);
+            finish();
+        }
+    };
+
+    View.OnClickListener addToFavorite = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            AddThisTofavorite AddThisTofavorite = new AddThisTofavorite();
+            AddThisTofavorite.execute();
+
+        }
+    };
 
     @Override
     protected void onResume() {

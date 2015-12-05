@@ -31,8 +31,19 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        initialize();
 
+        resultFoodName = (TextView) findViewById(R.id.tv_fodName);
+        resultDescription = (TextView) findViewById(R.id.tv_foodescription);
+        resultPrice = (TextView) findViewById(R.id.tv_price);
+        resultResto = (TextView) findViewById(R.id.tv_restaurant);
+        button_eat = (Button) findViewById(R.id.button_eat);
+        button_main = (ImageButton) findViewById(R.id.button_main);
+        imageView = (ImageView) findViewById(R.id.tv_foodImage);
+        listView = (ListView) findViewById(R.id.evFoodComment_Result);
+        rating = (RatingBar) findViewById(R.id.randomize_rating);
+
+        button_eat.setOnClickListener(decision);
+        button_main.setOnClickListener(decision);
         result = (FoodFeedFeedbacks) getIntent().getSerializableExtra("Result");
 
         if (result.equals(null)) {
@@ -53,24 +64,6 @@ public class ResultActivity extends AppCompatActivity {
             customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, result.getComments());
             listView.setAdapter(customAdapterComments);
         }
-    }
-
-    /**
-     * Clean codes
-     */
-    protected void initialize(){
-        resultFoodName = (TextView) findViewById(R.id.tv_fodName);
-        resultDescription = (TextView) findViewById(R.id.tv_foodescription);
-        resultPrice = (TextView) findViewById(R.id.tv_price);
-        resultResto = (TextView) findViewById(R.id.tv_restaurant);
-        button_eat = (Button) findViewById(R.id.button_eat);
-        button_main = (ImageButton) findViewById(R.id.button_main);
-        imageView = (ImageView) findViewById(R.id.tv_foodImage);
-        listView = (ListView) findViewById(R.id.evFoodComment_Result);
-        rating = (RatingBar) findViewById(R.id.randomize_rating);
-
-        button_eat.setOnClickListener(decision);
-        button_main.setOnClickListener(decision);
     }
 
     View.OnClickListener decision = new View.OnClickListener() {
