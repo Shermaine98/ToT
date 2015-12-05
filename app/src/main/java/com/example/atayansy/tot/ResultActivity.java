@@ -18,7 +18,7 @@ import com.example.atayansy.tot.java.ImageResources;
 
 public class ResultActivity extends AppCompatActivity {
 
-    ImageButton button_eat;
+    Button button_eat;
     ImageButton button_main;
     ImageView imageView;
     TextView resultFoodName, resultDescription, resultPrice;
@@ -47,7 +47,7 @@ public class ResultActivity extends AppCompatActivity {
         resultFoodName = (TextView) findViewById(R.id.tv_fodName);
         resultDescription = (TextView) findViewById(R.id.tv_foodescription);
         resultPrice = (TextView) findViewById(R.id.tv_price);
-        button_eat = (ImageButton) findViewById(R.id.button_eat);
+        button_eat = (Button) findViewById(R.id.button_eat);
         button_main = (ImageButton) findViewById(R.id.button_main);
         imageView = (ImageView) findViewById(R.id.tv_foodImage);
         listView = (ListView) findViewById(R.id.evFoodComment_Result);
