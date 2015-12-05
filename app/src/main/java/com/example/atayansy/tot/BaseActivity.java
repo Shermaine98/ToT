@@ -49,7 +49,6 @@ public class BaseActivity extends AppCompatActivity {
                     editor.commit();
                     i.setClass(getBaseContext(), MainActivity.class);
                 }
-
                 startActivity(i);
                 finish();
             }

@@ -1,10 +1,8 @@
 package com.example.atayansy.tot;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -15,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.Comments;
-import com.example.atayansy.tot.java.Food;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -32,16 +29,10 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Randomize extends AppCompatActivity {
-    ArrayList<FoodFeedFeedbacks> FoodList;
     ImageView iv_randomize;
     TextView tv_randomize;
-    ArrayList<FoodFeedFeedbacks> FilteredResult;
-    int result;
-    boolean x = true;
     Random random;
-    none none;
     FoodFeedFeedbacks foodTempResult;
-    private Handler handler = new Handler();
     private double Distance;
     private double CurrLatitude;
     private double CurrLongitude;
@@ -61,6 +52,8 @@ public class Randomize extends AppCompatActivity {
         //Get Chosen
         location_spinner = getIntent().getExtras().getBoolean("location_spinner");
         budget_spinner = getIntent().getExtras().getBoolean("Budget_spinner");
+        sort();
+
 
         //printing Console
         //TODO: delete
@@ -70,15 +63,13 @@ public class Randomize extends AppCompatActivity {
         Log.e("Distance", String.valueOf(Distance));
         Log.e("Latitude", String.valueOf(CurrLatitude));
         Log.e("Longitude", String.valueOf(CurrLongitude));
-        sort();
+
     }
 
     //Sorting
     public void sort() {
-
-        FilteredResult = new ArrayList<>();
         if (location_spinner == false && budget_spinner == false) {
-            none = new none();
+            none none = new none();
             none.execute();
         }
         //sort/filter budget then randomize
@@ -88,42 +79,17 @@ public class Randomize extends AppCompatActivity {
         }
         //sort/filter location then randomize
         else if (location_spinner == true && budget_spinner == false) {
-            filterLocation();
+            randomizeByLocation randomizeByLocation = new randomizeByLocation();
+            randomizeByLocation.execute();
         } else {
             //sort/filter location and budget randmize
-            //TODO:
+            randomizeByBoth randomizeByBoth = new randomizeByBoth();
+            randomizeByBoth.execute();
 
         }
 
     }
 
-    //sort/filter location then randomize
-    public void filterLocation() {
-        Location currentLocation = new Location("Current Location");
-        currentLocation.setLatitude(CurrLatitude);
-        currentLocation.setLongitude(CurrLongitude);
-
-        for (int i = 0; i < FoodList.size(); i++) {
-            Location otherLocation = new Location("Other Location");
-            otherLocation.setLatitude(FoodList.get(i).getLatitude());
-            otherLocation.setLongitude(FoodList.get(i).getLongtitude());
-            float distanceResult = currentLocation.distanceTo(otherLocation);
-            if (Distance <= distanceResult) {
-                FilteredResult.add(FoodList.get(i));
-                x = true;
-            } else {
-                x = false;
-            }
-        }
-        if (x) {
-            result = random.nextInt(FilteredResult.size());
-            //   intent(FilteredResult.get();
-        } else {
-            intent();
-        }
-    }
-
-    //Filter by location
 
     //Result intent
     public void Result(String s) {
@@ -132,7 +98,6 @@ public class Randomize extends AppCompatActivity {
             foodTempResult = new FoodFeedFeedbacks();
             try {
                 //getting result body and coverting to JSON
-
                 JSONObject jo = new JSONObject(s);
                 //Setting Json variable
                 foodTempResult.setFoodID(jo.getInt("foodID"));
@@ -161,24 +126,6 @@ public class Randomize extends AppCompatActivity {
     }
     //end sort
 
-    public void intent(ArrayList<Food> FoodResult) {
-        Intent i = new Intent();
-        i.setClass(getBaseContext(), ResultActivity.class);
-        i.putExtra("Result", FoodResult.get(result).getFoodName());
-        startActivity(i);
-        finish();
-    }
-    // end none
-
-    public void intent() {
-        Intent i = new Intent();
-        i.setClass(getBaseContext(), ResultActivity.class);
-        i.putExtra("Result", "No Result");
-        startActivity(i);
-        finish();
-    }
-    // end filter by budget
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -201,8 +148,66 @@ public class Randomize extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Filter by both
+    private class randomizeByBoth extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Distance = getIntent().getExtras().getFloat("Distance");
+            CurrLatitude = getIntent().getExtras().getDouble("Latitude");
+            CurrLongitude = getIntent().getExtras().getDouble("Longitude");
+            Budget = getIntent().getExtras().getInt("Budget");
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            OkHttpClient okHttpClient = new OkHttpClient();
+
+            // Stop Activity?
+            okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
+
+            //Setting Parameters
+
+            RequestBody requestbody = new FormEncodingBuilder()
+                    .add("filterBy", "Both").add("distance", String.valueOf(Distance))
+                    .add("longitude", String.valueOf(CurrLongitude))
+                    .add("latitude", String.valueOf(CurrLatitude))
+                    .add("price", String.valueOf(Distance)).build();
+
+            Request request = null;
+            Response response = null;
+
+            //Connecting to Servlet
+            request = new Request.Builder().url(url.ip + "RandomizeServlet").post(requestbody).build();
+            String result = "";
+            try {
+                //Run
+                response = okHttpClient.newCall(request).execute();
+                //get the page body
+                result = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.i("ENTER", "POSTEXCUTE");
+
+        }
+    }
+
+    //end filter by both
     //Filter by Location
-    private class filterByLocation extends AsyncTask<String, Void, String> {
+    private class randomizeByLocation extends AsyncTask<String, Void, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -226,9 +231,11 @@ public class Randomize extends AppCompatActivity {
             okHttpClient.setConnectTimeout(100, TimeUnit.SECONDS);
 
             //Setting Parameters
-
             RequestBody requestbody = new FormEncodingBuilder()
-                    .add("filterBy", "Both").build();
+                    .add("filterBy", "Location")
+                    .add("longitude", String.valueOf(CurrLongitude))
+                    .add("latitude", String.valueOf(CurrLatitude))
+                    .add("distance", String.valueOf(Distance)).build();
 
             Request request = null;
             Response response = null;
@@ -320,7 +327,7 @@ public class Randomize extends AppCompatActivity {
             //Setting Parameters
 
             RequestBody requestbody = new FormEncodingBuilder()
-                    .add("filterBy", "price").build();
+                    .add("filterBy", "price").add("price", String.valueOf(Budget)).build();
 
             Request request = null;
             Response response = null;
@@ -348,4 +355,5 @@ public class Randomize extends AppCompatActivity {
 
         }
     }
+
 }

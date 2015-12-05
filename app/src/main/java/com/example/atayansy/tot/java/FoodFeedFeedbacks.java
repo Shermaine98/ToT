@@ -14,8 +14,8 @@ public class FoodFeedFeedbacks implements Serializable {
     private String location;
     private String type;
     private int image;
-    private double latitue;
-    private double longtitude;
+    private float latitude;
+    private float longitude;
     private int foodID;
     private double rating;
     private int icon;
@@ -102,19 +102,19 @@ public class FoodFeedFeedbacks implements Serializable {
     }
 
     public double getLatitude() {
-        return latitue;
+        return latitude;
     }
 
-    public void setLatitude(double latitue) {
-        this.latitue = latitue;
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 
-    public double getLongtitude() {
-        return longtitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(double longtitude) {
-        this.longtitude = longtitude;
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 
     public int getFoodID() {
