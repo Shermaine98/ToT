@@ -1,6 +1,7 @@
 package com.example.atayansy.tot;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.example.atayansy.tot.URL.url;
 import com.example.atayansy.tot.java.Comments;
 import com.example.atayansy.tot.java.FoodFeedFeedbacks;
+import com.example.atayansy.tot.java.ImageResources;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -82,15 +84,12 @@ public class Randomize extends AppCompatActivity {
             randomizeByLocation randomizeByLocation = new randomizeByLocation();
             randomizeByLocation.execute();
         } else {
-            //sort/filter location and budget randmize
+            //randomize both
             randomizeByBoth randomizeByBoth = new randomizeByBoth();
             randomizeByBoth.execute();
-
         }
 
     }
-
-
     //Result intent
     public void Result(String s) {
         //check if result is null
@@ -153,7 +152,7 @@ public class Randomize extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Distance = getIntent().getExtras().getFloat("Distance");
+            Distance = getIntent().getExtras().getDouble("Distance");
             CurrLatitude = getIntent().getExtras().getDouble("Latitude");
             CurrLongitude = getIntent().getExtras().getDouble("Longitude");
             Budget = getIntent().getExtras().getInt("Budget");
@@ -193,7 +192,6 @@ public class Randomize extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return result;
         }
 
@@ -201,24 +199,28 @@ public class Randomize extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("ENTER", "POSTEXCUTE");
+            Result(s);
 
         }
     }
 
     //end filter by both
     //Filter by Location
-    private class randomizeByLocation extends AsyncTask<String, Void, String> {
+    private class randomizeByLocation extends AsyncTask<String, Integer, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Distance = getIntent().getExtras().getFloat("Distance");
+            Distance = getIntent().getExtras().getDouble("Distance");
             CurrLatitude = getIntent().getExtras().getDouble("Latitude");
             CurrLongitude = getIntent().getExtras().getDouble("Longitude");
         }
 
         @Override
-        protected void onProgressUpdate(Void... values) {
+        protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+            ImageResources ir = new ImageResources();
+            iv_randomize.setBackgroundResource(ir.getImage(values[0], getBaseContext()));
+            AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
         }
 
         @Override
@@ -259,6 +261,7 @@ public class Randomize extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("ENTER", "POSTEXCUTE");
+            Result(s);
 
         }
     }

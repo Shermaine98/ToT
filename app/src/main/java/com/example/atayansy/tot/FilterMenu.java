@@ -35,9 +35,61 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
     AppLocationService appLocationService;
     ImageButton buttonHome;
     ImageButton buttonRandomize;
-
+    // Redirect
+    //location end
+    Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (spinner_Bd.isEnabled()) {
+                spinner_Bd.setEnabled(false);
+            } else {
+                spinner_Bd.setEnabled(true);
+            }
+        }
+    };
     private double latitude;
     private double longitude;
+    View.OnClickListener Navigation = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent();
+            if (v.equals(buttonHome)) {
+                i.setClass(getBaseContext(), HomePage.class);
+            } else if (v.equals(buttonRandomize)) {
+                //put Extra Filter Options
+                int budget = Integer.parseInt(spinner_Bd.getSelectedItem().toString());
+                String distancevalue = spinner_lt.getSelectedItem().toString();
+                distancevalue = distancevalue.replaceAll("meters", "");
+                double distance = Double.parseDouble(distancevalue);
+                //return spinner
+                i.putExtra("location_spinner", spinner_lt.isEnabled());
+                i.putExtra("Budget_spinner", spinner_Bd.isEnabled());
+                //
+                i.putExtra("Budget", budget);
+                i.putExtra("Distance", distance);
+                i.putExtra("Latitude", latitude);
+                i.putExtra("Longitude", longitude);
+                i.setClass(getBaseContext(), Randomize.class);
+
+            }
+            startActivity(i);
+            finish();
+        }
+    };
+    Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (spinner_lt.isEnabled()) {
+                spinner_lt.setEnabled(false);
+                tvAddress.setVisibility(View.INVISIBLE);
+            } else {
+                spinner_lt.setEnabled(true);
+                tvAddress.setVisibility(View.VISIBLE);
+                location();
+            }
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,62 +133,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         buttonRandomize.setOnClickListener(Navigation);
 
     }
-
-    // Redirect
-    //location end
-    Spinner.OnClickListener switchSpinBd = new Spinner.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (spinner_Bd.isEnabled()) {
-                spinner_Bd.setEnabled(false);
-            } else {
-                spinner_Bd.setEnabled(true);
-            }
-        }
-    };
-
-    View.OnClickListener Navigation = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent();
-            if (v.equals(buttonHome)) {
-                i.setClass(getBaseContext(), HomePage.class);
-            } else if (v.equals(buttonRandomize)) {
-                //put Extra Filter Options
-                int budget = Integer.parseInt(spinner_Bd.getSelectedItem().toString());
-                String distancevalue = spinner_lt.getSelectedItem().toString();
-                distancevalue = distancevalue.replaceAll("meters", "");
-                float distance = Float.parseFloat(distancevalue);
-                //return spinner
-                i.putExtra("location_spinner", spinner_lt.isEnabled());
-                i.putExtra("Budget_spinner", spinner_Bd.isEnabled());
-                //
-                i.putExtra("Budget", budget);
-                i.putExtra("Distance", distance);
-                i.putExtra("Latitude", latitude);
-                i.putExtra("Longitude", longitude);
-                i.setClass(getBaseContext(), Randomize.class);
-
-            }
-            startActivity(i);
-            finish();
-        }
-    };
-
-    Spinner.OnClickListener switchSpinLt = new Spinner.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (spinner_lt.isEnabled()) {
-                spinner_lt.setEnabled(false);
-                tvAddress.setVisibility(View.INVISIBLE);
-            } else {
-                spinner_lt.setEnabled(true);
-                tvAddress.setVisibility(View.VISIBLE);
-                location();
-            }
-        }
-
-    };
 
     public void location() {
 
