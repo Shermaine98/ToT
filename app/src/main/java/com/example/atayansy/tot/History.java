@@ -163,19 +163,19 @@ public class History extends BaseActivity {
                             foodtemp.setRestaurantName(obj.getString("RestaurantName"));
                             foodtemp.setAddress(obj.getString("address"));
 
-                            comments = new ArrayList<>();
-                            for (int j = 0; j < cList.length(); j++) {
-                                JSONObject objC = cList.getJSONObject(j);
-                                commentstemp = new Comments();
-                                if (foodtemp.getFoodID() == objC.getInt("foodID")) {
-                                    commentstemp.setName(objC.getString("IDUser"));
-                                    commentstemp.setFoodID(objC.getInt("foodID"));
-                                    commentstemp.setComments(objC.getString("comments"));
-                                    comments.add(commentstemp);
-                                    Log.i("print:", comments.get(j).getComments());
-                                }
-                            }
-                            foodtemp.setComments(comments);
+//                            comments = new ArrayList<>();
+//                            for (int j = 0; j < cList.length(); j++) {
+//                                JSONObject objC = cList.getJSONObject(j);
+//                                commentstemp = new Comments();
+//                                if (foodtemp.getFoodID() == objC.getInt("foodID")) {
+//                                    commentstemp.setName(objC.getString("IDUser"));
+//                                    commentstemp.setFoodID(objC.getInt("foodID"));
+//                                    commentstemp.setComments(objC.getString("comments"));
+//                                    comments.add(commentstemp);
+//                                    Log.i("print:", comments.get(j).getComments());
+//                                }
+//                            }
+//                            foodtemp.setComments(comments);
                             userHistory.add(foodtemp);
                             Log.i("print:", userHistory.get(i).getfName());
                         }
