@@ -7,8 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginBottom="45dp">
+        android:layout_marginBottom="45dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -27,16 +27,24 @@
             android:layout_marginTop="15dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center_horizontal"
-            android:text="foodName"
             android:textSize="22sp" />
 
+        <Button
+            android:id="@+id/addToFavorite"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="#d74a4a"
+            android:text="Add to Favorite"
+            android:textAllCaps="false"
+            android:textColor="#f3f3f3" />
+
         <TextView
-            android:id="@+id/tv_foodescription"
+            android:id="@+id/tv_foodinfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
             android:gravity="center_horizontal"
-            android:text="food description"
             android:textSize="17sp" />
 
         <TextView
@@ -45,7 +53,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
             android:gravity="center_horizontal"
-            android:text="Price: 100"
             android:textSize="17sp" />
 
         <ImageView
@@ -53,38 +60,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/food_temp1"
             android:text="food description" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:textSize="20sp"
             android:gravity="center_horizontal"
-            android:text="Rating" />
+            android:text="Rating"
+            android:textSize="20sp" />
+
+        <ListView
+            android:id="@+id/listView_feedComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ListView>
 
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:numStars="5"
-            android:rating="2.4" />
+            android:max="5"
+            android:numStars="5" />
 
         <EditText
             android:id="@+id/tv_FeedBack"
             android:layout_width="match_parent"
             android:layout_height="136dp"
             android:hint="Comments"
-            android:textColorHint="#c3c3c3"
             android:inputType="textMultiLine"
             android:lines="8"
             android:maxLines="10"
             android:minLines="3"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:textColorHint="#c3c3c3" />
 
+
+        <!-- TODO: Send, may pa back??-->
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
+
 
 </RelativeLayout>

@@ -113,6 +113,7 @@ public class Randomize extends AppCompatActivity {
                 Log.i("this", foodTempResult.getFoodName());
             } catch (JSONException e) {
             }
+
             Intent i = new Intent();
             i.putExtra("Result", foodTempResult);
             i.setClass(getBaseContext(), ResultActivity.class);
