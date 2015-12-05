@@ -10,13 +10,19 @@ public class FavoriteObject implements Serializable {
 
     private int fPictureIcon;
     private String fName;
-    private float fRatingStar;
+    private double fRatingStar;
     private String description;
     private int price;
     private int foodID;
+    private String address;
+    private String restaurantName;
     private ArrayList<Comments> comments;
 
-    public FavoriteObject(int fPictureIcon, String fName, float fRatingStar, String description, int price, int foodID) {
+    public FavoriteObject(){
+
+    }
+
+    public FavoriteObject(int fPictureIcon, String fName, double fRatingStar, String description, int price, int foodID) {
         this.fPictureIcon = fPictureIcon;
         this.fName = fName;
         this.fRatingStar = fRatingStar;
@@ -41,7 +47,7 @@ public class FavoriteObject implements Serializable {
         this.fName = fName;
     }
 
-    public float getfRatingStar() {
+    public double getfRatingStar() {
         return fRatingStar;
     }
 
@@ -79,5 +85,21 @@ public class FavoriteObject implements Serializable {
 
     public void setComments(ArrayList<Comments> comments) {
         this.comments = comments;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 }

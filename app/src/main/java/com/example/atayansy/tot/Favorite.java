@@ -36,16 +36,6 @@ public class Favorite extends BaseActivity {
     int userId;
     String username;
     GridView gridview;
-    AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            Intent i = new Intent();
-            i.setClass(getBaseContext(), Result_Favorite_History.class);
-            i.putExtra("FaveClicked", userFavorites.get(position));
-            i.putExtra("userID", userId);
-            startActivity(i);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +63,17 @@ public class Favorite extends BaseActivity {
 
 
     }
+
+    AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            Intent i = new Intent();
+            i.setClass(getBaseContext(), Result_Favorite_History.class);
+            i.putExtra("FaveClicked", userFavorites.get(position));
+            i.putExtra("userID", userId);
+            startActivity(i);
+        }
+    };
 
     @Override
     protected void onResume() {
