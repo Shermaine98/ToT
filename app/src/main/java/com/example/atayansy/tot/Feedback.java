@@ -104,7 +104,7 @@ public class Feedback extends AppCompatActivity {
         Image.setImageResource(imageResources.getImage(feedbackResult.getImage(), getBaseContext()));
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, feedbackResult.getComments());
         listViewC.setAdapter(customAdapterComments);
-        ratingbar.setRating(Float.parseFloat(String.valueOf(3.5)));
+        ratingbar.setRating(Float.parseFloat(String.valueOf(feedbackResult.getRating())));
         addListenerOnRatingBar();
 
         send.setOnClickListener(sendFeedBack);
