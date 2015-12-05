@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 
 public class History extends BaseActivity {
     ArrayList<FavoriteObject> userHistory;
-    ArrayList<Comments> comments;
+    ArrayList<Comments> comments1;
     SharedPreferences sharedPreferences;
     int userId;
     String username;
@@ -147,40 +147,44 @@ public class History extends BaseActivity {
             super.onPostExecute(s);
             //check if result is null
             if (!s.equalsIgnoreCase("null")) {
-                    try {
+                try {
 //TODO: not getting arraylist
-                        JSONObject jo = new JSONObject(s);
-                        JSONArray fList = jo.getJSONArray("History");
-                        JSONArray cList = jo.getJSONArray("Comments");
-                        FavoriteObject foodtemp;
-                        Comments commentstemp;
+                    JSONObject jo = new JSONObject(s);
+                    JSONArray fList = jo.getJSONArray("History");
+                    JSONArray cList = jo.getJSONArray("Comments");
+                    FavoriteObject foodtemp;
+                    Comments commentstemp;
 
-                        for (int i = 0; i < fList.length(); i++) {
-                            JSONObject obj = fList.getJSONObject(i);
-                            foodtemp = new FavoriteObject(
-                                    obj.getInt("picture"), obj.getString("foodName"), obj.getDouble("rating"),
-                                    obj.getString("foodDescription"), obj.getInt("price"), obj.getInt("foodID"));
-                            foodtemp.setRestaurantName(obj.getString("RestaurantName"));
-                            foodtemp.setAddress(obj.getString("address"));
+                    for (int i = 0; i < fList.length(); i++) {
+                        JSONObject obj = fList.getJSONObject(i);
+                        foodtemp = new FavoriteObject(
+                                obj.getInt("picture"), obj.getString("foodName"), obj.getDouble("rating"),
+                                obj.getString("foodDescription"), obj.getInt("price"), obj.getInt("foodID"));
+                        foodtemp.setRestaurantName(obj.getString("RestaurantName"));
+                        foodtemp.setAddress(obj.getString("address"));
 
-//                            comments = new ArrayList<>();
-//                            for (int j = 0; j < cList.length(); j++) {
-//                                JSONObject objC = cList.getJSONObject(j);
-//                                commentstemp = new Comments();
-//                                if (foodtemp.getFoodID() == objC.getInt("foodID")) {
-//                                    commentstemp.setName(objC.getString("IDUser"));
-//                                    commentstemp.setFoodID(objC.getInt("foodID"));
-//                                    commentstemp.setComments(objC.getString("comments"));
-//                                    comments.add(commentstemp);
-//                                    Log.i("print:", comments.get(j).getComments());
-//                                }
-//                            }
-//                            foodtemp.setComments(comments);
-                            userHistory.add(foodtemp);
-                            Log.i("print:", userHistory.get(i).getfName());
+                        comments1 = new ArrayList<>();
+                        for (int j = 0; j < cList.length(); j++) {
+                            JSONObject objC = cList.getJSONObject(j);
+                            commentstemp = new Comments();
+                            commentstemp.setName(objC.getString("IDUser"));
+                            commentstemp.setFoodID(objC.getInt("foodID"));
+                            commentstemp.setComments(objC.getString("comments"));
+                            if (foodtemp.getFoodID()==commentstemp.getFoodID()) {
+                                comments1.add(commentstemp);
+                            }
                         }
 
-                        grid.setAdapter(new CustomAdapterHistory(getBaseContext(), userHistory));
+                        if (comments1 != null)
+                            foodtemp.setComments(comments1);
+                        userHistory.add(foodtemp);
+                        Log.i("print:", userHistory.get(i).getfName());
+                        for (int x = 0; x < userHistory.get(i).getComments().size(); x++)
+                            Log.i("print:", userHistory.get(i).getComments().get(i).getName() + "--" + userHistory.get(i).getComments().get(x).getComments());
+                    }
+
+
+                    grid.setAdapter(new CustomAdapterHistory(getBaseContext(), userHistory));
 
                 } catch (JSONException e) {
                 }
