@@ -45,6 +45,7 @@ public class History extends BaseActivity {
             i.putExtra("Kind", "History");
             i.putExtra("userID", userId);
             startActivity(i);
+            finish();
         }
     };
     private CustomAdapterHistory customAdapterHistory;
