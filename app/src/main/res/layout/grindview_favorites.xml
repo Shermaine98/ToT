@@ -21,6 +21,7 @@
         android:background="#97000000"
         android:textSize="15sp"
         android:padding="3dp"
+        android:textAllCaps="true"
         android:textColor="#FFF" />
 
     <!--<TextView-->
