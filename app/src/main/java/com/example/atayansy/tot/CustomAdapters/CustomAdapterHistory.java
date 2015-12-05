@@ -1,49 +1,74 @@
 package com.example.atayansy.tot.CustomAdapters;
 
-import android.app.Service;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.atayansy.tot.R;
-import com.example.atayansy.tot.java.HistoryObject;
+import com.example.atayansy.tot.java.FavoriteObject;
+import com.example.atayansy.tot.java.ImageResources;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by shermainesy on 10/10/15.
+ * Created by Geraldine Atayan on 12/5/15.
  */
-public class CustomAdapterHistory extends ArrayAdapter<HistoryObject> {
-    ArrayList<HistoryObject> histories;
+public class CustomAdapterHistory extends BaseAdapter {
 
-    public CustomAdapterHistory(Context context, int resource, List<HistoryObject> objects) {
-        super(context, resource, objects);
-        this.histories = (ArrayList<HistoryObject>) objects;
+    private static LayoutInflater inflater = null;
+    private Context context;
+    private ArrayList<FavoriteObject> historyObjects;
 
+    public CustomAdapterHistory(Context context, ArrayList<FavoriteObject> objects) {
+        this.context = context;
+        this.historyObjects = objects;
+        inflater = (LayoutInflater) context.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.history_favorite_list_view, parent, false);
-        }
+    public int getCount() {
+        return historyObjects.size();
+    }
 
-        //customize convertview to change the text, and the icon
-        TextView foodName = (TextView) convertView.findViewById(R.id.tv_FoodName);
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_foodPic);
-        RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.rb_star);
+    @Override
+    public Object getItem(int position) {
+        return position;
+    }
 
-        foodName.setText(histories.get(position).gethName());
-        imageView.setImageResource(histories.get(position).gethPictureIcon());
-        ratingBar.setRating(histories.get(position).getrRatingStar());
-        return convertView;
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        Holder holder = new Holder();
+        View rowView;
+
+        rowView = inflater.inflate(R.layout.gridview_history, null);
+
+        holder.img = (ImageView) rowView.findViewById(R.id.gh_image);
+        holder.foodName = (TextView) rowView.findViewById(R.id.gh_foodName);
+        holder.foodPrice = (TextView) rowView.findViewById(R.id.gh_price);
+        ImageResources ir = new ImageResources();
+
+
+        holder.img.setImageResource(ir.getImage(historyObjects.get(position).getfPictureIcon(), context));
+        holder.foodName.setText(historyObjects.get(position).getfName());
+        holder.foodPrice.setText("P" + String.valueOf(historyObjects.get(position).getPrice()) + ".00");
+
+
+        return rowView;
+    }
+
+    public class Holder {
+        TextView foodName;
+        TextView foodPrice;
+        ImageView img;
     }
 }
