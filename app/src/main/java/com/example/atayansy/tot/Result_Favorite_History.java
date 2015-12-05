@@ -81,8 +81,9 @@ public class Result_Favorite_History extends BaseActivity {
         resto.setText(clicked.getRestaurantName() + ", " + clicked.getAddress());
         desc.setText(clicked.getDescription());
         price.setText("P" + clicked.getPrice() + ".00");
-        noComments.setText("Comments("+clicked.getComments().size()+")");
+        noComments.setText("Comments(" + clicked.getComments().size() + ")");
         rating.setRating(Float.parseFloat(String.valueOf(clicked.getfRatingStar())));
+        Log.i("Rating", String.valueOf(clicked.getfRatingStar()));
 
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, clicked.getComments());
         listView.setAdapter(customAdapterComments);
@@ -99,13 +100,13 @@ public class Result_Favorite_History extends BaseActivity {
             listView.setVisibility(View.GONE);
         }
 
-        fh_scroll.scrollTo(0, 0);
-
         if(kind.equalsIgnoreCase("history"))
             remove.setVisibility(View.GONE);
 
         image.setImageResource(ir.getImage(clicked.getfPictureIcon(), getBaseContext()));
         remove.setOnClickListener(removeItem);
+
+        fh_scroll.scrollTo(0, 0);
     }
 
     private class RemoveFromFavorites extends AsyncTask<String, Void, String> {
