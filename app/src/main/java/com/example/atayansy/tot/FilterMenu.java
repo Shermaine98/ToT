@@ -70,7 +70,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
                 i.putExtra("Latitude", latitude);
                 i.putExtra("Longitude", longitude);
                 i.setClass(getBaseContext(), Randomize.class);
-
             }
             startActivity(i);
             finish();

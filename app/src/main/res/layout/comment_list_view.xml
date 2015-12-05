@@ -10,17 +10,16 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:fontFamily="sans-serif-bold"
-        android:textSize="15sp"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/tv_userComments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="2dp"
         android:layout_marginLeft="15dp"
-        android:textSize="14sp"
-        android:fontFamily="sans-serif-light" />
-
+        android:fontFamily="sans-serif-light"
+        android:padding="2dp"
+        android:textSize="14sp" />
 
 </LinearLayout>
