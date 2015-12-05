@@ -176,7 +176,7 @@ public class Randomize extends AppCompatActivity {
                     .add("filterBy", "Both").add("distance", String.valueOf(Distance))
                     .add("longitude", String.valueOf(CurrLongitude))
                     .add("latitude", String.valueOf(CurrLatitude))
-                    .add("price", String.valueOf(Distance)).build();
+                    .add("price", String.valueOf(Budget)).build();
 
             Request request = null;
             Response response = null;
