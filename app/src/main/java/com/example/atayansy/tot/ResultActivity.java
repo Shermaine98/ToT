@@ -106,7 +106,7 @@ public class ResultActivity extends AppCompatActivity {
             imageView.setImageResource(imageResources.getImage(result.getImage(), getBaseContext()));
             customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, result.getComments());
             listView.setAdapter(customAdapterComments);
-            numberofComments.setText(String.valueOf(result.getComments().size()));
+            numberofComments.setText("Comments(" + result.getComments().size() + ")");
             AddToHistory AddToHistory = new AddToHistory();
             AddToHistory.execute();
 

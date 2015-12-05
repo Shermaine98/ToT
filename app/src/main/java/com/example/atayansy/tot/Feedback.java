@@ -116,7 +116,7 @@ public class Feedback extends AppCompatActivity {
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, feedbackResult.getComments());
         listViewC.setAdapter(customAdapterComments);
         ratingbar.setRating(Float.parseFloat(String.valueOf(feedbackResult.getRating())));
-        numberofComments.setText(String.valueOf(feedbackResult.getComments()));
+        numberofComments.setText("Comments(" + feedbackResult.getComments().size() + ")");
         ViewGroup.LayoutParams lp = listViewC.getLayoutParams();
         if (feedbackResult.getComments().size() != 0) {
             if (feedbackResult.getComments().size() <= 3) {
