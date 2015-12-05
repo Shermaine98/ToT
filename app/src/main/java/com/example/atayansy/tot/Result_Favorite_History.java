@@ -1,13 +1,17 @@
 package com.example.atayansy.tot;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +32,11 @@ public class Result_Favorite_History extends BaseActivity {
     TextView name;
     TextView desc;
     TextView price;
+    TextView resto;
     TextView noComments;
     ImageView image;
     Button remove;
+    ScrollView fh_scroll;
     int userID;
     ListView listView;
     String kind;
@@ -59,18 +65,36 @@ public class Result_Favorite_History extends BaseActivity {
         remove = (Button) findViewById(R.id.btn_removeFromFave);
         listView = (ListView) findViewById(R.id.listview_comments);
         noComments = (TextView) findViewById(R.id.NumberofComments);
+        resto = (TextView) findViewById(R.id.tvfh_restaurant);
+        fh_scroll = (ScrollView) findViewById(R.id.fh_scroll);
 
         clicked = (FavoriteObject) getIntent().getSerializableExtra("FaveClicked");
         kind = getIntent().getExtras().getString("Kind");
         userID = getIntent().getExtras().getInt("userID");
         Log.i("userID", String.valueOf(userID));
         Log.i("foodID", String.valueOf(clicked.getFoodID()));
+        desc.setTypeface(desc.getTypeface(), Typeface.BOLD_ITALIC);
         name.setText(clicked.getfName());
+        resto.setText(clicked.getRestaurantName() + ", " + clicked.getAddress());
         desc.setText(clicked.getDescription());
         price.setText("P" + clicked.getPrice() + ".00");
         noComments.setText("Comments("+clicked.getComments().size()+")");
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, clicked.getComments());
         listView.setAdapter(customAdapterComments);
+
+        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) listView.getLayoutParams();
+        if(clicked.getComments().size()!=0) {
+            if (clicked.getComments().size() <= 3) {
+                lp.height = 200;
+            } else {
+                lp.height = 350;
+            }
+            listView.setLayoutParams(lp);
+        }else{
+            listView.setVisibility(View.GONE);
+        }
+
+        fh_scroll.scrollTo(0, 0);
 
         if(kind.equalsIgnoreCase("history"))
             remove.setVisibility(View.GONE);
@@ -132,4 +156,6 @@ public class Result_Favorite_History extends BaseActivity {
         }
 
     }
+
+
 }
