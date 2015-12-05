@@ -45,6 +45,7 @@ public class Favorite extends BaseActivity {
             i.putExtra("Kind", "Favorite");
             i.putExtra("userID", userId);
             startActivity(i);
+            finish();
         }
     };
 
