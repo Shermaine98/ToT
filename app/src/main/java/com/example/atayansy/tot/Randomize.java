@@ -55,17 +55,7 @@ public class Randomize extends AppCompatActivity {
         location_spinner = getIntent().getExtras().getBoolean("location_spinner");
         budget_spinner = getIntent().getExtras().getBoolean("Budget_spinner");
         sort();
-
-
-        //printing Console
-        //TODO: delete
-        Log.e("location_spinner", String.valueOf(location_spinner));
-        Log.e("Budget_spinner", String.valueOf(budget_spinner));
-        Log.e("Budget", String.valueOf(Budget));
-        Log.e("Distance", String.valueOf(Distance));
-        Log.e("Latitude", String.valueOf(CurrLatitude));
-        Log.e("Longitude", String.valueOf(CurrLongitude));
-
+        
     }
 
     //Sorting
