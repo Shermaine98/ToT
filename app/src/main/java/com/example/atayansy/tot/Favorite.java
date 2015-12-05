@@ -37,6 +37,17 @@ public class Favorite extends BaseActivity {
     String username;
     GridView gridview;
     ArrayList<Comments> comments1;
+    AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            Intent i = new Intent();
+            i.setClass(getBaseContext(), Result_Favorite_History.class);
+            i.putExtra("FaveClicked", userFavorites.get(position));
+            i.putExtra("Kind", "Favorite");
+            i.putExtra("userID", userId);
+            startActivity(i);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,18 +75,6 @@ public class Favorite extends BaseActivity {
 
 
     }
-
-    AdapterView.OnItemClickListener showItem = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            Intent i = new Intent();
-            i.setClass(getBaseContext(), Result_Favorite_History.class);
-            i.putExtra("FaveClicked", userFavorites.get(position));
-            i.putExtra("Kind", "Favorite");
-            i.putExtra("userID", userId);
-            startActivity(i);
-        }
-    };
 
     @Override
     protected void onResume() {
@@ -166,7 +165,6 @@ public class Favorite extends BaseActivity {
                         );
                         foodtemp.setRestaurantName(obj.getString("RestaurantName"));
                         foodtemp.setAddress(obj.getString("address"));
-
                         comments1 = new ArrayList<>();
                         for (int j = 0; j < cList.length(); j++) {
                             JSONObject objC = cList.getJSONObject(j);
