@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,18 @@ public class Randomize extends AppCompatActivity {
     Random random;
     FoodFeedFeedbacks foodTempResult;
     ArrayList<Comments> comments1;
+    float maxValue;
+    String[] animationStrings;
+    final Animation textAnimation = new Animation() {
+        @Override
+        protected void applyTransformation(float interpolatedTime, Transformation t) {
+            int index = (int) Math.floor(maxValue * interpolatedTime);
+            index = index == maxValue ? index - 1 : index;
+            tv_randomize.setText(animationStrings[index]);
+            tv_randomize.startAnimation(textAnimation);
+        }
+
+    };
     private double Distance;
     private double CurrLatitude;
     private double CurrLongitude;
@@ -62,10 +76,11 @@ public class Randomize extends AppCompatActivity {
         sort();
 
         AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
-        // AnimationDrawable frameAnimation2 = (AnimationDrawable) tv_randomize.getBackground();
         frameAnimation.start();
-        // frameAnimation2.start();
-
+        animationStrings = new String[]{"This looks good!", "This might be a little far", "Nah, it wont be healthy for you",
+                "how about this one?", "I know you are own diet, so not this one!", "there you go!"};
+        maxValue = animationStrings.length;
+        tv_randomize.startAnimation(textAnimation);
     }
 
     //Sorting
