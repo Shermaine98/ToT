@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Randomize extends AppCompatActivity {
     ImageView iv_randomize;
-    TextView tv_randomize;
+    TextView tv_randomize, header;
     Random random;
     FoodFeedFeedbacks foodTempResult;
     ArrayList<Comments> comments1;
@@ -53,7 +53,7 @@ public class Randomize extends AppCompatActivity {
 
         iv_randomize = (ImageView) findViewById(R.id.ivRandomize);
         tv_randomize = (TextView) findViewById(R.id.tvrandomize);
-
+        header = (TextView) findViewById(R.id.randomizing);
         iv_randomize.setBackgroundResource(R.drawable.randomize_image);
 
         //Get Chosen
