@@ -36,15 +36,13 @@
                 android:fontFamily="sans-serif-bold"
                 android:textSize="24sp" />
 
-
             <TextView
                 android:id="@+id/feedback_restaurant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
                 android:textSize="20sp" />
@@ -58,7 +56,7 @@
                 android:layout_marginRight="12dp"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/tv_price"
@@ -70,7 +68,7 @@
 
             <ImageView
                 android:id="@+id/tv_foodImage"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
                 android:scaleType="centerCrop" />
@@ -94,18 +92,18 @@
                 android:textColor="#9d2334"
                 android:textSize="17sp" />
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="55dp">
-            <ListView
-                android:id="@+id/listView_feedComments"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp" />
-            </ScrollView>
+            <!--<ScrollView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginBottom="55dp">-->
+            <!--<ListView-->
+                <!--android:id="@+id/listView_feedComments"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginTop="8dp" />-->
+            <!--</ScrollView>-->
 
             <TextView
                 android:id="@+id/characterCount"
@@ -114,28 +112,34 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Numbers of Character Left - 100"
+                android:text="Numbers of Characters Left - 100"
                 android:textColor="#9d2334"
                 android:textSize="17sp" />
 
             <EditText
                 android:id="@+id/tv_FeedBack"
+                android:background="#fe65635f"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="136dp"
                 android:hint="Comments"
+                android:padding="5dp"
                 android:inputType="textMultiLine"
-                android:lines="8"
+                android:gravity="left|top"
+                android:lines="4"
                 android:maxLines="10"
                 android:minLines="3"
                 android:scrollbars="vertical"
-                android:textColorHint="#c3c3c3" />
+                android:textColorHint="#f5f6f4"
+                android:textColor="#e3e3e3" />
 
 
             <Button
                 android:id="@+id/addToFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="right"
                 android:layout_marginBottom="25dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="15dp"
@@ -154,6 +158,7 @@
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:background="#005f5f5f"
+        android:padding="8dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -162,6 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#005f5f5f"
+            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_back" />
 
@@ -171,8 +177,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#005f5f5f"
+            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_send" />
 
     </LinearLayout>
+
 </RelativeLayout>

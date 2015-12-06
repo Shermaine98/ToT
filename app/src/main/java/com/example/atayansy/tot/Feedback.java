@@ -2,6 +2,7 @@ package com.example.atayansy.tot;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,7 @@ public class Feedback extends AppCompatActivity {
     TextView textPrice;
     TextView numberofComments;
     TextView numberChar;
-    ListView listViewC;
+//    ListView listViewC;
     CustomAdapterComments customAdapterComments;
     SharedPreferences sharedPreferences;
     String userName;
@@ -58,7 +59,7 @@ public class Feedback extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             //This sets a textview to the current length
             int text = 100 - s.length();
-            numberChar.setText("Numbers of Character Left -" + String.valueOf(text));
+            numberChar.setText("Numbers of Character Left (" + String.valueOf(text)+")");
             if (s.length() >= 100) {
                 comments.setKeyListener(null);
             }
@@ -105,7 +106,7 @@ public class Feedback extends AppCompatActivity {
         textResto = (TextView) findViewById(R.id.feedback_restaurant);
         textPrice = (TextView) findViewById(R.id.tv_price);
         ratingbar = (RatingBar) findViewById(R.id.ratingBar);
-        listViewC = (ListView) findViewById(R.id.listView_feedComments);
+//        listViewC = (ListView) findViewById(R.id.listView_feedComments);
         buttonAddToFavorite = (Button) findViewById(R.id.addToFavorite);
         send = (ImageView) findViewById(R.id.send);
         cancel = (ImageView) findViewById(R.id.back);
@@ -113,6 +114,7 @@ public class Feedback extends AppCompatActivity {
         comments = (EditText) findViewById(R.id.tv_FeedBack);
         numberChar = (TextView) findViewById(R.id.characterCount);
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        textInfo.setTypeface(textInfo.getTypeface(), Typeface.BOLD_ITALIC);
 
         userName = sharedPreferences.getString("username", "");
         userID = sharedPreferences.getInt("id", 0);
@@ -129,27 +131,28 @@ public class Feedback extends AppCompatActivity {
 
         feedbackResult = (FoodFeedFeedbacks) getIntent().getSerializableExtra("ResultFeedBack");
         textName.setText(feedbackResult.getFoodName());
-        textInfo.append("\n" + feedbackResult.getDefinition());
-        textInfo.append("\n" + String.valueOf(feedbackResult.getRestaurant()));
-        textInfo.append("\n" + String.valueOf(feedbackResult.getLocation()));
-        textInfo.append("\n" + "P" + String.valueOf(feedbackResult.getPrice()));
+        textInfo.setText(feedbackResult.getDefinition());
+        textResto.setText(String.valueOf(feedbackResult.getRestaurant()));
+        textResto.append(", " + String.valueOf(feedbackResult.getLocation()));
+        textPrice.setText("P" + String.valueOf(feedbackResult.getPrice())+"0");
+
         ImageResources imageResources = new ImageResources();
         Image.setImageResource(imageResources.getImage(feedbackResult.getImage(), getBaseContext()));
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, feedbackResult.getComments());
-        listViewC.setAdapter(customAdapterComments);
+//        listViewC.setAdapter(customAdapterComments);
         ratingbar.setRating(Float.parseFloat(String.valueOf(feedbackResult.getRating())));
         numberofComments.setText("Comments(" + feedbackResult.getComments().size() + ")");
-        ViewGroup.LayoutParams lp = listViewC.getLayoutParams();
-        if (feedbackResult.getComments().size() != 0) {
-            if (feedbackResult.getComments().size() <= 3) {
-                lp.height = 200;
-            } else {
-                lp.height = 350;
-            }
-            listViewC.setLayoutParams(lp);
-        } else {
-            listViewC.setVisibility(View.GONE);
-        }
+//        ViewGroup.LayoutParams lp = listViewC.getLayoutParams();
+//        if (feedbackResult.getComments().size() != 0) {
+//            if (feedbackResult.getComments().size() <= 3) {
+//                lp.height = 200;
+//            } else {
+//                lp.height = 350;
+//            }
+//            listViewC.setLayoutParams(lp);
+//        } else {
+//            listViewC.setVisibility(View.GONE);
+//        }
 
 
         addListenerOnRatingBar();
