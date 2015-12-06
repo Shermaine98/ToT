@@ -118,15 +118,6 @@ public class Result_Favorite_History extends BaseActivity {
                 lp.height = 350;
             }
             listView.setLayoutParams(lp);
-            listView.setOnTouchListener(new View.OnTouchListener() {
-                // Setting on Touch Listener for handling the touch inside ScrollView
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    // Disallow the touch request for parent scroll on touch of child view
-                    v.getParent().requestDisallowInterceptTouchEvent(true);
-                    return false;
-                }
-            });
 
         }else{
             listView.setVisibility(View.GONE);
@@ -139,6 +130,15 @@ public class Result_Favorite_History extends BaseActivity {
         if (kind.equalsIgnoreCase("Favorite"))
             feedBack.setVisibility(View.GONE);
 
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
         feedBack.setOnClickListener(feedBackClick);
     }
 

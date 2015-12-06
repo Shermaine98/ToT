@@ -153,15 +153,7 @@ public class Feedback extends AppCompatActivity {
                 lp.height = 350;
             }
             listViewC.setLayoutParams(lp);
-            listViewC.setOnTouchListener(new View.OnTouchListener() {
-                // Setting on Touch Listener for handling the touch inside ScrollView
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    // Disallow the touch request for parent scroll on touch of child view
-                    v.getParent().requestDisallowInterceptTouchEvent(true);
-                    return false;
-                }
-            });
+
 
         } else {
             listViewC.setVisibility(View.GONE);
@@ -176,8 +168,26 @@ public class Feedback extends AppCompatActivity {
         CheckIFfavorite.execute();
         comments.addTextChangedListener(mTextEditorWatcher);
 
+        listViewC.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
     }
 
+    private void requestDisallowParentInterceptTouchEvent(View __v, Boolean __disallowIntercept) {
+        while (__v.getParent() != null && __v.getParent() instanceof View) {
+            if (__v.getParent() instanceof ScrollView) {
+                __v.getParent().requestDisallowInterceptTouchEvent(__disallowIntercept);
+            }
+            __v = (View) __v.getParent();
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();

@@ -2,9 +2,6 @@ package com.example.atayansy.tot;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -121,25 +119,33 @@ public class ResultActivity extends AppCompatActivity {
                 } else {
                     lp.height = 350;
                 }
-
                 listView.setLayoutParams(lp);
-                listView.setOnTouchListener(new View.OnTouchListener() {
-                    // Setting on Touch Listener for handling the touch inside ScrollView
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        // Disallow the touch request for parent scroll on touch of child view
-                        v.getParent().requestDisallowInterceptTouchEvent(true);
-                        return false;
-                    }
-                });
+
             } else {
                 listView.setVisibility(View.GONE);
             }
 
         }
 
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
     }
 
+    private void requestDisallowParentInterceptTouchEvent(View __v, Boolean __disallowIntercept) {
+        while (__v.getParent() != null && __v.getParent() instanceof View) {
+            if (__v.getParent() instanceof ScrollView) {
+                __v.getParent().requestDisallowInterceptTouchEvent(__disallowIntercept);
+            }
+            __v = (View) __v.getParent();
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
