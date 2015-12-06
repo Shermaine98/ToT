@@ -41,9 +41,9 @@ public class Feedback extends AppCompatActivity {
     TextView textInfo;
     TextView textResto;
     TextView textPrice;
-    TextView numberofComments;
+//    TextView numberofComments;
     TextView numberChar;
-    ListView listViewC;
+//    ListView listViewC;
     CustomAdapterComments customAdapterComments;
     SharedPreferences sharedPreferences;
     String userName;
@@ -60,7 +60,7 @@ public class Feedback extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             //This sets a textview to the current length
             int text = 100 - s.length();
-            numberChar.setText("Numbers of Character Left -" + String.valueOf(text));
+            numberChar.setText("Add Comments: \nNumbers of Characters Left (" + String.valueOf(text)+")");
             if (text < 0) {
                 //   comments.setKeyListener(null);
                 comments.setText(comments.getText().toString().substring(0, comments.getText().length() - 1));
@@ -72,7 +72,7 @@ public class Feedback extends AppCompatActivity {
         }
     };
     ScrollView outerScroll;
-    RatingBar currRating;
+//    RatingBar currRating;
     View.OnClickListener sendFeedBack = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -111,15 +111,15 @@ public class Feedback extends AppCompatActivity {
         textResto = (TextView) findViewById(R.id.feedback_restaurant);
         textPrice = (TextView) findViewById(R.id.tv_price);
         Edratingbar = (RatingBar) findViewById(R.id.ratingBar);
-        listViewC = (ListView) findViewById(R.id.listView_feedComments);
+//        listViewC = (ListView) findViewById(R.id.listView_feedComments);
         buttonAddToFavorite = (Button) findViewById(R.id.addToFavorite);
         send = (ImageView) findViewById(R.id.send);
         cancel = (ImageView) findViewById(R.id.back);
-        numberofComments = (TextView) findViewById(R.id.NumberofCommentsFeedBack);
+//        numberofComments = (TextView) findViewById(R.id.NumberofCommentsFeedBack);
         comments = (EditText) findViewById(R.id.tv_FeedBack);
         numberChar = (TextView) findViewById(R.id.characterCount);
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
-        currRating = (RatingBar) findViewById(R.id.curr_rating);
+//        currRating = (RatingBar) findViewById(R.id.curr_rating);
         userName = sharedPreferences.getString("username", "");
         userID = sharedPreferences.getInt("id", 0);
         outerScroll = (ScrollView) findViewById(R.id.fh_scroll);
@@ -135,29 +135,29 @@ public class Feedback extends AppCompatActivity {
 
         feedbackResult = (FoodFeedFeedbacks) getIntent().getSerializableExtra("ResultFeedBack");
         textName.setText(feedbackResult.getFoodName());
-        textInfo.append("\n" + feedbackResult.getDefinition());
-        textInfo.append("\n" + String.valueOf(feedbackResult.getRestaurant()));
-        textInfo.append("\n" + String.valueOf(feedbackResult.getLocation()));
-        textInfo.append("\n" + "P" + String.valueOf(feedbackResult.getPrice()));
+        textInfo.setText(feedbackResult.getDefinition());
+        textResto.setText(feedbackResult.getRestaurant() + ", " + String.valueOf(feedbackResult.getLocation()));
+        textPrice.setText("P" + String.valueOf(feedbackResult.getPrice())+"0");
+
         ImageResources imageResources = new ImageResources();
         Image.setImageResource(imageResources.getImage(feedbackResult.getImage(), getBaseContext()));
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, feedbackResult.getComments());
-        listViewC.setAdapter(customAdapterComments);
-        currRating.setRating(Float.parseFloat(String.valueOf(feedbackResult.getRating())));
-        numberofComments.setText("Comments(" + feedbackResult.getComments().size() + ")");
-        ViewGroup.LayoutParams lp = listViewC.getLayoutParams();
-        if (feedbackResult.getComments().size() != 0) {
-            if (feedbackResult.getComments().size() <= 3) {
-                lp.height = 200;
-            } else {
-                lp.height = 350;
-            }
-            listViewC.setLayoutParams(lp);
-
-
-        } else {
-            listViewC.setVisibility(View.GONE);
-        }
+//        listViewC.setAdapter(customAdapterComments);
+//        currRating.setRating(Float.parseFloat(String.valueOf(feedbackResult.getRating())));
+//        numberofComments.setText("Comments(" + feedbackResult.getComments().size() + ")");
+//        ViewGroup.LayoutParams lp = listViewC.getLayoutParams();
+//        if (feedbackResult.getComments().size() != 0) {
+//            if (feedbackResult.getComments().size() <= 3) {
+//                lp.height = 200;
+//            } else {
+//                lp.height = 350;
+//            }
+//            listViewC.setLayoutParams(lp);
+//
+//
+//        } else {
+//            listViewC.setVisibility(View.GONE);
+//        }
 
 
         addListenerOnRatingBar();
@@ -168,15 +168,15 @@ public class Feedback extends AppCompatActivity {
         CheckIFfavorite.execute();
         comments.addTextChangedListener(mTextEditorWatcher);
 
-        listViewC.setOnTouchListener(new View.OnTouchListener() {
-            // Setting on Touch Listener for handling the touch inside ScrollView
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Disallow the touch request for parent scroll on touch of child view
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
+//        listViewC.setOnTouchListener(new View.OnTouchListener() {
+//            // Setting on Touch Listener for handling the touch inside ScrollView
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                // Disallow the touch request for parent scroll on touch of child view
+//                v.getParent().requestDisallowInterceptTouchEvent(true);
+//                return false;
+//            }
+//        });
 
     }
 
