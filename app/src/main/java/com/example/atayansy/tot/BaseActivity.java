@@ -83,52 +83,26 @@ public class BaseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent();
                 if (v.equals(ibButtonHome)) {
-                    if (location.equalsIgnoreCase("home")) {
-                        setImageButtonEnabled(getBaseContext(), false, ibButtonHome, R.drawable.ic_home);
-                    } else {
-                        i.setClass(getBaseContext(), HomePage.class);
-                        i.putExtra("currlocation", "home");
-                        startActivity(i);
-                        finish();
-                    }
+                    i.setClass(getBaseContext(), HomePage.class);
+                    i.putExtra("currlocation", "home");
                 } else if (v.equals(ibButtonFavorite)) {
-                    if (location.equalsIgnoreCase("favorites")) {
-                        setImageButtonEnabled(getBaseContext(), false, ibButtonFavorite, R.drawable.ic_action);
-                    } else {
-                        i.setClass(getBaseContext(), Favorite.class);
-
-                        i.putExtra("currlocation", "favorites");
-                        startActivity(i);
-                        finish();
-                    }
+                    i.setClass(getBaseContext(), Favorite.class);
+                    i.putExtra("currlocation", "favorites");
                 } else if (v.equals(ibButtonFilter)) {
-                    if (location.equalsIgnoreCase("filter")) {
-                        setImageButtonEnabled(getBaseContext(), false, ibButtonFilter, R.drawable.dice);
-                    } else {
-                        i.setClass(getBaseContext(), FilterMenu.class);
-                        i.putExtra("currlocation", "filter");
-                        startActivity(i);
-                        finish();
-                    }
-
+                    i.setClass(getBaseContext(), FilterMenu.class);
+                    i.putExtra("currlocation", "filter");
                 } else if (v.equals(ibButtonHistory)) {
-                    if (location.equalsIgnoreCase("history")) {
-                        setImageButtonEnabled(getBaseContext(), false, ibButtonHistory, R.drawable.ic_history);
-                    } else {
-                        i.setClass(getBaseContext(), History.class);
-                        i.putExtra("currlocation", "history");
-                        startActivity(i);
-                        finish();
-                    }
+                    i.setClass(getBaseContext(), History.class);
+                    i.putExtra("currlocation", "history");
                 } else if (v.equals(ibButtonLogOut)) {
                     SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.clear();
                     editor.commit();
                     i.setClass(getBaseContext(), MainActivity.class);
-                    startActivity(i);
-                    finish();
                 }
+                startActivity(i);
+                finish();
             }
         };
 

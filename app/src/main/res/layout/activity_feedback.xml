@@ -36,6 +36,16 @@
                 android:fontFamily="sans-serif-bold"
                 android:textSize="24sp" />
 
+            <RatingBar
+                android:id="@+id/curr_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:isIndicator="true"
+                android:max="5" />
 
             <TextView
                 android:id="@+id/feedback_restaurant"
@@ -81,7 +91,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:max="5" />
+                android:max="5"
+                android:stepSize="1" />
 
             <TextView
                 android:id="@+id/NumberofCommentsFeedBack"

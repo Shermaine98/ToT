@@ -46,7 +46,7 @@ public class Feedback extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     String userName;
     int userID;
-    RatingBar ratingbar;
+    RatingBar Edratingbar;
     ImageView send;
     ImageView cancel;
     Button buttonAddToFavorite;
@@ -67,6 +67,7 @@ public class Feedback extends AppCompatActivity {
         public void afterTextChanged(Editable s) {
         }
     };
+    RatingBar currRating;
     View.OnClickListener sendFeedBack = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -104,7 +105,7 @@ public class Feedback extends AppCompatActivity {
         textInfo = (TextView) findViewById(R.id.tv_foodinfo);
         textResto = (TextView) findViewById(R.id.feedback_restaurant);
         textPrice = (TextView) findViewById(R.id.tv_price);
-        ratingbar = (RatingBar) findViewById(R.id.ratingBar);
+        Edratingbar = (RatingBar) findViewById(R.id.ratingBar);
         listViewC = (ListView) findViewById(R.id.listView_feedComments);
         buttonAddToFavorite = (Button) findViewById(R.id.addToFavorite);
         send = (ImageView) findViewById(R.id.send);
@@ -113,7 +114,7 @@ public class Feedback extends AppCompatActivity {
         comments = (EditText) findViewById(R.id.tv_FeedBack);
         numberChar = (TextView) findViewById(R.id.characterCount);
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
-
+        currRating = (RatingBar) findViewById(R.id.curr_rating);
         userName = sharedPreferences.getString("username", "");
         userID = sharedPreferences.getInt("id", 0);
 
@@ -137,7 +138,7 @@ public class Feedback extends AppCompatActivity {
         Image.setImageResource(imageResources.getImage(feedbackResult.getImage(), getBaseContext()));
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, feedbackResult.getComments());
         listViewC.setAdapter(customAdapterComments);
-        ratingbar.setRating(Float.parseFloat(String.valueOf(feedbackResult.getRating())));
+        currRating.setRating(Float.parseFloat(String.valueOf(feedbackResult.getRating())));
         numberofComments.setText("Comments(" + feedbackResult.getComments().size() + ")");
         ViewGroup.LayoutParams lp = listViewC.getLayoutParams();
         if (feedbackResult.getComments().size() != 0) {
@@ -171,7 +172,7 @@ public class Feedback extends AppCompatActivity {
     }
 
     public void addListenerOnRatingBar() {
-        ratingbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        Edratingbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 
@@ -211,9 +212,8 @@ public class Feedback extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            rating = ratingbar.getRating();
+            rating = Edratingbar.getRating();
             Comment = comments.getText().toString();
-
             if (Comment.matches("") && rating == 0.0) {
                 rating = (float) 0.0;
                 Comment = "null%";
@@ -264,7 +264,7 @@ public class Feedback extends AppCompatActivity {
                 startActivity(i);
                 finish();
             } else {
-                Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Kindly input comment/s and or Rating", Toast.LENGTH_LONG).show();
 
             }
         }

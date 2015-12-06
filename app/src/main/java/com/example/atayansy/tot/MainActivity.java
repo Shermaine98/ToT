@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
 
+
         userName = (EditText) findViewById(R.id.et_username);
         password = (EditText) findViewById(R.id.et_password);
 
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
+
     }
 
     //  CODES THAT ARE NOT CHANGED
