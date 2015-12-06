@@ -5,6 +5,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.atayansy.tot.Randomize">
 
+    <TextView
+        android:id="@+id/randomizing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#d6025f"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
+        android:padding="8dp"
+        android:text="Randomizing"
+        android:textColor="#ebebeb"
+        android:textSize="30sp" />
+
     <ImageView
         android:id="@+id/ivRandomize"
         android:layout_width="match_parent"
