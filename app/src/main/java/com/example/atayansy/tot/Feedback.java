@@ -2,7 +2,10 @@ package com.example.atayansy.tot;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +43,7 @@ public class Feedback extends AppCompatActivity {
     TextView textInfo;
     TextView textResto;
     TextView textPrice;
-    TextView numberofComments;
+//    TextView numberofComments;
     TextView numberChar;
 //    ListView listViewC;
     CustomAdapterComments customAdapterComments;
@@ -110,7 +113,7 @@ public class Feedback extends AppCompatActivity {
         buttonAddToFavorite = (Button) findViewById(R.id.addToFavorite);
         send = (ImageView) findViewById(R.id.send);
         cancel = (ImageView) findViewById(R.id.back);
-        numberofComments = (TextView) findViewById(R.id.NumberofCommentsFeedBack);
+//        numberofComments = (TextView) findViewById(R.id.NumberofCommentsFeedBack);
         comments = (EditText) findViewById(R.id.tv_FeedBack);
         numberChar = (TextView) findViewById(R.id.characterCount);
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
@@ -134,14 +137,14 @@ public class Feedback extends AppCompatActivity {
         textInfo.setText(feedbackResult.getDefinition());
         textResto.setText(String.valueOf(feedbackResult.getRestaurant()));
         textResto.append(", " + String.valueOf(feedbackResult.getLocation()));
-        textPrice.setText("P" + String.valueOf(feedbackResult.getPrice())+"0");
+        textPrice.setText("P" + String.valueOf(feedbackResult.getPrice()) + "0");
 
         ImageResources imageResources = new ImageResources();
         Image.setImageResource(imageResources.getImage(feedbackResult.getImage(), getBaseContext()));
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, feedbackResult.getComments());
 //        listViewC.setAdapter(customAdapterComments);
         ratingbar.setRating(Float.parseFloat(String.valueOf(feedbackResult.getRating())));
-        numberofComments.setText("Comments(" + feedbackResult.getComments().size() + ")");
+//        numberofComments.setText("Comments(" + feedbackResult.getComments().size() + ")");
 //        ViewGroup.LayoutParams lp = listViewC.getLayoutParams();
 //        if (feedbackResult.getComments().size() != 0) {
 //            if (feedbackResult.getComments().size() <= 3) {

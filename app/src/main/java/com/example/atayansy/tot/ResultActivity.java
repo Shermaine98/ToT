@@ -2,6 +2,9 @@ package com.example.atayansy.tot;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -81,7 +84,6 @@ public class ResultActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
         userID = sharedPreferences.getInt("id", 0);
-
 
         if (username.isEmpty()) {
             Intent intent = new Intent();
