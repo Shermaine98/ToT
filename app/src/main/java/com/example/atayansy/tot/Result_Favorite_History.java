@@ -192,6 +192,7 @@ public class Result_Favorite_History extends BaseActivity {
                 if (s.equalsIgnoreCase("true")) {
                     Intent i = new Intent();
                     i.setClass(getBaseContext(), Favorite.class);
+                    i.putExtra("currlocation", "favorites");
                     startActivity(i);
                     finish();
                 } else {
