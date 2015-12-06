@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
@@ -41,15 +42,26 @@ public class Randomize extends AppCompatActivity {
     ArrayList<Comments> comments1;
     float maxValue;
     String[] animationStrings;
+
     final Animation textAnimation = new Animation() {
         @Override
         protected void applyTransformation(float interpolatedTime, Transformation t) {
-            int index = (int) Math.floor(maxValue * interpolatedTime);
-            index = index == maxValue ? index - 1 : index;
-            tv_randomize.setText(animationStrings[index]);
-            tv_randomize.startAnimation(textAnimation);
+            Log.i("time", String.valueOf(interpolatedTime));
+            random = new Random();
+            tv_randomize = (TextView) findViewById(R.id.tvrandomize);
+            int randomNum = random.nextInt((animationStrings.length - 1 - 0) + 1) + 0;
+            tv_randomize.setText("");
+            Log.i("this", String.valueOf(randomNum));
+            tv_randomize.setText(animationStrings[randomNum]);
+            Log.i("this", animationStrings[randomNum]);
+
         }
 
+        @Override
+        public void setDuration(long durationMillis) {
+            super.setDuration(durationMillis);
+            durationMillis = 50;
+        }
     };
     private double Distance;
     private double CurrLatitude;
@@ -69,7 +81,9 @@ public class Randomize extends AppCompatActivity {
         tv_randomize = (TextView) findViewById(R.id.tvrandomize);
         header = (TextView) findViewById(R.id.randomizing);
         iv_randomize.setBackgroundResource(R.drawable.randomize_image);
-
+        animationStrings = new String[]{"This looks good!", "This might be a little far", "Nah, it wont be healthy for you",
+                "how about this one?", "I know you are own diet, so not this one!", "there you go!"};
+        maxValue = animationStrings.length - 1;
         //Get Chosen
         location_spinner = getIntent().getExtras().getBoolean("location_spinner");
         budget_spinner = getIntent().getExtras().getBoolean("Budget_spinner");
@@ -77,11 +91,10 @@ public class Randomize extends AppCompatActivity {
 
         AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
         frameAnimation.start();
-        animationStrings = new String[]{"This looks good!", "This might be a little far", "Nah, it wont be healthy for you",
-                "how about this one?", "I know you are own diet, so not this one!", "there you go!"};
-        maxValue = animationStrings.length;
+
         tv_randomize.startAnimation(textAnimation);
     }
+
 
     //Sorting
     public void sort() {
