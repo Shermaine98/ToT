@@ -2,6 +2,7 @@ package com.example.atayansy.tot;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -139,6 +140,7 @@ public class Feedback extends AppCompatActivity {
         textResto.setText(feedbackResult.getRestaurant() + ", " + String.valueOf(feedbackResult.getLocation()));
         textPrice.setText("P" + String.valueOf(feedbackResult.getPrice())+"0");
 
+        textInfo.setTypeface(textInfo.getTypeface(), Typeface.ITALIC);
         ImageResources imageResources = new ImageResources();
         Image.setImageResource(imageResources.getImage(feedbackResult.getImage(), getBaseContext()));
         customAdapterComments = new CustomAdapterComments(getBaseContext(), R.layout.comment_list_view, feedbackResult.getComments());

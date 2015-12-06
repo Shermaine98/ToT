@@ -126,6 +126,7 @@
             <EditText
                 android:id="@+id/tv_FeedBack"
                 android:layout_margin="8dp"
+                android:padding="12dp"
                 android:background="@drawable/edittext"
                 android:layout_width="match_parent"
                 android:layout_height="136dp"
