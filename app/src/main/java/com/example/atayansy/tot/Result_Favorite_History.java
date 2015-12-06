@@ -113,7 +113,7 @@ public class Result_Favorite_History extends BaseActivity {
 
         if(clicked.getComments().size()!=0) {
             if (clicked.getComments().size() <= 3) {
-                lp.height = 200;
+                lp.height = 400;
             } else {
                 lp.height = 350;
             }

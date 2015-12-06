@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.atayansy.tot.Location.AppLocationService;
 import com.example.atayansy.tot.Location.LocationAddress;
@@ -29,7 +30,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
 
     Spinner spinner_Bd;
     Spinner spinner_lt;
-    TextView tvAddress;
+//    TextView tvAddress;
     TextView tvBudgetLocation;
     String locationAddress;
     AppLocationService appLocationService;
@@ -81,10 +82,10 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         public void onClick(View v) {
             if (spinner_lt.isEnabled()) {
                 spinner_lt.setEnabled(false);
-                tvAddress.setVisibility(View.GONE);
+//                tvAddress.setVisibility(View.GONE);
             } else {
                 spinner_lt.setEnabled(true);
-                tvAddress.setVisibility(View.VISIBLE);
+//                tvAddress.setVisibility(View.VISIBLE);
                 location();
             }
         }
@@ -100,12 +101,12 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         spinner_Bd = (Spinner) findViewById(R.id.sn_budget);
         spinner_lt = (Spinner) findViewById(R.id.sn_location);
         location = (Switch) findViewById(R.id.ms_nearMe);
-        tvAddress = (TextView) findViewById(R.id.tvAddress);
+//        tvAddress = (TextView) findViewById(R.id.tvAddress);
         tvBudgetLocation = (TextView) findViewById(R.id.selectedBudgetLocation);
         buttonHome = (ImageButton) findViewById(R.id.fbutton_home);
         buttonRandomize = (ImageButton) findViewById(R.id.fbutton_randomize);
 
-        tvAddress.setVisibility(View.GONE);
+//        tvAddress.setVisibility(View.GONE);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer> (this, android.R.layout.simple_dropdown_item_1line, budget);
@@ -197,7 +198,8 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         alertDialog.setNegativeButton("YES",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        tvAddress.setText("Your Current Location: \n" + locationAddress);
+                        Toast.makeText(getBaseContext(), "Your Current Location is: \n" + locationAddress, Toast.LENGTH_LONG).show();
+//                        tvAddress.setText("Your Current Location: \n" + locationAddress);
                         dialog.cancel();
                     }
                 });
