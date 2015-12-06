@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,6 +43,7 @@ public class Randomize extends AppCompatActivity {
     private int Budget;
     private boolean location_spinner;
     private boolean budget_spinner;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,17 +115,30 @@ public class Randomize extends AppCompatActivity {
                 foodTempResult.setComments(comments1);
             } catch (JSONException e) {
             }
-            Intent i = new Intent();
-            i.putExtra("Result", foodTempResult);
-            i.setClass(getBaseContext(), ResultActivity.class);
-            startActivity(i);
-            finish();
+            animation();
+
         } else {
             Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_LONG).show();
         }
 
     }
     //end sort
+
+    public void animation() {
+        handler.postDelayed(new Runnable() {
+            Random rand = new Random();
+            int randomNum = rand.nextInt((100 - 0) + 1) + 0;
+
+            @Override
+            public void run() {
+                Intent i = new Intent();
+                i.putExtra("Result", foodTempResult);
+                i.setClass(getBaseContext(), ResultActivity.class);
+                startActivity(i);
+                finish();
+            }
+        }, 3000);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
