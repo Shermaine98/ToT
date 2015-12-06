@@ -116,7 +116,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         // Apply the adapter to the spinner
         spinner_Bd.setEnabled(false);
         spinner_Bd.setAdapter(adapter);
-
         Budget.setOnClickListener(switchSpinBd);
 
 
@@ -128,7 +127,6 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         // Apply the adapter to the spinner
         spinner_lt.setEnabled(false);
-
         spinner_lt.setAdapter(adapter2);
         location.setOnClickListener(switchSpinLt);
 
@@ -141,9 +139,7 @@ public class FilterMenu extends AppCompatActivity implements AdapterView.OnItemS
 
         // two types, since GPS sometimes wont work or took long time to load
         Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
-
         Location networkLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
-
         if (gpsLocation != null) {
             latitude = gpsLocation.getLatitude();
             longitude = gpsLocation.getLongitude();

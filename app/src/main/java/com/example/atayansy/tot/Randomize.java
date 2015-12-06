@@ -54,11 +54,18 @@ public class Randomize extends AppCompatActivity {
         iv_randomize = (ImageView) findViewById(R.id.ivRandomize);
         tv_randomize = (TextView) findViewById(R.id.tvrandomize);
 
+        iv_randomize.setBackgroundResource(R.drawable.randomize_image);
+
         //Get Chosen
         location_spinner = getIntent().getExtras().getBoolean("location_spinner");
         budget_spinner = getIntent().getExtras().getBoolean("Budget_spinner");
         sort();
-        
+
+        AnimationDrawable frameAnimation = (AnimationDrawable) iv_randomize.getBackground();
+        // AnimationDrawable frameAnimation2 = (AnimationDrawable) tv_randomize.getBackground();
+        frameAnimation.start();
+        // frameAnimation2.start();
+
     }
 
     //Sorting
@@ -126,9 +133,6 @@ public class Randomize extends AppCompatActivity {
 
     public void animation() {
         handler.postDelayed(new Runnable() {
-            Random rand = new Random();
-            int randomNum = rand.nextInt((100 - 0) + 1) + 0;
-
             @Override
             public void run() {
                 Intent i = new Intent();
