@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,14 +61,17 @@ public class Feedback extends AppCompatActivity {
             //This sets a textview to the current length
             int text = 100 - s.length();
             numberChar.setText("Numbers of Character Left -" + String.valueOf(text));
-            if (s.length() >= 100) {
-                comments.setKeyListener(null);
+            if (text < 0) {
+                //   comments.setKeyListener(null);
+                comments.setText(comments.getText().toString().substring(0, comments.getText().length() - 1));
+                comments.setSelection(comments.getText().length());
             }
         }
 
         public void afterTextChanged(Editable s) {
         }
     };
+    ScrollView outerScroll;
     RatingBar currRating;
     View.OnClickListener sendFeedBack = new View.OnClickListener() {
         @Override
@@ -117,7 +122,7 @@ public class Feedback extends AppCompatActivity {
         currRating = (RatingBar) findViewById(R.id.curr_rating);
         userName = sharedPreferences.getString("username", "");
         userID = sharedPreferences.getInt("id", 0);
-
+        outerScroll = (ScrollView) findViewById(R.id.fh_scroll);
         if (userName.isEmpty()) {
             Intent intent = new Intent();
             intent.setClass(getBaseContext(), MainActivity.class);
@@ -148,6 +153,16 @@ public class Feedback extends AppCompatActivity {
                 lp.height = 350;
             }
             listViewC.setLayoutParams(lp);
+            listViewC.setOnTouchListener(new View.OnTouchListener() {
+                // Setting on Touch Listener for handling the touch inside ScrollView
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    // Disallow the touch request for parent scroll on touch of child view
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                    return false;
+                }
+            });
+
         } else {
             listViewC.setVisibility(View.GONE);
         }

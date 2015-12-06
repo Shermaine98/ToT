@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/Fh_ResultText"
-        android:layout_marginBottom="55dp">
+        android:layout_marginBottom="55dp"
+        android:focusableInTouchMode="false">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -90,10 +91,6 @@
             android:textColor="#9d2334"
             android:textSize="17sp" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="55dp">
         <ListView
             android:id="@+id/listview_comments"
             android:layout_width="fill_parent"
@@ -101,7 +98,6 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"></ListView>
-        </ScrollView>
 
         <Button
             android:id="@+id/bt_FeedBack"

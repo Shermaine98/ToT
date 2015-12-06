@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -42,6 +43,7 @@ public class Result_Favorite_History extends BaseActivity {
     int userID;
     ListView listView;
     String kind;
+
     View.OnClickListener removeItem = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -93,7 +95,6 @@ public class Result_Favorite_History extends BaseActivity {
         fh_scroll = (ScrollView) findViewById(R.id.fh_scroll);
         rating = (RatingBar) findViewById(R.id.fh_rating);
         feedBack = (Button) findViewById(R.id.bt_FeedBack);
-
         clicked = (FavoriteObject) getIntent().getSerializableExtra("FaveClicked");
         kind = getIntent().getExtras().getString("Kind");
         userID = getIntent().getExtras().getInt("userID");
@@ -117,11 +118,20 @@ public class Result_Favorite_History extends BaseActivity {
                 lp.height = 350;
             }
             listView.setLayoutParams(lp);
+            listView.setOnTouchListener(new View.OnTouchListener() {
+                // Setting on Touch Listener for handling the touch inside ScrollView
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    // Disallow the touch request for parent scroll on touch of child view
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                    return false;
+                }
+            });
+
         }else{
             listView.setVisibility(View.GONE);
         }
-
-        if(kind.equalsIgnoreCase("history"))
+        if (kind.equalsIgnoreCase("history"))
             remove.setVisibility(View.GONE);
 
         image.setImageResource(ir.getImage(clicked.getfPictureIcon(), getBaseContext()));
@@ -130,10 +140,16 @@ public class Result_Favorite_History extends BaseActivity {
             feedBack.setVisibility(View.GONE);
 
         feedBack.setOnClickListener(feedBackClick);
-
-        fh_scroll.scrollTo(0, 0);
     }
 
+    private void requestDisallowParentInterceptTouchEvent(View __v, Boolean __disallowIntercept) {
+        while (__v.getParent() != null && __v.getParent() instanceof View) {
+            if (__v.getParent() instanceof ScrollView) {
+                __v.getParent().requestDisallowInterceptTouchEvent(__disallowIntercept);
+            }
+            __v = (View) __v.getParent();
+        }
+    }
     private class RemoveFromFavorites extends AsyncTask<String, Void, String> {
 
         //Connecting to Servlet
